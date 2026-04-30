@@ -1,11 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:mdamik/features/projects/presentation/project_details_view.dart';
 
 import '../features/auth/presentation/auth_login_view.dart';
 import '../features/auth/presentation/auth_otp_view.dart';
 import '../features/auth/presentation/auth_register_view.dart';
 import '../features/auth/presentation/auth_reset_password_view.dart';
 import '../features/auth/presentation/auth_success_view.dart';
+import '../features/chat/presentation/chat_conversation_view.dart';
+import '../features/home/presentation/all_services_view.dart';
+import '../features/home/presentation/main_nav_view.dart';
+import '../features/home/presentation/notifications_view.dart';
+import '../features/project_setup/presentation/construction_view.dart';
+import '../features/project_setup/presentation/payment_success_view.dart';
+import '../features/project_setup/presentation/payment_view.dart';
+import '../features/project_setup/presentation/project_setup_view.dart';
+import '../features/engineering/presentation/engineering_view.dart';
+import '../features/engineering/presentation/professional_list_view.dart';
+import '../features/excavation/presentation/excavation_view.dart';
+import '../features/financial/presentation/financial_view.dart';
+import '../features/labor/presentation/labor_hiring_view.dart';
+import '../features/materials/presentation/materials_view.dart';
+import '../features/transport/presentation/transport_view.dart';
+import '../features/services/presentation/services_view.dart';
+import '../features/services/presentation/site_services_list_view.dart';
+import '../features/real_estate/presentation/property_details_view.dart';
+import '../features/real_estate/presentation/real_estate_view.dart';
+import '../features/projects/presentation/project_management_details_view.dart';
+import '../features/profile/presentation/profile_information_view.dart';
+import '../features/profile/presentation/security_privacy_view.dart';
+import '../features/profile/presentation/notifications_settings_view.dart';
 import '../features/splash/presentation/splash_view.dart';
+import '../features/language/presentation/choose_language_view.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -27,8 +52,34 @@ class App extends StatelessWidget {
         AuthRegisterView.routeName: (_) => const AuthRegisterView(),
         AuthResetPasswordView.routeName: (_) => const AuthResetPasswordView(),
         AuthSuccessView.routeName: (_) => const AuthSuccessView(),
+        MainNavView.routeName: (_) => const MainNavView(),
+        AllServicesView.routeName: (_) => const AllServicesView(),
+        NotificationsView.routeName: (_) => const NotificationsView(),
+        ProjectDetailsView.routeName: (_) => const ProjectDetailsView(),
+        ChatConversationView.routeName: (_) => const ChatConversationView(),
+        ConstructionView.routeName: (_) => const ConstructionView(),
+        ProjectSetupView.routeName: (_) => const ProjectSetupView(),
+        PaymentView.routeName: (_) => const PaymentView(),
+        PaymentSuccessView.routeName: (_) => const PaymentSuccessView(),
+        RealEstateView.routeName: (_) => const RealEstateView(),
+        PropertyDetailsView.routeName: (_) => const PropertyDetailsView(),
+        EngineeringView.routeName: (_) => const EngineeringView(),
+        ProfessionalListView.routeName: (_) => const ProfessionalListView(),
+        MaterialsView.routeName: (_) => const MaterialsView(),
+        LaborHiringView.routeName: (_) => const LaborHiringView(),
+        ExcavationView.routeName: (_) => const ExcavationView(),
+        TransportView.routeName: (_) => const TransportView(),
+        ServicesView.routeName: (_) => const ServicesView(),
+        SiteServicesListView.routeName: (_) => const SiteServicesListView(),
+        ProjectManagementDetailsView.routeName: (_) =>
+            const ProjectManagementDetailsView(),
+        FinancialView.routeName: (_) => const FinancialView(),
+        ProfileInformationView.routeName: (_) => const ProfileInformationView(),
+        SecurityPrivacyView.routeName: (_) => const SecurityPrivacyView(),
+        NotificationsSettingsView.routeName: (_) =>
+            const NotificationsSettingsView(),
+        ChooseLanguageView.routeName: (_) => const ChooseLanguageView(),
       },
     );
   }
 }
-

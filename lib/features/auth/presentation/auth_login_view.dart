@@ -200,7 +200,7 @@ class _AuthLoginScaffold extends StatelessWidget {
                                 ),
                                 child: TextButton(
                                   onPressed: () => Navigator.of(context)
-                                      .pushNamed('/auth/success'),
+                                      .pushReplacementNamed('/language/choose'),
                                   child: const Text(
                                     'Sign In',
                                     style: TextStyle(
@@ -246,7 +246,7 @@ class _AuthLoginScaffold extends StatelessWidget {
                               height: 48,
                               child: OutlinedButton(
                                 onPressed: () => Navigator.of(context)
-                                    .pushNamed('/auth/success'),
+                                    .pushReplacementNamed('/language/choose'),
                                 style: OutlinedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   side: BorderSide(

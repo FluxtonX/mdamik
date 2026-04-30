@@ -10,6 +10,7 @@ class AuthTextField extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.prefixIcon,
+    this.suffixIcon,
   });
 
   final String hintText;
@@ -17,6 +18,7 @@ class AuthTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool obscureText;
   final IconData? prefixIcon;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +26,16 @@ class AuthTextField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       obscureText: obscureText,
+      style: const TextStyle(fontSize: 14),
       decoration: InputDecoration(
         hintText: hintText,
-        prefixIcon: prefixIcon == null ? null : Icon(prefixIcon),
+        hintStyle: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 14),
+        prefixIcon: prefixIcon == null
+            ? null
+            : Icon(prefixIcon, color: AuthTheme.orange.withOpacity(0.5), size: 20),
+        suffixIcon: suffixIcon,
         filled: true,
-        fillColor: AuthTheme.surface,
+        fillColor: Colors.white,
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
         border: OutlineInputBorder(

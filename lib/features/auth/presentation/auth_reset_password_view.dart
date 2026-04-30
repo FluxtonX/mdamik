@@ -4,64 +4,76 @@ import 'widgets/auth_scaffold.dart';
 import 'widgets/auth_text_field.dart';
 import 'widgets/primary_button.dart';
 
-class AuthResetPasswordView extends StatelessWidget {
+class AuthResetPasswordView extends StatefulWidget {
   const AuthResetPasswordView({super.key});
 
   static const routeName = '/auth/reset-password';
 
   @override
+  State<AuthResetPasswordView> createState() => _AuthResetPasswordViewState();
+}
+
+class _AuthResetPasswordViewState extends State<AuthResetPasswordView> {
+  bool _obscureNew = true;
+  bool _obscureConfirm = true;
+
+  @override
   Widget build(BuildContext context) {
     return AuthScaffold(
-      title: 'Auth',
+      title: 'مداميك',
+      headerTitle: 'Change Password',
       showBack: true,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.06),
-                  blurRadius: 18,
-                  offset: const Offset(0, 8),
-                ),
-              ],
+      backgroundImageAsset: 'assets/images/construction_login_bg.png',
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 24,
+              offset: const Offset(0, 12),
             ),
-            child: Column(
-              children: [
-                Text(
-                  'Reset password',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+          ],
+        ),
+        child: Column(
+          children: [
+            AuthTextField(
+              hintText: 'Type your new password',
+              obscureText: _obscureNew,
+              prefixIcon: Icons.lock_outline,
+              suffixIcon: IconButton(
+                onPressed: () => setState(() => _obscureNew = !_obscureNew),
+                icon: Icon(
+                  _obscureNew ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                  color: Colors.black.withOpacity(0.4),
+                  size: 20,
                 ),
-                const SizedBox(height: 12),
-                const AuthTextField(
-                  hintText: 'New password',
-                  obscureText: true,
-                  prefixIcon: Icons.lock_outline,
-                ),
-                const SizedBox(height: 10),
-                const AuthTextField(
-                  hintText: 'Confirm password',
-                  obscureText: true,
-                  prefixIcon: Icons.lock_outline,
-                ),
-                const SizedBox(height: 14),
-                PrimaryButton(
-                  label: 'Update Password',
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed('/auth/success'),
-                ),
-              ],
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-        ],
+            const SizedBox(height: 16),
+            AuthTextField(
+              hintText: 'Confirm your new password',
+              obscureText: _obscureConfirm,
+              prefixIcon: Icons.lock_outline,
+              suffixIcon: IconButton(
+                onPressed: () => setState(() => _obscureConfirm = !_obscureConfirm),
+                icon: Icon(
+                  _obscureConfirm ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                  color: Colors.black.withOpacity(0.4),
+                  size: 20,
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            PrimaryButton(
+              label: 'Change Password',
+              onPressed: () =>
+                  Navigator.of(context).pushNamed('/auth/success'),
+            ),
+          ],
+        ),
       ),
     );
   }
