@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -12,9 +14,12 @@ class ProfileView extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
+          icon: const Icon(Icons.arrow_back_ios_new,
+              color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Account & Settings', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n?.accountSettings ?? 'Account & Settings',
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -42,7 +47,11 @@ class ProfileView extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: const Center(
-                          child: Text('JD', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+                          child: Text('JD',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20)),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -50,18 +59,28 @@ class ProfileView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('John Doe', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                            const Text('John Doe',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16)),
                             const SizedBox(height: 4),
                             Text(
                               'Client • Member since\nJan 2026',
-                              style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 11, fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.3),
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
                       ),
                       TextButton(
                         onPressed: () {},
-                        child: const Text('Edit', style: TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 13)),
+                        child: Text(l10n?.edit ?? 'Edit',
+                            style: const TextStyle(
+                                color: Color(0xFFF28B22),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13)),
                       ),
                     ],
                   ),
@@ -69,8 +88,16 @@ class ProfileView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Verification Progress', style: TextStyle(color: Colors.black.withOpacity(0.4), fontSize: 12, fontWeight: FontWeight.w500)),
-                      const Text('3/6 Completed', style: TextStyle(color: Color(0xFFF28B22), fontSize: 12, fontWeight: FontWeight.bold)),
+                      Text(l10n?.verificationProgress ?? 'Verification Progress',
+                          style: TextStyle(
+                              color: Colors.black.withOpacity(0.4),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500)),
+                      Text(l10n?.completedOf6 ?? '3/6 Completed',
+                          style: const TextStyle(
+                              color: Color(0xFFF28B22),
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold)),
                     ],
                   ),
                   const SizedBox(height: 10),
@@ -98,23 +125,35 @@ class ProfileView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Complete Your Verification', style: TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 14)),
+                  Text(l10n?.completeVerification ?? 'Complete Your Verification',
+                      style: const TextStyle(
+                          color: Color(0xFFE57E2E),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14)),
                   const SizedBox(height: 6),
-                  Text('Unlock advanced features and build trust', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 11, fontWeight: FontWeight.w500)),
+                  Text(
+                      l10n?.verificationSubtitle ??
+                          'Unlock advanced features and build trust',
+                      style: TextStyle(
+                          color: Colors.black.withOpacity(0.3),
+                          fontSize: 11,
+                          fontWeight: FontWeight.w500)),
                   const SizedBox(height: 16),
                   Row(
                     children: [
-                      _VerificationChip(label: 'Phone'),
+                      _VerificationChip(label: l10n?.phone ?? 'Phone'),
                       const SizedBox(width: 12),
-                      _VerificationChip(label: 'Email'),
+                      _VerificationChip(label: l10n?.email ?? 'Email'),
                     ],
                   ),
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      _VerificationChip(label: 'National'),
+                      _VerificationChip(
+                          label: l10n?.national ?? 'National'),
                       const SizedBox(width: 12),
-                      _VerificationChip(label: 'Business'),
+                      _VerificationChip(
+                          label: l10n?.business ?? 'Business'),
                     ],
                   ),
                 ],
@@ -122,31 +161,64 @@ class ProfileView extends StatelessWidget {
             ),
             const SizedBox(height: 32),
 
-            // ACCOUNT Section
-            Text('ACCOUNT', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1)),
+            Text(l10n?.account ?? 'ACCOUNT',
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.3),
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1)),
             const SizedBox(height: 16),
-            _SettingsItem(icon: Icons.person_outline, label: 'Profile Information', onTap: () => Navigator.of(context).pushNamed('/profile/information')),
-            _SettingsItem(icon: Icons.verified_user_outlined, label: 'Verification Status'),
-            _SettingsItem(icon: Icons.lock_outline, label: 'Security & Privacy', onTap: () => Navigator.of(context).pushNamed('/profile/security')),
+            _SettingsItem(
+                icon: Icons.person_outline,
+                label: l10n?.profileInformation ?? 'Profile Information',
+                onTap: () => Navigator.of(context)
+                    .pushNamed('/profile/information')),
+            _SettingsItem(
+                icon: Icons.verified_user_outlined,
+                label: l10n?.verificationStatus ?? 'Verification Status'),
+            _SettingsItem(
+                icon: Icons.lock_outline,
+                label: l10n?.securityPrivacy ?? 'Security & Privacy',
+                onTap: () =>
+                    Navigator.of(context).pushNamed('/profile/security')),
             const SizedBox(height: 32),
 
-            // PREFERENCES Section
-            Text('PREFERENCES', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1)),
+            Text(l10n?.preferences ?? 'PREFERENCES',
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.3),
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1)),
             const SizedBox(height: 16),
-            _SettingsItem(icon: Icons.notifications_none_outlined, label: 'Notifications', onTap: () => Navigator.of(context).pushNamed('/profile/notifications')),
-            _SettingsItem(icon: Icons.language_outlined, label: 'Language & Region'),
-            _SettingsItem(icon: Icons.credit_card_outlined, label: 'Payment Methods'),
+            _SettingsItem(
+                icon: Icons.notifications_none_outlined,
+                label: l10n?.notificationsSettings ?? 'Notifications',
+                onTap: () => Navigator.of(context)
+                    .pushNamed('/profile/notifications')),
+            _SettingsItem(
+                icon: Icons.language_outlined,
+                label: l10n?.languageRegion ?? 'Language & Region'),
+            _SettingsItem(
+                icon: Icons.credit_card_outlined,
+                label: l10n?.paymentMethods ?? 'Payment Methods'),
             const SizedBox(height: 32),
 
-            // SUPPORT Section
-            Text('SUPPORT', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1)),
+            Text(l10n?.support ?? 'SUPPORT',
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.3),
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1)),
             const SizedBox(height: 16),
-            _SettingsItem(icon: Icons.help_outline, label: 'Help & Support'),
+            _SettingsItem(
+                icon: Icons.help_outline,
+                label: l10n?.helpSupport ?? 'Help & Support'),
             const SizedBox(height: 8),
 
             // Log Out
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
@@ -160,10 +232,15 @@ class ProfileView extends StatelessWidget {
                       color: Colors.red.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Icon(Icons.logout, color: Colors.red, size: 18),
+                    child: const Icon(Icons.logout,
+                        color: Colors.red, size: 18),
                   ),
                   const SizedBox(width: 16),
-                  const Text('Log Out', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 14)),
+                  Text(l10n?.logOut ?? 'Log Out',
+                      style: const TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14)),
                 ],
               ),
             ),
@@ -190,9 +267,14 @@ class _VerificationChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.check_circle, color: Color(0xFF00B16A), size: 14),
+          const Icon(Icons.check_circle,
+              color: Color(0xFF00B16A), size: 14),
           const SizedBox(width: 8),
-          Text(label, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 11, fontWeight: FontWeight.w500)),
+          Text(label,
+              style: TextStyle(
+                  color: Colors.black.withOpacity(0.3),
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500)),
         ],
       ),
     );
@@ -200,7 +282,8 @@ class _VerificationChip extends StatelessWidget {
 }
 
 class _SettingsItem extends StatelessWidget {
-  const _SettingsItem({required this.icon, required this.label, this.onTap});
+  const _SettingsItem(
+      {required this.icon, required this.label, this.onTap});
   final IconData icon;
   final String label;
   final VoidCallback? onTap;
@@ -212,7 +295,8 @@ class _SettingsItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
@@ -229,8 +313,12 @@ class _SettingsItem extends StatelessWidget {
               child: Icon(icon, color: const Color(0xFFF28B22), size: 18),
             ),
             const SizedBox(width: 16),
-            Expanded(child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14))),
-            const Icon(Icons.chevron_right, color: Color(0xFFF28B22), size: 20),
+            Expanded(
+                child: Text(label,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14))),
+            const Icon(Icons.chevron_right,
+                color: Color(0xFFF28B22), size: 20),
           ],
         ),
       ),

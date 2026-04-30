@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationsView extends StatelessWidget {
   const NotificationsView({super.key});
@@ -7,6 +8,7 @@ class NotificationsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -14,42 +16,49 @@ class NotificationsView extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
+          icon: const Icon(Icons.arrow_back_ios_new,
+              color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Notifications', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n?.notifications ?? 'Notifications',
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: false,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: const [
+        children: [
           _NotificationItem(
-            title: 'Payment Received',
-            desc: 'Your payment of \$1,200 for Custom Home Build project has been confirmed',
-            time: '2 hours ago',
+            title: l10n?.notif1Title ?? 'Payment Received',
+            desc: l10n?.notif1Desc ??
+                'Your payment of \$1,200 for Custom Home Build project has been confirmed',
+            time: l10n?.notif1Time ?? '2 hours ago',
             icon: Icons.check_circle_outline,
             isImportant: true,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           _NotificationItem(
-            title: 'New Message from Ahmed Ali',
-            desc: "Hi! I've reviewed your requirements and can start next week...",
-            time: '5 hours ago',
+            title: l10n?.notif2Title ?? 'New Message from Ahmed Ali',
+            desc: l10n?.notif2Desc ??
+                "Hi! I've reviewed your requirements and can start next week...",
+            time: l10n?.notif2Time ?? '5 hours ago',
             icon: Icons.chat_bubble_outline,
             isImportant: true,
             hasUnread: true,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           _NotificationItem(
-            title: 'Project Milestone Due',
-            desc: 'Design approval needed for Apartment Complex project',
-            time: 'Yesterday',
+            title: l10n?.notif3Title ?? 'Project Milestone Due',
+            desc: l10n?.notif3Desc ??
+                'Design approval needed for Apartment Complex project',
+            time: l10n?.notif3Time ?? 'Yesterday',
             icon: Icons.access_time,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           _NotificationItem(
-            title: 'Special Offer Available',
-            desc: 'Get 15% off on all engineering services this week',
-            time: '2 days ago',
+            title: l10n?.notif4Title ?? 'Special Offer Available',
+            desc: l10n?.notif4Desc ??
+                'Get 15% off on all engineering services this week',
+            time: l10n?.notif4Time ?? '2 days ago',
             icon: Icons.local_offer_outlined,
           ),
         ],
@@ -83,7 +92,9 @@ class _NotificationItem extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isImportant ? const Color(0xFFF28B22) : const Color(0xFFF1F1F4),
+          color: isImportant
+              ? const Color(0xFFF28B22)
+              : const Color(0xFFF1F1F4),
           width: isImportant ? 1.2 : 1.0,
         ),
       ),
@@ -108,26 +119,33 @@ class _NotificationItem extends StatelessWidget {
                     Expanded(
                       child: Text(
                         title,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 14),
                       ),
                     ),
                     if (hasUnread)
                       Container(
                         width: 8,
                         height: 8,
-                        decoration: const BoxDecoration(color: Color(0xFFF28B22), shape: BoxShape.circle),
+                        decoration: const BoxDecoration(
+                            color: Color(0xFFF28B22),
+                            shape: BoxShape.circle),
                       ),
                   ],
                 ),
                 const SizedBox(height: 6),
                 Text(
                   desc,
-                  style: const TextStyle(color: Colors.black54, fontSize: 12, height: 1.4),
+                  style: const TextStyle(
+                      color: Colors.black54, fontSize: 12, height: 1.4),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   time,
-                  style: const TextStyle(color: Colors.black26, fontSize: 10, fontWeight: FontWeight.w500),
+                  style: const TextStyle(
+                      color: Colors.black26,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500),
                 ),
               ],
             ),

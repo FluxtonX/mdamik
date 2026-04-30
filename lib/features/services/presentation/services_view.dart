@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ServicesView extends StatelessWidget {
   const ServicesView({super.key});
@@ -7,6 +8,7 @@ class ServicesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -16,7 +18,7 @@ class ServicesView extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Services', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n?.services ?? 'Services', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -25,7 +27,7 @@ class ServicesView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Essential site operations support',
+              l10n?.essentialSiteOps ?? 'Essential site operations support',
               style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 13, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 24),
@@ -39,74 +41,74 @@ class ServicesView extends StatelessWidget {
               children: [
                 _ServiceCard(
                   icon: Icons.auto_awesome_outlined,
-                  title: 'Site Cleaning',
-                  subtitle: 'During & post-construction cleanup',
+                  title: l10n?.siteCleaning ?? 'Site Cleaning',
+                  subtitle: l10n?.siteCleaningSubtitle ?? 'During & post-construction cleanup',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
-                    arguments: {'title': 'Site Cleaning'},
+                    arguments: {'title': l10n?.siteCleaning ?? 'Site Cleaning'},
                   ),
                 ),
                 _ServiceCard(
                   icon: Icons.shield_outlined,
-                  title: 'Security',
-                  subtitle: '24/7 guards & CCTV setup',
+                  title: l10n?.security ?? 'Security',
+                  subtitle: l10n?.securitySubtitle ?? '24/7 guards & CCTV setup',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
-                    arguments: {'title': 'Security Services'},
+                    arguments: {'title': l10n?.security ?? 'Security Services'},
                   ),
                 ),
                 _ServiceCard(
                   icon: Icons.bolt_outlined,
-                  title: 'Utility Setup',
-                  subtitle: 'Electricity, water & internet',
+                  title: l10n?.utilitySetup ?? 'Utility Setup',
+                  subtitle: l10n?.utilitySetupSubtitle ?? 'Electricity, water & internet',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
-                    arguments: {'title': 'Utility Setup'},
+                    arguments: {'title': l10n?.utilitySetup ?? 'Utility Setup'},
                   ),
                 ),
                 _ServiceCard(
                   icon: Icons.fact_check_outlined,
-                  title: 'Safety &\nCompliance',
-                  subtitle: 'HSE inspections & audits',
+                  title: l10n?.safetyCompliance ?? 'Safety &\nCompliance',
+                  subtitle: l10n?.safetyComplianceSubtitle ?? 'HSE inspections & audits',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
-                    arguments: {'title': 'Safety & Compliance'},
+                    arguments: {'title': l10n?.safetyCompliance ?? 'Safety & Compliance'},
                   ),
                 ),
                 _ServiceCard(
                   icon: Icons.opacity_outlined,
-                  title: 'Sanitation',
-                  subtitle: 'Portable toilets & hygiene',
+                  title: l10n?.sanitation ?? 'Sanitation',
+                  subtitle: l10n?.sanitationSubtitle ?? 'Portable toilets & hygiene',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
-                    arguments: {'title': 'Sanitation Services'},
+                    arguments: {'title': l10n?.sanitation ?? 'Sanitation Services'},
                   ),
                 ),
                 _ServiceCard(
                   icon: Icons.fence_outlined,
-                  title: 'Site Setup',
-                  subtitle: 'Hoarding, fencing & signage',
+                  title: l10n?.siteSetup ?? 'Site Setup',
+                  subtitle: l10n?.siteSetupSubtitle ?? 'Hoarding, fencing & signage',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
-                    arguments: {'title': 'Site Setup'},
+                    arguments: {'title': l10n?.siteSetup ?? 'Site Setup'},
                   ),
                 ),
                 _ServiceCard(
                   icon: Icons.eco_outlined,
-                  title: 'Environmental',
-                  subtitle: 'Dust control & restoration',
+                  title: l10n?.environmental ?? 'Environmental',
+                  subtitle: l10n?.environmentalSubtitle ?? 'Dust control & restoration',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
-                    arguments: {'title': 'Environmental Services'},
+                    arguments: {'title': l10n?.environmental ?? 'Environmental Services'},
                   ),
                 ),
                 _ServiceCard(
                   icon: Icons.camera_alt_outlined,
-                  title: 'Documentation',
-                  subtitle: 'Drone surveys & photography',
+                  title: l10n?.documentation ?? 'Documentation',
+                  subtitle: l10n?.documentationSubtitle ?? 'Drone surveys & photography',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
-                    arguments: {'title': 'Documentation Services'},
+                    arguments: {'title': l10n?.documentation ?? 'Documentation Services'},
                   ),
                 ),
               ],
@@ -122,10 +124,10 @@ class ServicesView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Bundle Services & Save', style: TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 14)),
+                  Text(l10n?.bundleServices ?? 'Bundle Services & Save', style: const TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 14)),
                   const SizedBox(height: 8),
                   Text(
-                    'Book multiple services together for better rates',
+                    l10n?.bundleServicesDesc ?? 'Book multiple services together for better rates',
                     style: TextStyle(color: Colors.black.withOpacity(0.4), fontSize: 12, height: 1.5),
                   ),
                   const SizedBox(height: 16),
@@ -138,7 +140,7 @@ class ServicesView extends StatelessWidget {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       elevation: 0,
                     ),
-                    child: const Text('View Bundles', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                    child: Text(l10n?.viewBundles ?? 'View Bundles', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                   ),
                 ],
               ),

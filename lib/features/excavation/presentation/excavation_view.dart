@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/excavation_step_header.dart';
 
 class ExcavationView extends StatefulWidget {
@@ -48,6 +49,7 @@ class _ExcavationViewState extends State<ExcavationView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -64,7 +66,11 @@ class _ExcavationViewState extends State<ExcavationView> {
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
         title: Text(
-          _currentStep == 1 ? 'Excavation' : (_currentStep == 2 ? 'Excavation Type' : 'Soil Type'),
+          _currentStep == 1
+              ? (l10n?.excavationTitle ?? 'Excavation')
+              : (_currentStep == 2
+                  ? (l10n?.excavationTypeTitle ?? 'Excavation Type')
+                  : (l10n?.soilTypeTitle ?? 'Soil Type')),
           style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: false,
@@ -73,31 +79,31 @@ class _ExcavationViewState extends State<ExcavationView> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            if (_currentStep == 1) _buildStep1(),
-            if (_currentStep == 2) _buildStep2(),
-            if (_currentStep == 3) _buildStep3(),
+            if (_currentStep == 1) _buildStep1(l10n),
+            if (_currentStep == 2) _buildStep2(l10n),
+            if (_currentStep == 3) _buildStep3(l10n),
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomAction(),
+      bottomNavigationBar: _buildBottomAction(l10n),
     );
   }
 
-  Widget _buildStep1() {
+  Widget _buildStep1(AppLocalizations? l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ExcavationStepHeader(
+        ExcavationStepHeader(
           step: 1,
-          title: 'Measurement Input',
-          subtitle: 'Enter site dimensions to calculate volume',
+          title: l10n?.step1Title ?? 'Measurement Input',
+          subtitle: l10n?.step1Subtitle ?? 'Enter site dimensions to calculate volume',
         ),
         const SizedBox(height: 24),
-        _buildInputField('Length (meters)', _lengthController),
+        _buildInputField(l10n?.lengthMeters ?? 'Length (meters)', _lengthController),
         const SizedBox(height: 16),
-        _buildInputField('Width (meters)', _widthController),
+        _buildInputField(l10n?.widthMeters ?? 'Width (meters)', _widthController),
         const SizedBox(height: 16),
-        _buildInputField('Depth (meters)', _depthController),
+        _buildInputField(l10n?.depthMeters ?? 'Depth (meters)', _depthController),
         const SizedBox(height: 24),
         Container(
           width: double.infinity,
@@ -113,12 +119,13 @@ class _ExcavationViewState extends State<ExcavationView> {
                 children: [
                   const Icon(Icons.calculate_outlined, color: Color(0xFFE57E2E), size: 18),
                   const SizedBox(width: 8),
-                  const Text('Calculated Volume', style: TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 13)),
+                  Text(l10n?.calculatedVolume ?? 'Calculated Volume',
+                      style: const TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 13)),
                 ],
               ),
               const SizedBox(height: 12),
               Text(
-                '${_volume.toStringAsFixed(2)} m³',
+                '${_volume.toStringAsFixed(2)} m\u00b3',
                 style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w900, color: Color(0xFFF28B22)),
               ),
             ],
@@ -128,14 +135,14 @@ class _ExcavationViewState extends State<ExcavationView> {
     );
   }
 
-  Widget _buildStep2() {
+  Widget _buildStep2(AppLocalizations? l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ExcavationStepHeader(
           step: 2,
-          title: 'Select Excavation Type',
-          subtitle: 'Volume: ${_volume.toStringAsFixed(2)} m³',
+          title: l10n?.selectExcavationType ?? 'Select Excavation Type',
+          subtitle: 'Volume: ${_volume.toStringAsFixed(2)} m\u00b3',
         ),
         const SizedBox(height: 24),
         ..._excavationTypes.map((type) {
@@ -175,7 +182,7 @@ class _ExcavationViewState extends State<ExcavationView> {
     );
   }
 
-  Widget _buildStep3() {
+  Widget _buildStep3(AppLocalizations? l10n) {
     final selectedSoilData = _soilTypes.firstWhere((s) => s['title'] == _selectedSoil, orElse: () => _soilTypes[0]);
     final totalEstimate = _volume * selectedSoilData['rate'];
 
@@ -184,8 +191,8 @@ class _ExcavationViewState extends State<ExcavationView> {
       children: [
         ExcavationStepHeader(
           step: 3,
-          title: 'Select Soil Type',
-          subtitle: '$_selectedType • ${_volume.toStringAsFixed(2)} m³',
+          title: l10n?.selectSoilType ?? 'Select Soil Type',
+          subtitle: '$_selectedType \u2022 ${_volume.toStringAsFixed(2)} m\u00b3',
         ),
         const SizedBox(height: 24),
         ..._soilTypes.map((soil) {
@@ -237,9 +244,9 @@ class _ExcavationViewState extends State<ExcavationView> {
               children: [
                 const Text('Cost Breakdown', style: TextStyle(color: Colors.black26, fontWeight: FontWeight.bold, fontSize: 12)),
                 const SizedBox(height: 16),
-                _buildBreakdownRow('Volume', '${_volume.toStringAsFixed(2)} m³'),
+                _buildBreakdownRow(l10n?.volume ?? 'Volume', '${_volume.toStringAsFixed(2)} m\u00b3'),
                 const SizedBox(height: 12),
-                _buildBreakdownRow('Rate per m³', '\$${selectedSoilData['rate']}'),
+                _buildBreakdownRow(l10n?.ratePerM3 ?? 'Rate per m\u00b3', '\$${selectedSoilData['rate']}'),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 12),
                   child: Divider(color: Color(0xFFF1F1F4)),
@@ -247,7 +254,7 @@ class _ExcavationViewState extends State<ExcavationView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Total Estimate', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFFF28B22))),
+                    Text(l10n?.totalEstimate ?? 'Total Estimate', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFFF28B22))),
                     Text('\$${totalEstimate.toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 20, color: Color(0xFFF28B22))),
                   ],
                 ),
@@ -293,17 +300,17 @@ class _ExcavationViewState extends State<ExcavationView> {
     );
   }
 
-  Widget _buildBottomAction() {
+  Widget _buildBottomAction(AppLocalizations? l10n) {
     String label = '';
     bool isEnabled = true;
     
     if (_currentStep == 1) {
-      label = 'Continue to Excavation Type';
+      label = l10n?.continueToExcavationType ?? 'Continue to Excavation Type';
     } else if (_currentStep == 2) {
-      label = 'Continue to Soil Type';
+      label = l10n?.continueToSoilType ?? 'Continue to Soil Type';
       isEnabled = _selectedType != null;
     } else {
-      label = 'View Service Providers';
+      label = l10n?.viewServiceProviders ?? 'View Service Providers';
       isEnabled = _selectedSoil != null;
     }
 

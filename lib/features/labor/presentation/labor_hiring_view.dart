@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/labor_card.dart';
 
 class LaborHiringView extends StatefulWidget {
@@ -11,12 +12,23 @@ class LaborHiringView extends StatefulWidget {
 }
 
 class _LaborHiringViewState extends State<LaborHiringView> {
-  String _selectedSkill = 'All';
-
-  final List<String> _skills = ['All', 'Mason', 'Electrician', 'Plumber', 'Painter', 'Carpenter'];
+  String? _selectedSkillKey;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    
+    final Map<String, String> skillsMap = {
+      'All': l10n?.skillAll ?? 'All',
+      'Mason': l10n?.skillMason ?? 'Mason',
+      'Electrician': l10n?.skillElectrician ?? 'Electrician',
+      'Plumber': l10n?.skillPlumber ?? 'Plumber',
+      'Painter': l10n?.skillPainter ?? 'Painter',
+      'Carpenter': l10n?.skillCarpenter ?? 'Carpenter',
+    };
+
+    _selectedSkillKey ??= 'All';
+
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -26,7 +38,7 @@ class _LaborHiringViewState extends State<LaborHiringView> {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Labor Hiring', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n?.laborHiring ?? 'Labor Hiring', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: false,
       ),
       body: Column(
@@ -42,11 +54,11 @@ class _LaborHiringViewState extends State<LaborHiringView> {
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(color: const Color(0xFFF1F1F4)),
               ),
-              child: const TextField(
+              child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'Search by skill or name...',
-                  hintStyle: TextStyle(color: Colors.black12, fontSize: 14),
-                  prefixIcon: Icon(Icons.search, color: Colors.black12),
+                  hintText: l10n?.searchBySkillOrName ?? 'Search by skill or name...',
+                  hintStyle: const TextStyle(color: Colors.black12, fontSize: 14),
+                  prefixIcon: const Icon(Icons.search, color: Colors.black12),
                   border: InputBorder.none,
                 ),
               ),
@@ -55,21 +67,21 @@ class _LaborHiringViewState extends State<LaborHiringView> {
           const SizedBox(height: 24),
 
           // Filter by Skill
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text('Filter by Skill', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(l10n?.filterBySkill ?? 'Filter by Skill', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           ),
           const SizedBox(height: 12),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
-              children: _skills.map((skill) {
-                final isSelected = _selectedSkill == skill;
+              children: skillsMap.entries.map((entry) {
+                final isSelected = _selectedSkillKey == entry.key;
                 return Padding(
                   padding: const EdgeInsets.only(right: 12),
                   child: InkWell(
-                    onTap: () => setState(() => _selectedSkill = skill),
+                    onTap: () => setState(() => _selectedSkillKey = entry.key),
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
@@ -78,7 +90,7 @@ class _LaborHiringViewState extends State<LaborHiringView> {
                         border: Border.all(color: isSelected ? const Color(0xFFF28B22) : const Color(0xFFF1F1F4)),
                       ),
                       child: Text(
-                        skill,
+                        entry.value,
                         style: TextStyle(
                           color: isSelected ? Colors.white : Colors.black26,
                           fontWeight: FontWeight.bold,
@@ -97,12 +109,12 @@ class _LaborHiringViewState extends State<LaborHiringView> {
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              children: const [
+              children: [
                 LaborCard(
                   initials: 'AH',
                   name: 'Ahmed Hassan',
-                  skill: 'Mason (Raj Mistri)',
-                  rate: '\$45/day',
+                  skill: l10n?.skillMason ?? 'Mason (Raj Mistri)',
+                  rate: '\$45/${l10n?.day ?? 'day'}',
                   rating: 4.9,
                   reviews: 128,
                   distance: '1.2 km',
@@ -113,8 +125,8 @@ class _LaborHiringViewState extends State<LaborHiringView> {
                 LaborCard(
                   initials: 'MA',
                   name: 'Mohammed Ali',
-                  skill: 'Electrician',
-                  rate: '\$38/day',
+                  skill: l10n?.skillElectrician ?? 'Electrician',
+                  rate: '\$38/${l10n?.day ?? 'day'}',
                   rating: 4.8,
                   reviews: 95,
                   distance: '2.5 km',
@@ -125,8 +137,8 @@ class _LaborHiringViewState extends State<LaborHiringView> {
                 LaborCard(
                   initials: 'OK',
                   name: 'Omar Khaled',
-                  skill: 'Plumber',
-                  rate: '\$35/day',
+                  skill: l10n?.skillPlumber ?? 'Plumber',
+                  rate: '\$35/${l10n?.day ?? 'day'}',
                   rating: 4.7,
                   reviews: 67,
                   distance: '3.1 km',
@@ -137,8 +149,8 @@ class _LaborHiringViewState extends State<LaborHiringView> {
                 LaborCard(
                   initials: 'YI',
                   name: 'Youssef Ibrahim',
-                  skill: 'Painter',
-                  rate: '\$28/day',
+                  skill: l10n?.skillPainter ?? 'Painter',
+                  rate: '\$28/${l10n?.day ?? 'day'}',
                   rating: 4.6,
                   reviews: 54,
                   distance: '4.8 km',
@@ -149,8 +161,8 @@ class _LaborHiringViewState extends State<LaborHiringView> {
                 LaborCard(
                   initials: 'KM',
                   name: 'Karim Mostafa',
-                  skill: 'Carpenter',
-                  rate: '\$42/day',
+                  skill: l10n?.skillCarpenter ?? 'Carpenter',
+                  rate: '\$42/${l10n?.day ?? 'day'}',
                   rating: 4.9,
                   reviews: 112,
                   distance: '0.8 km',

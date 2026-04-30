@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FinancialView extends StatelessWidget {
   const FinancialView({super.key});
@@ -7,6 +8,7 @@ class FinancialView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -16,7 +18,9 @@ class FinancialView extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Financial', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n?.financialTitle ?? 'Financial',
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -36,7 +40,7 @@ class FinancialView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'TOTAL BUDGET',
+                    l10n?.totalBudget ?? 'TOTAL BUDGET',
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.8),
                       fontSize: 10,
@@ -55,7 +59,11 @@ class FinancialView extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Spent', style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 10, fontWeight: FontWeight.w500)),
+                          Text(l10n?.spent ?? 'Spent',
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(0.7),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500)),
                           const SizedBox(height: 4),
                           const Text('\$86.8k', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                         ],
@@ -64,7 +72,11 @@ class FinancialView extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Remaining', style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 10, fontWeight: FontWeight.w500)),
+                          Text(l10n?.remaining ?? 'Remaining',
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(0.7),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500)),
                           const SizedBox(height: 4),
                           const Text('\$25.3k', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                         ],
@@ -81,7 +93,7 @@ class FinancialView extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 4),
-                          Text('consumed', style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 10, fontWeight: FontWeight.w500)),
+                          Text(l10n?.consumed ?? 'consumed', style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 10, fontWeight: FontWeight.w500)),
                         ],
                       ),
                     ],
@@ -92,7 +104,9 @@ class FinancialView extends StatelessWidget {
             const SizedBox(height: 32),
 
             // Budget by Category
-            const Text('Budget by Category', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            Text(l10n?.budgetByCategory ?? 'Budget by Category',
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 18)),
             const SizedBox(height: 20),
 
             const _BudgetCategoryItem(
@@ -144,10 +158,16 @@ class FinancialView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Recent Transactions', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                Text(l10n?.recentTransactions ?? 'Recent Transactions',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18)),
                 TextButton(
                   onPressed: () {},
-                  child: const Text('View All', style: TextStyle(color: Color(0xFFF28B22), fontSize: 12, fontWeight: FontWeight.bold)),
+                  child: Text(l10n?.viewAll ?? 'View All',
+                      style: const TextStyle(
+                          color: Color(0xFFF28B22),
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold)),
                 ),
               ],
             ),
@@ -197,14 +217,20 @@ class FinancialView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          '2 Categories Approaching Limit',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFFF28B22)),
+                        Text(
+                          l10n?.budgetWarning ?? '2 Categories Approaching Limit',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              color: Color(0xFFF28B22)),
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Materials (85%) and Transport (90%) budgets need attention',
-                          style: TextStyle(fontSize: 11, color: Colors.black.withOpacity(0.4)),
+                          l10n?.budgetWarningDesc ??
+                              'Materials (85%) and Transport (90%) budgets need attention',
+                          style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.black.withOpacity(0.4)),
                         ),
                       ],
                     ),

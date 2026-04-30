@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'all_services_view.dart';
 import 'notifications_view.dart';
 
@@ -8,6 +9,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final top = MediaQuery.paddingOf(context).top;
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
@@ -28,12 +30,13 @@ class HomeView extends StatelessWidget {
                           color: Colors.white, fontWeight: FontWeight.bold)),
                 ),
                 const SizedBox(width: 12),
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Good morning',
-                        style: TextStyle(color: Colors.black26, fontSize: 12)),
-                    Text('John Doe',
+                    Text(l10n?.goodMorning ?? 'Good morning',
+                        style: const TextStyle(
+                            color: Colors.black26, fontSize: 12)),
+                    const Text('John Doe',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16)),
                   ],
@@ -61,11 +64,13 @@ class HomeView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(color: const Color(0xFFF1F1F4)),
               ),
-              child: const TextField(
+              child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'Search services, materials...',
-                  hintStyle: TextStyle(color: Colors.black12, fontSize: 14),
-                  prefixIcon: Icon(Icons.search, color: Colors.black12),
+                  hintText: l10n?.searchHint ?? 'Search services, materials...',
+                  hintStyle:
+                      const TextStyle(color: Colors.black12, fontSize: 14),
+                  prefixIcon:
+                      const Icon(Icons.search, color: Colors.black12),
                   border: InputBorder.none,
                 ),
               ),
@@ -94,25 +99,26 @@ class HomeView extends StatelessWidget {
                       color: Colors.white.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: const Text(
-                      'LIMITED OFFER',
-                      style: TextStyle(
+                    child: Text(
+                      l10n?.limitedOffer ?? 'LIMITED OFFER',
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 10,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    '20% Off Your First\nProject',
-                    style: TextStyle(
+                  Text(
+                    l10n?.bannerTitle ?? '20% Off Your First\nProject',
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Get started with our premium services',
+                    l10n?.bannerSubtitle ??
+                        'Get started with our premium services',
                     style: TextStyle(
                         color: Colors.white.withOpacity(0.8), fontSize: 12),
                   ),
@@ -127,8 +133,9 @@ class HomeView extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                     ),
-                    child: const Text('Claim Now',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: Text(l10n?.claimNow ?? 'Claim Now',
+                        style:
+                            const TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
@@ -139,14 +146,14 @@ class HomeView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Categories',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                Text(l10n?.categories ?? 'Categories',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18)),
                 TextButton(
                   onPressed: () => Navigator.of(context)
                       .pushNamed(AllServicesView.routeName),
-                  child: const Text('See all',
-                      style: TextStyle(color: Color(0xFFF28B22))),
+                  child: Text(l10n?.seeAll ?? 'See all',
+                      style: const TextStyle(color: Color(0xFFF28B22))),
                 ),
               ],
             ),
@@ -160,42 +167,48 @@ class HomeView extends StatelessWidget {
               children: [
                 _CategoryItem(
                   icon: Icons.home_repair_service_outlined,
-                  label: 'Construction',
-                  onTap: () => Navigator.of(context).pushNamed('/construction'),
+                  label: l10n?.catConstruction ?? 'Construction',
+                  onTap: () =>
+                      Navigator.of(context).pushNamed('/construction'),
                 ),
                 _CategoryItem(
                   icon: Icons.real_estate_agent_outlined,
-                  label: 'Real Estate',
-                  onTap: () => Navigator.of(context).pushNamed('/real-estate'),
+                  label: l10n?.catRealEstate ?? 'Real Estate',
+                  onTap: () =>
+                      Navigator.of(context).pushNamed('/real-estate'),
                 ),
                 _CategoryItem(
                   icon: Icons.engineering_outlined,
-                  label: 'Engineering',
-                  onTap: () => Navigator.of(context).pushNamed('/engineering'),
+                  label: l10n?.catEngineering ?? 'Engineering',
+                  onTap: () =>
+                      Navigator.of(context).pushNamed('/engineering'),
                 ),
                 _CategoryItem(
                   icon: Icons.layers_outlined,
-                  label: 'Materials',
-                  onTap: () => Navigator.of(context).pushNamed('/materials'),
+                  label: l10n?.catMaterials ?? 'Materials',
+                  onTap: () =>
+                      Navigator.of(context).pushNamed('/materials'),
                 ),
                 _CategoryItem(
                   icon: Icons.construction_outlined,
-                  label: 'Excavation',
-                  onTap: () => Navigator.of(context).pushNamed('/excavation'),
+                  label: l10n?.catExcavation ?? 'Excavation',
+                  onTap: () =>
+                      Navigator.of(context).pushNamed('/excavation'),
                 ),
                 _CategoryItem(
                   icon: Icons.engineering_outlined,
-                  label: 'Labor',
+                  label: l10n?.catLabor ?? 'Labor',
                   onTap: () => Navigator.of(context).pushNamed('/labor'),
                 ),
                 _CategoryItem(
                   icon: Icons.local_shipping_outlined,
-                  label: 'Transport',
-                  onTap: () => Navigator.of(context).pushNamed('/transport'),
+                  label: l10n?.catTransport ?? 'Transport',
+                  onTap: () =>
+                      Navigator.of(context).pushNamed('/transport'),
                 ),
                 _CategoryItem(
                   icon: Icons.more_horiz,
-                  label: 'More',
+                  label: l10n?.catMore ?? 'More',
                   onTap: () => Navigator.of(context).pushNamed('/services'),
                 ),
               ],
@@ -206,9 +219,9 @@ class HomeView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Featured Projects',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                Text(l10n?.featuredProjects ?? 'Featured Projects',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18)),
                 const Icon(Icons.arrow_forward,
                     color: Colors.black26, size: 20),
               ],
@@ -218,16 +231,17 @@ class HomeView extends StatelessWidget {
               height: 200,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: const [
+                children: [
                   _ProjectCard(
-                    title: 'Custom Home Build',
-                    price: 'From \$45,000',
+                    title: l10n?.projectCustomHome ?? 'Custom Home Build',
+                    price: l10n?.projectCustomHomePrice ?? 'From \$45,000',
                     imagePath: 'assets/images/project_home_build.png',
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   _ProjectCard(
-                    title: 'Apartment Complex',
-                    price: 'From \$120,000',
+                    title: l10n?.projectApartment ?? 'Apartment Complex',
+                    price:
+                        l10n?.projectApartmentPrice ?? 'From \$120,000',
                     imagePath: 'assets/images/project_apartment.png',
                   ),
                 ],
@@ -307,7 +321,8 @@ class _ProjectCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(16)),
             child: Image.asset(imagePath,
                 height: 110, width: 160, fit: BoxFit.cover),
           ),

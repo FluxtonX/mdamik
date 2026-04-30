@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'professional_list_view.dart';
 
 class EngineeringView extends StatelessWidget {
@@ -8,6 +9,7 @@ class EngineeringView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -17,7 +19,9 @@ class EngineeringView extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Engineering', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n?.engineeringTitle ?? 'Engineering',
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -25,10 +29,13 @@ class EngineeringView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'What do you need help with?',
-              style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 13, fontWeight: FontWeight.w500),
-            ),
+          Text(
+            l10n?.engineeringHelp ?? 'What do you need help with?',
+            style: TextStyle(
+                color: Colors.black.withOpacity(0.3),
+                fontSize: 13,
+                fontWeight: FontWeight.w500),
+          ),
             const SizedBox(height: 24),
             GridView.count(
               crossAxisCount: 2,
@@ -40,8 +47,8 @@ class EngineeringView extends StatelessWidget {
               children: [
                 _EngineeringServiceCard(
                   icon: Icons.architecture_outlined,
-                  label: 'Design & Planning',
-                  subtitle: 'Architectural & blueprints',
+                  label: l10n?.engDesignPlanning ?? 'Design & Planning',
+                  subtitle: l10n?.engDesignSubtitle ?? 'Architectural & blueprints',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -53,8 +60,8 @@ class EngineeringView extends StatelessWidget {
                 ),
                 _EngineeringServiceCard(
                   icon: Icons.attach_money_outlined,
-                  label: 'Cost Estimation',
-                  subtitle: 'Project cost breakdown',
+                  label: l10n?.engCostEstimation ?? 'Cost Estimation',
+                  subtitle: l10n?.engCostSubtitle ?? 'Project cost breakdown',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -66,8 +73,8 @@ class EngineeringView extends StatelessWidget {
                 ),
                 _EngineeringServiceCard(
                   icon: Icons.visibility_outlined,
-                  label: 'Supervision',
-                  subtitle: 'Construction oversight',
+                  label: l10n?.engSupervision ?? 'Supervision',
+                  subtitle: l10n?.engSupervisionSubtitle ?? 'Construction oversight',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -79,8 +86,8 @@ class EngineeringView extends StatelessWidget {
                 ),
                 _EngineeringServiceCard(
                   icon: Icons.forum_outlined,
-                  label: 'Consultation',
-                  subtitle: 'Advice & guidance',
+                  label: l10n?.engConsultation ?? 'Consultation',
+                  subtitle: l10n?.engConsultationSubtitle ?? 'Advice & guidance',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -92,8 +99,8 @@ class EngineeringView extends StatelessWidget {
                 ),
                 _EngineeringServiceCard(
                   icon: Icons.engineering_outlined,
-                  label: 'Execution / PM',
-                  subtitle: 'Project management',
+                  label: l10n?.engExecution ?? 'Execution / PM',
+                  subtitle: l10n?.engExecutionSubtitle ?? 'Project management',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -105,8 +112,8 @@ class EngineeringView extends StatelessWidget {
                 ),
                 _EngineeringServiceCard(
                   icon: Icons.inventory_2_outlined,
-                  label: 'Turnkey Projects',
-                  subtitle: 'End-to-end solution',
+                  label: l10n?.engTurnkey ?? 'Turnkey Projects',
+                  subtitle: l10n?.engTurnkeySubtitle ?? 'End-to-end solution',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -118,8 +125,8 @@ class EngineeringView extends StatelessWidget {
                 ),
                 _EngineeringServiceCard(
                   icon: Icons.palette_outlined,
-                  label: 'Finishing Design',
-                  subtitle: 'Design & finishes',
+                  label: l10n?.engFinishing ?? 'Finishing Design',
+                  subtitle: l10n?.engFinishingSubtitle ?? 'Design & finishes',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -141,11 +148,19 @@ class EngineeringView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Need help deciding?', style: TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 14)),
+                  const Text('Need help deciding?',
+                      style: TextStyle(
+                          color: Color(0xFFE57E2E),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14)),
                   const SizedBox(height: 8),
                   Text(
-                    'Our assistant can guide you to the right service based on your needs.',
-                    style: TextStyle(color: Colors.black.withOpacity(0.4), fontSize: 12, height: 1.5),
+                    l10n?.needHelpDesc ??
+                        'Our assistant can guide you to the right service based on your needs.',
+                    style: TextStyle(
+                        color: Colors.black.withOpacity(0.4),
+                        fontSize: 12,
+                        height: 1.5),
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
@@ -154,10 +169,14 @@ class EngineeringView extends StatelessWidget {
                       backgroundColor: const Color(0xFFF28B22),
                       foregroundColor: Colors.white,
                       minimumSize: const Size(100, 36),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                       elevation: 0,
                     ),
-                    child: const Text('Talk to Assistant', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                    child: Text(
+                        l10n?.talkToAssistant ?? 'Talk to Assistant',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 12)),
                   ),
                 ],
               ),

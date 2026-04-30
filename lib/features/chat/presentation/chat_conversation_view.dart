@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatConversationView extends StatelessWidget {
   const ChatConversationView({super.key});
@@ -7,6 +8,7 @@ class ChatConversationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     // For demonstration, use a flag to show empty or chat state.
     const bool isEmpty = false;
 
@@ -31,7 +33,7 @@ class ChatConversationView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text('Ahmed Hassan', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14)),
-                Text('Online', style: TextStyle(color: Colors.green.shade600, fontSize: 10, fontWeight: FontWeight.w500)),
+                Text(l10n?.online ?? 'Online', style: TextStyle(color: Colors.green.shade600, fontSize: 10, fontWeight: FontWeight.w500)),
               ],
             ),
           ],
@@ -45,10 +47,10 @@ class ChatConversationView extends StatelessWidget {
         children: [
           Expanded(
             child: isEmpty
-                ? const Center(
+                ? Center(
                     child: Text(
-                      'No chat happen',
-                      style: TextStyle(color: Colors.black26, fontSize: 14, fontWeight: FontWeight.bold),
+                      l10n?.noChatHappen ?? 'No chat happen',
+                      style: const TextStyle(color: Colors.black26, fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   )
                 : ListView(
@@ -100,10 +102,10 @@ class ChatConversationView extends StatelessWidget {
                       color: const Color(0xFFFBFBFB),
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Type a message...',
-                        hintStyle: TextStyle(color: Colors.black12, fontSize: 14),
+                        hintText: l10n?.typeMessage ?? 'Type a message...',
+                        hintStyle: const TextStyle(color: Colors.black12, fontSize: 14),
                         border: InputBorder.none,
                       ),
                     ),

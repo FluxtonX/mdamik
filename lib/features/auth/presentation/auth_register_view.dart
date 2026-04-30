@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/mvvm/view_model_builder.dart';
 import 'auth_register_view_model.dart';
@@ -15,6 +16,7 @@ class AuthRegisterView extends StatelessWidget {
       builder: (context, vm, _) {
         final top = MediaQuery.paddingOf(context).top;
         final size = MediaQuery.sizeOf(context);
+        final l10n = AppLocalizations.of(context);
 
         return Scaffold(
           body: Stack(
@@ -72,7 +74,7 @@ class AuthRegisterView extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'Create your account to get started.',
+                            l10n?.createAccountDesc ?? 'Create your account to get started.',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -133,28 +135,29 @@ class AuthRegisterView extends StatelessWidget {
                                     .pushReplacementNamed('/auth/login');
                               },
                               onSignUp: vm.selectSignUp,
+                              l10n: l10n,
                             ),
                             const SizedBox(height: 18),
-                            const _AuthInput(
-                              hint: 'Full Name',
+                            _AuthInput(
+                              hint: l10n?.fullName ?? 'Full Name',
                               icon: Icons.person_outline,
                               keyboardType: TextInputType.name,
                             ),
                             const SizedBox(height: 12),
-                            const _AuthInput(
-                              hint: 'Email address',
+                            _AuthInput(
+                              hint: l10n?.emailAddress ?? 'Email address',
                               icon: Icons.email_outlined,
                               keyboardType: TextInputType.emailAddress,
                             ),
                             const SizedBox(height: 12),
-                            const _AuthInput(
-                              hint: 'Phone number',
+                            _AuthInput(
+                              hint: l10n?.phoneNumber ?? 'Phone number',
                               icon: Icons.phone_outlined,
                               keyboardType: TextInputType.phone,
                             ),
                             const SizedBox(height: 12),
-                            const _AuthInput(
-                              hint: 'Password',
+                            _AuthInput(
+                              hint: l10n?.password ?? 'Password',
                               icon: Icons.lock_outline,
                               obscureText: true,
                               showEye: true,
@@ -179,9 +182,9 @@ class AuthRegisterView extends StatelessWidget {
                                 child: TextButton(
                                   onPressed: () => Navigator.of(context)
                                       .pushReplacementNamed('/language/choose'),
-                                  child: const Text(
-                                    'Create Account',
-                                    style: TextStyle(
+                                  child: Text(
+                                    l10n?.createAccount ?? 'Create Account',
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w800,
                                       fontSize: 16,
@@ -203,7 +206,7 @@ class AuthRegisterView extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 10),
                                   child: Text(
-                                    'or continue with',
+                                    l10n?.orContinueWith ?? 'or continue with',
                                     style: TextStyle(
                                       color: Colors.grey.shade600,
                                       fontWeight: FontWeight.w500,
@@ -243,9 +246,9 @@ class AuthRegisterView extends StatelessWidget {
                                       width: 18,
                                     ),
                                     const SizedBox(width: 10),
-                                    const Text(
-                                      'Continue with Google',
-                                      style: TextStyle(
+                                    Text(
+                                      l10n?.continueWithGoogle ?? 'Continue with Google',
+                                      style: const TextStyle(
                                         color: Colors.black87,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -275,11 +278,13 @@ class _SegmentedTabs extends StatelessWidget {
     required this.isLogin,
     required this.onLogin,
     required this.onSignUp,
+    this.l10n,
   });
 
   final bool isLogin;
   final VoidCallback onLogin;
   final VoidCallback onSignUp;
+  final AppLocalizations? l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -294,7 +299,7 @@ class _SegmentedTabs extends StatelessWidget {
         children: [
           Expanded(
             child: _TabPill(
-              label: 'Login',
+              label: l10n?.loginTab ?? 'Login',
               active: isLogin,
               onTap: onLogin,
             ),
@@ -302,7 +307,7 @@ class _SegmentedTabs extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: _TabPill(
-              label: 'Sign Up',
+              label: l10n?.signUpTab ?? 'Sign Up',
               active: !isLogin,
               onTap: onSignUp,
             ),

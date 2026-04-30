@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'chat_conversation_view.dart';
 
 class ChatListView extends StatelessWidget {
@@ -6,6 +7,7 @@ class ChatListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     // For demonstration, use a flag to show empty or list state.
     const bool isEmpty = false;
 
@@ -15,13 +17,13 @@ class ChatListView extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: const Text('Messages', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24)),
+          title: Text(l10n?.messages ?? 'Messages', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24)),
           centerTitle: false,
         ),
-        body: const Center(
+        body: Center(
           child: Text(
-            'No Messages',
-            style: TextStyle(color: Colors.black26, fontSize: 18, fontWeight: FontWeight.bold),
+            l10n?.noMessages ?? 'No Messages',
+            style: const TextStyle(color: Colors.black26, fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
       );
@@ -32,7 +34,7 @@ class ChatListView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Messages', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24)),
+        title: Text(l10n?.messages ?? 'Messages', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24)),
         centerTitle: false,
       ),
       body: ListView(
@@ -60,7 +62,7 @@ class ChatListView extends StatelessWidget {
           _ChatListItem(
             initials: 'MS',
             color: const Color(0xFF50E3C2),
-            name: 'Support مداميك',
+            name: l10n?.chatSupport ?? 'Support Mdamik',
             message: 'Your project has been approved!',
             time: '3h ago',
             unreadCount: 1,

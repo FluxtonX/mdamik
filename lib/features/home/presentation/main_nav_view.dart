@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mdamik/features/chat/presentation/chat_list_view.dart';
 import 'package:mdamik/features/profile/presentation/profile_view.dart';
 
@@ -26,6 +27,7 @@ class _MainNavViewState extends State<MainNavView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -40,26 +42,26 @@ class _MainNavViewState extends State<MainNavView> {
             const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
         unselectedLabelStyle:
             const TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Home',
+            icon: const Icon(Icons.home_outlined),
+            activeIcon: const Icon(Icons.home),
+            label: l10n?.navHome ?? 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business_center_outlined),
-            activeIcon: Icon(Icons.business_center),
-            label: 'Projects',
+            icon: const Icon(Icons.business_center_outlined),
+            activeIcon: const Icon(Icons.business_center),
+            label: l10n?.navProjects ?? 'Projects',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble_outline),
-            activeIcon: Icon(Icons.chat_bubble),
-            label: 'Chat',
+            icon: const Icon(Icons.chat_bubble_outline),
+            activeIcon: const Icon(Icons.chat_bubble),
+            label: l10n?.navChat ?? 'Chat',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
-            label: 'Profile',
+            icon: const Icon(Icons.person_outline),
+            activeIcon: const Icon(Icons.person),
+            label: l10n?.navProfile ?? 'Profile',
           ),
         ],
       ),

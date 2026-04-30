@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/material_card.dart';
 import 'widgets/project_calculator.dart';
 
@@ -12,48 +13,52 @@ class MaterialsView extends StatefulWidget {
 }
 
 class _MaterialsViewState extends State<MaterialsView> {
-  String _selectedCategory = 'Cement';
-
-  final List<Map<String, dynamic>> _categories = [
-    {'label': 'Cement', 'icon': Icons.layers_outlined},
-    {'label': 'Steel', 'icon': Icons.architecture_outlined},
-    {'label': 'Sand', 'icon': Icons.grain_outlined},
-    {'label': 'Ceramic', 'icon': Icons.grid_view_outlined},
-  ];
-
-  final List<Map<String, dynamic>> _allMaterials = [
-    {
-      'image': 'assets/images/project_home_build.png',
-      'title': 'Portland Cement 50kg',
-      'price': '\$12.50',
-      'unit': 'bag',
-      'category': 'Cement',
-    },
-    {
-      'image': 'assets/images/project_apartment.png',
-      'title': 'Steel Rebar 12mm',
-      'price': '\$8.75',
-      'unit': 'rod',
-      'category': 'Steel',
-    },
-    {
-      'image': 'assets/images/property_family_house.png',
-      'title': 'Ceramic Tiles 60×60',
-      'price': '\$22.00',
-      'unit': 'box',
-      'category': 'Ceramic',
-    },
-    {
-      'image': 'assets/images/property_villa.png',
-      'title': 'Fine Sand 1m³',
-      'price': '\$35.00',
-      'unit': 'm³',
-      'category': 'Sand',
-    },
-  ];
+  String? _selectedCategoryKey;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    
+    final List<Map<String, dynamic>> categories = [
+      {'key': 'Cement', 'label': l10n?.catCement ?? 'Cement', 'icon': Icons.layers_outlined},
+      {'key': 'Steel', 'label': l10n?.catSteel ?? 'Steel', 'icon': Icons.architecture_outlined},
+      {'key': 'Sand', 'label': l10n?.catSand ?? 'Sand', 'icon': Icons.grain_outlined},
+      {'key': 'Ceramic', 'label': l10n?.catCeramic ?? 'Ceramic', 'icon': Icons.grid_view_outlined},
+    ];
+
+    _selectedCategoryKey ??= 'Cement';
+
+    final List<Map<String, dynamic>> allMaterials = [
+      {
+        'image': 'assets/images/project_home_build.png',
+        'title': 'Portland Cement 50kg',
+        'price': '\$12.50',
+        'unit': l10n?.unitBag ?? 'bag',
+        'category': 'Cement',
+      },
+      {
+        'image': 'assets/images/project_apartment.png',
+        'title': 'Steel Rebar 12mm',
+        'price': '\$8.75',
+        'unit': l10n?.unitRod ?? 'rod',
+        'category': 'Steel',
+      },
+      {
+        'image': 'assets/images/property_family_house.png',
+        'title': 'Ceramic Tiles 60×60',
+        'price': '\$22.00',
+        'unit': l10n?.unitBox ?? 'box',
+        'category': 'Ceramic',
+      },
+      {
+        'image': 'assets/images/property_villa.png',
+        'title': 'Fine Sand 1m³',
+        'price': '\$35.00',
+        'unit': l10n?.unitM3 ?? 'm³',
+        'category': 'Sand',
+      },
+    ];
+
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -63,7 +68,7 @@ class _MaterialsViewState extends State<MaterialsView> {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Materials', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n?.materials ?? 'Materials', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
             onPressed: () {},
@@ -99,11 +104,11 @@ class _MaterialsViewState extends State<MaterialsView> {
                       borderRadius: BorderRadius.circular(30),
                       border: Border.all(color: const Color(0xFFF1F1F4)),
                     ),
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Search materials...',
-                        hintStyle: TextStyle(color: Colors.black12, fontSize: 14),
-                        prefixIcon: Icon(Icons.search, color: Colors.black12),
+                        hintText: l10n?.searchMaterials ?? 'Search materials...',
+                        hintStyle: const TextStyle(color: Colors.black12, fontSize: 14),
+                        prefixIcon: const Icon(Icons.search, color: Colors.black12),
                         border: InputBorder.none,
                       ),
                     ),
@@ -114,12 +119,12 @@ class _MaterialsViewState extends State<MaterialsView> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: _categories.map((cat) {
-                        final isSelected = _selectedCategory == cat['label'];
+                      children: categories.map((cat) {
+                        final isSelected = _selectedCategoryKey == cat['key'];
                         return Padding(
                           padding: const EdgeInsets.only(right: 12),
                           child: InkWell(
-                            onTap: () => setState(() => _selectedCategory = cat['label']),
+                            onTap: () => setState(() => _selectedCategoryKey = cat['key']),
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                               decoration: BoxDecoration(
@@ -161,11 +166,11 @@ class _MaterialsViewState extends State<MaterialsView> {
                       crossAxisCount: 2,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
-                      childAspectRatio: 0.75,
+                      childAspectRatio: 0.7,
                     ),
-                    itemCount: _allMaterials.length,
+                    itemCount: allMaterials.length,
                     itemBuilder: (context, index) {
-                      final item = _allMaterials[index];
+                      final item = allMaterials[index];
                       return MaterialCard(
                         image: item['image'],
                         title: item['title'],

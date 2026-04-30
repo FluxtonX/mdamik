@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MaterialCard extends StatelessWidget {
   const MaterialCard({
@@ -16,6 +17,7 @@ class MaterialCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -64,7 +66,7 @@ class MaterialCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -75,7 +77,7 @@ class MaterialCard extends StatelessWidget {
                     elevation: 0,
                     padding: EdgeInsets.zero,
                   ),
-                  child: const Text('Add to Cart', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11)),
+                  child: Text(l10n?.addToCart ?? 'Add to Cart', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11)),
                 ),
               ],
             ),

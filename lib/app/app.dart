@@ -32,14 +32,35 @@ import '../features/profile/presentation/notifications_settings_view.dart';
 import '../features/splash/presentation/splash_view.dart';
 import '../features/language/presentation/choose_language_view.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../core/localization/locale_provider.dart';
+
 class App extends StatelessWidget {
-  const App({super.key});
+  final LocaleProvider localeProvider;
+
+  const App({super.key, required this.localeProvider});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'MDAMIK',
+    return ListenableBuilder(
+      listenable: localeProvider,
+      builder: (context, _) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          locale: localeProvider.locale,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'),
+            Locale('ar'),
+          ],
+          title: 'MDAMIK',
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: null,
@@ -79,6 +100,8 @@ class App extends StatelessWidget {
         NotificationsSettingsView.routeName: (_) =>
             const NotificationsSettingsView(),
         ChooseLanguageView.routeName: (_) => const ChooseLanguageView(),
+      },
+    );
       },
     );
   }

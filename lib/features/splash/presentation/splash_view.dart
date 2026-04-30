@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/mvvm/view_model_builder.dart';
 import 'splash_view_model.dart';
@@ -132,12 +133,13 @@ class _WelcomeBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     final onBg = Colors.white.withOpacity(0.92);
     final onBgSoft = Colors.white.withOpacity(0.75);
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Welcome to',
+          l10n?.welcomeTo ?? 'Welcome to',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: onBg,
                 fontWeight: FontWeight.w600,
@@ -145,8 +147,7 @@ class _WelcomeBlock extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          'مداميك',
-          textDirection: TextDirection.rtl,
+          l10n?.appName ?? 'مداميك',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 color: onBg,
                 fontWeight: FontWeight.w700,
@@ -154,7 +155,7 @@ class _WelcomeBlock extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'Build Your Future',
+          l10n?.buildYourFuture ?? 'Build Your Future',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: onBgSoft,
                 fontWeight: FontWeight.w500,

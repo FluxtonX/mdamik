@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProjectCalculator extends StatefulWidget {
   const ProjectCalculator({super.key});
@@ -13,6 +14,7 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -34,9 +36,9 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
                 children: [
                   const Icon(Icons.calculate_outlined, color: Colors.white, size: 20),
                   const SizedBox(width: 8),
-                  const Text(
-                    'Project Calculator',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                  Text(
+                    l10n?.projectCalculator ?? 'Project Calculator',
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ],
               ),
@@ -48,21 +50,21 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Text('Close', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                  child: Text(l10n?.close ?? 'Close', style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 4),
           Text(
-            'Auto-calculate quantities for your project',
+            l10n?.autoCalcQuantities ?? 'Auto-calculate quantities for your project',
             style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 11),
           ),
           const SizedBox(height: 20),
           if (!_isCalculated) ...[
-            const Text(
-              'Project Area (m²)',
-              style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500),
+            Text(
+              l10n?.projectAreaM2 ?? 'Project Area (m²)',
+              style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             Row(
@@ -79,9 +81,9 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
                       controller: _areaController,
                       keyboardType: TextInputType.number,
                       style: const TextStyle(color: Colors.white),
-                      decoration: const InputDecoration(
-                        hintText: 'Enter area in square meters',
-                        hintStyle: TextStyle(color: Colors.white38, fontSize: 12),
+                      decoration: InputDecoration(
+                        hintText: l10n?.enterAreaM2 ?? 'Enter area in square meters',
+                        hintStyle: const TextStyle(color: Colors.white38, fontSize: 12),
                         border: InputBorder.none,
                       ),
                     ),
@@ -97,14 +99,14 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
                     minimumSize: const Size(100, 44),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
-                  child: const Text('Calculate', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                  child: Text(l10n?.calculate ?? 'Calculate', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                 ),
               ],
             ),
           ] else ...[
-            const Text(
-              'Project Area (m²)',
-              style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500),
+            Text(
+              l10n?.projectAreaM2 ?? 'Project Area (m²)',
+              style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             Row(
@@ -131,19 +133,19 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
                     minimumSize: const Size(100, 44),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
-                  child: const Text('Recalculate', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                  child: Text(l10n?.recalculate ?? 'Recalculate', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                 ),
               ],
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Recommended Quantities:',
-              style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+            Text(
+              l10n?.recommendedQuantities ?? 'Recommended Quantities:',
+              style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-            _buildResultRow('Cement:', '3 bags'),
-            _buildResultRow('Steel:', '0.01 tons'),
-            _buildResultRow('Sand:', '1 m³'),
+            _buildResultRow(l10n?.catCement ?? 'Cement:', '3 ${l10n?.unitBag ?? 'bags'}'),
+            _buildResultRow(l10n?.catSteel ?? 'Steel:', '0.01 tons'),
+            _buildResultRow(l10n?.catSand ?? 'Sand:', '1 ${l10n?.unitM3 ?? 'm³'}'),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {},
@@ -154,7 +156,7 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
                 minimumSize: const Size(double.infinity, 44),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              child: const Text('Add to Cart', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+              child: Text(l10n?.addToCart ?? 'Add to Cart', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
             ),
           ],
         ],

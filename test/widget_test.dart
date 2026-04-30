@@ -9,9 +9,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:mdamik/app/app.dart';
 
+import 'package:mdamik/core/localization/locale_provider.dart';
+
 void main() {
   testWidgets('Splash renders', (WidgetTester tester) async {
-    await tester.pumpWidget(const App());
+    await tester.pumpWidget(App(localeProvider: LocaleProvider()));
 
     expect(find.text('Welcome to'), findsOneWidget);
     expect(find.text('Build Your Future'), findsOneWidget);

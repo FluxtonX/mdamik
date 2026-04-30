@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProjectManagementDetailsView extends StatefulWidget {
   const ProjectManagementDetailsView({super.key});
@@ -11,10 +12,18 @@ class ProjectManagementDetailsView extends StatefulWidget {
 
 class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsView> {
   int _selectedTab = 0;
-  final List<String> _tabs = ['Overview', 'Timeline', 'Team', 'Budget'];
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    
+    final List<String> tabs = [
+      l10n?.tabOverview ?? 'Overview',
+      l10n?.tabTimeline ?? 'Timeline',
+      l10n?.tabTeam ?? 'Team',
+      l10n?.tabBudget ?? 'Budget'
+    ];
+
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -52,14 +61,14 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Overall Progress', style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
+                      Text(l10n?.overallProgress ?? 'Overall Progress', style: const TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold)),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                         decoration: BoxDecoration(
                           color: const Color(0xFF00B16A),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Text('On Track', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                        child: Text(l10n?.onTrack ?? 'On Track', style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),
@@ -81,12 +90,12 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
 
             // Quick Stats Row
             Row(
-              children: const [
-                Expanded(child: _DetailStatCard(value: '\$55k', label: 'Spent', icon: Icons.monetization_on_outlined)),
-                SizedBox(width: 12),
-                Expanded(child: _DetailStatCard(value: '12', label: 'Team', icon: Icons.people_outline)),
-                SizedBox(width: 12),
-                Expanded(child: _DetailStatCard(value: '45', label: 'Days', icon: Icons.calendar_today_outlined)),
+              children: [
+                Expanded(child: _DetailStatCard(value: '\$55k', label: l10n?.spent ?? 'Spent', icon: Icons.monetization_on_outlined)),
+                const SizedBox(width: 12),
+                Expanded(child: _DetailStatCard(value: '12', label: l10n?.tabTeam ?? 'Team', icon: Icons.people_outline)),
+                const SizedBox(width: 12),
+                Expanded(child: _DetailStatCard(value: '45', label: l10n?.days ?? 'Days', icon: Icons.calendar_today_outlined)),
               ],
             ),
             const SizedBox(height: 32),
@@ -95,7 +104,7 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: _tabs.asMap().entries.map((entry) {
+                children: tabs.asMap().entries.map((entry) {
                   final isSelected = _selectedTab == entry.key;
                   return Padding(
                     padding: const EdgeInsets.only(right: 12),
@@ -137,13 +146,13 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('Current Milestone', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                      Text('75% Complete', style: TextStyle(color: Color(0xFFF28B22), fontSize: 11, fontWeight: FontWeight.bold)),
+                    children: [
+                      Text(l10n?.currentMilestone ?? 'Current Milestone', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                      const Text('75% Complete', style: TextStyle(color: Color(0xFFF28B22), fontSize: 11, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   const SizedBox(height: 12),
-                  const Text('Foundation & Structure', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(l10n?.foundationStructure ?? 'Foundation & Structure', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   const SizedBox(height: 16),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
@@ -156,10 +165,10 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
                   ),
                   const SizedBox(height: 16),
                   Row(
-                    children: const [
-                      Icon(Icons.calendar_today_outlined, color: Colors.black26, size: 14),
-                      SizedBox(width: 8),
-                      Text('Target: May 15, 2026', style: TextStyle(color: Colors.black26, fontSize: 12, fontWeight: FontWeight.w500)),
+                    children: [
+                      const Icon(Icons.calendar_today_outlined, color: Colors.black26, size: 14),
+                      const SizedBox(width: 8),
+                      Text(l10n?.targetDate('May 15, 2026') ?? 'Target: May 15, 2026', style: const TextStyle(color: Colors.black26, fontSize: 12, fontWeight: FontWeight.w500)),
                     ],
                   ),
                 ],
@@ -175,11 +184,11 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: const Color(0xFFF1F1F4)),
               ),
-              child: Row(
+              child: const Row(
                 children: [
-                  const Text('Team Members', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                  const Spacer(),
-                  const Icon(Icons.chevron_right, color: Colors.black26),
+                  Text('Team Members', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                  Spacer(),
+                  Icon(Icons.chevron_right, color: Colors.black26),
                 ],
               ),
             ),
@@ -188,11 +197,11 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: Row(
                 children: [
-                  _AvatarCircle(label: 'M1'),
-                  _AvatarCircle(label: 'M2'),
-                  _AvatarCircle(label: 'M3'),
-                  _AvatarCircle(label: 'M4'),
-                  _AvatarCircle(label: 'M5'),
+                  const _AvatarCircle(label: 'M1'),
+                  const _AvatarCircle(label: 'M2'),
+                  const _AvatarCircle(label: 'M3'),
+                  const _AvatarCircle(label: 'M4'),
+                  const _AvatarCircle(label: 'M5'),
                   Container(
                     width: 36,
                     height: 36,
@@ -222,13 +231,13 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
                 children: [
                   const Icon(Icons.warning_amber_rounded, color: Color(0xFFF28B22)),
                   const SizedBox(width: 16),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Pending Action Required', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFFF28B22))),
-                        SizedBox(height: 4),
-                        Text('Material delivery approval needed for next phase', style: TextStyle(fontSize: 11, color: Colors.black54)),
+                        Text(l10n?.pendingActionRequired ?? 'Pending Action Required', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Color(0xFFF28B22))),
+                        const SizedBox(height: 4),
+                        Text(l10n?.materialDeliveryApproval ?? 'Material delivery approval needed for next phase', style: const TextStyle(fontSize: 11, color: Colors.black54)),
                       ],
                     ),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum LaborStatus { availableNow, availableSoon, busy }
 
@@ -30,6 +31,7 @@ class LaborCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     Color statusColor;
     String statusText;
     IconData statusIcon;
@@ -37,17 +39,17 @@ class LaborCard extends StatelessWidget {
     switch (status) {
       case LaborStatus.availableNow:
         statusColor = const Color(0xFFE0F2F1);
-        statusText = 'Available Now';
+        statusText = l10n?.availableNow ?? 'Available Now';
         statusIcon = Icons.bolt;
         break;
       case LaborStatus.availableSoon:
         statusColor = const Color(0xFFFFF3E0);
-        statusText = 'Available Soon';
+        statusText = l10n?.availableSoon ?? 'Available Soon';
         statusIcon = Icons.access_time;
         break;
       case LaborStatus.busy:
         statusColor = const Color(0xFFFFEBEE);
-        statusText = 'Busy';
+        statusText = l10n?.busy ?? 'Busy';
         statusIcon = Icons.block;
         break;
     }
@@ -114,7 +116,7 @@ class LaborCard extends StatelessWidget {
                         const SizedBox(width: 8),
                         Container(width: 4, height: 4, decoration: const BoxDecoration(color: Colors.black12, shape: BoxShape.circle)),
                         const SizedBox(width: 8),
-                        Text('$distance away', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500)),
+                        Text('$distance ${l10n?.away ?? 'away'}', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500)),
                       ],
                     ),
                   ],
@@ -139,7 +141,7 @@ class LaborCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  '$experience years exp • $jobs jobs',
+                  '$experience ${l10n?.experienceYears ?? 'years exp'} • $jobs ${l10n?.jobsDone ?? 'jobs'}',
                   style: TextStyle(color: statusTextColor.withOpacity(0.6), fontSize: 11, fontWeight: FontWeight.w500),
                 ),
               ],
@@ -159,10 +161,10 @@ class LaborCard extends StatelessWidget {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.chat_bubble_outline, size: 16),
-                      SizedBox(width: 8),
-                      Text('Chat', style: TextStyle(fontWeight: FontWeight.bold)),
+                    children: [
+                      const Icon(Icons.chat_bubble_outline, size: 16),
+                      const SizedBox(width: 8),
+                      Text(l10n?.chat ?? 'Chat', style: const TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),
@@ -180,7 +182,7 @@ class LaborCard extends StatelessWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     elevation: 0,
                   ),
-                  child: const Text('Hire Now', style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text(l10n?.hireNow ?? 'Hire Now', style: const TextStyle(fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
