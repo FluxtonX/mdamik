@@ -4,7 +4,7 @@ import 'package:mdamik/features/chat/presentation/chat_list_view.dart';
 import 'package:mdamik/features/profile/presentation/profile_view.dart';
 
 import 'home_view.dart';
-import 'projects_view.dart';
+import '../../management/presentation/management_view.dart';
 
 class MainNavView extends StatefulWidget {
   const MainNavView({super.key});
@@ -20,7 +20,7 @@ class _MainNavViewState extends State<MainNavView> {
 
   final List<Widget> _screens = [
     const HomeView(),
-    const ProjectsView(),
+    const ManagementView(),
     const ChatListView(),
     const ProfileView(),
   ];

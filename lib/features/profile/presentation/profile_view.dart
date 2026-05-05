@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'language_region_view.dart';
+import 'payment_methods_view.dart';
+import 'support_view.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -12,14 +15,24 @@ class ProfileView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.arrow_back_ios_new,
-              color: Color(0xFFF28B22), size: 20),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xFFF1F1F4)),
+              color: Colors.white,
+            ),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.arrow_back,
+                  color: Color(0xFFF28B22), size: 18),
+            ),
+          ),
         ),
         title: Text(l10n?.accountSettings ?? 'Account & Settings',
             style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold)),
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -51,7 +64,7 @@ class ProfileView extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20)),
+                                  fontSize: 22)),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -62,13 +75,13 @@ class ProfileView extends StatelessWidget {
                             const Text('John Doe',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16)),
+                                    fontSize: 18)),
                             const SizedBox(height: 4),
                             Text(
                               'Client • Member since\nJan 2026',
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.3),
-                                  fontSize: 11,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -84,7 +97,7 @@ class ProfileView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -100,7 +113,7 @@ class ProfileView extends StatelessWidget {
                               fontWeight: FontWeight.bold)),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 12),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
                     child: const LinearProgressIndicator(
@@ -119,7 +132,7 @@ class ProfileView extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: const Color(0xFFF1F1E4).withOpacity(0.5),
+                color: const Color(0xFFFCE6D3).withOpacity(0.4),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -127,33 +140,31 @@ class ProfileView extends StatelessWidget {
                 children: [
                   Text(l10n?.completeVerification ?? 'Complete Your Verification',
                       style: const TextStyle(
-                          color: Color(0xFFE57E2E),
+                          color: Color(0xFFF28B22),
                           fontWeight: FontWeight.bold,
-                          fontSize: 14)),
+                          fontSize: 15)),
                   const SizedBox(height: 6),
                   Text(
                       l10n?.verificationSubtitle ??
                           'Unlock advanced features and build trust',
                       style: TextStyle(
-                          color: Colors.black.withOpacity(0.3),
-                          fontSize: 11,
+                          color: Colors.black.withOpacity(0.4),
+                          fontSize: 12,
                           fontWeight: FontWeight.w500)),
                   const SizedBox(height: 16),
                   Row(
                     children: [
-                      _VerificationChip(label: l10n?.phone ?? 'Phone'),
+                      Expanded(child: _VerificationChip(label: l10n?.phone ?? 'Phone')),
                       const SizedBox(width: 12),
-                      _VerificationChip(label: l10n?.email ?? 'Email'),
+                      Expanded(child: _VerificationChip(label: l10n?.email ?? 'Email')),
                     ],
                   ),
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      _VerificationChip(
-                          label: l10n?.national ?? 'National'),
+                      Expanded(child: _VerificationChip(label: l10n?.national ?? 'National')),
                       const SizedBox(width: 12),
-                      _VerificationChip(
-                          label: l10n?.business ?? 'Business'),
+                      Expanded(child: _VerificationChip(label: l10n?.business ?? 'Business')),
                     ],
                   ),
                 ],
@@ -161,13 +172,7 @@ class ProfileView extends StatelessWidget {
             ),
             const SizedBox(height: 32),
 
-            Text(l10n?.account ?? 'ACCOUNT',
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.3),
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1)),
-            const SizedBox(height: 16),
+            _SectionTitle(title: l10n?.account ?? 'ACCOUNT'),
             _SettingsItem(
                 icon: Icons.person_outline,
                 label: l10n?.profileInformation ?? 'Profile Information',
@@ -181,15 +186,9 @@ class ProfileView extends StatelessWidget {
                 label: l10n?.securityPrivacy ?? 'Security & Privacy',
                 onTap: () =>
                     Navigator.of(context).pushNamed('/profile/security')),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
 
-            Text(l10n?.preferences ?? 'PREFERENCES',
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.3),
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1)),
-            const SizedBox(height: 16),
+            _SectionTitle(title: l10n?.preferences ?? 'PREFERENCES'),
             _SettingsItem(
                 icon: Icons.notifications_none_outlined,
                 label: l10n?.notificationsSettings ?? 'Notifications',
@@ -197,56 +196,78 @@ class ProfileView extends StatelessWidget {
                     .pushNamed('/profile/notifications')),
             _SettingsItem(
                 icon: Icons.language_outlined,
-                label: l10n?.languageRegion ?? 'Language & Region'),
+                label: l10n?.languageRegion ?? 'Language & Region',
+                onTap: () => Navigator.of(context)
+                    .pushNamed(LanguageRegionView.routeName)),
             _SettingsItem(
                 icon: Icons.credit_card_outlined,
-                label: l10n?.paymentMethods ?? 'Payment Methods'),
-            const SizedBox(height: 32),
+                label: l10n?.paymentMethods ?? 'Payment Methods',
+                onTap: () => Navigator.of(context)
+                    .pushNamed(PaymentMethodsView.routeName)),
+            const SizedBox(height: 24),
 
-            Text(l10n?.support ?? 'SUPPORT',
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.3),
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1)),
-            const SizedBox(height: 16),
+            _SectionTitle(title: l10n?.support ?? 'SUPPORT'),
             _SettingsItem(
                 icon: Icons.help_outline,
-                label: l10n?.helpSupport ?? 'Help & Support'),
-            const SizedBox(height: 8),
+                label: l10n?.helpSupport ?? 'Help & Support',
+                onTap: () =>
+                    Navigator.of(context).pushNamed(SupportView.routeName)),
+            const SizedBox(height: 16),
 
             // Log Out
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: const Color(0xFFF1F1F4)),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
+            InkWell(
+              onTap: () {},
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: const Color(0xFFF1F1F4)),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.08),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Icon(Icons.logout,
+                          color: Colors.redAccent, size: 20),
                     ),
-                    child: const Icon(Icons.logout,
-                        color: Colors.red, size: 18),
-                  ),
-                  const SizedBox(width: 16),
-                  Text(l10n?.logOut ?? 'Log Out',
-                      style: const TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14)),
-                ],
+                    const SizedBox(width: 16),
+                    Text(l10n?.logOut ?? 'Log Out',
+                        style: const TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15)),
+                  ],
+                ),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _SectionTitle extends StatelessWidget {
+  const _SectionTitle({required this.title});
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Text(title,
+          style: TextStyle(
+              color: Colors.black.withOpacity(0.4),
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2)),
     );
   }
 }
@@ -258,23 +279,25 @@ class _VerificationChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: const Color(0xFFF1F1F4)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           const Icon(Icons.check_circle,
-              color: Color(0xFF00B16A), size: 14),
-          const SizedBox(width: 8),
-          Text(label,
-              style: TextStyle(
-                  color: Colors.black.withOpacity(0.3),
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500)),
+              color: Color(0xFF00B16A), size: 16),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(label,
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.4),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500)),
+          ),
         ],
       ),
     );
@@ -292,14 +315,14 @@ class _SettingsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(20),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
+        margin: const EdgeInsets.only(bottom: 12),
         padding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           border: Border.all(color: const Color(0xFFF1F1F4)),
         ),
         child: Row(
@@ -310,15 +333,14 @@ class _SettingsItem extends StatelessWidget {
                 color: const Color(0xFFFCE6D3).withOpacity(0.5),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(icon, color: const Color(0xFFF28B22), size: 18),
+              child: Icon(icon, color: const Color(0xFFF28B22), size: 20),
             ),
             const SizedBox(width: 16),
             Expanded(
                 child: Text(label,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 14))),
-            const Icon(Icons.chevron_right,
-                color: Color(0xFFF28B22), size: 20),
+                        fontWeight: FontWeight.bold, fontSize: 15))),
+            const Icon(Icons.circle, color: Color(0xFFF28B22), size: 8),
           ],
         ),
       ),

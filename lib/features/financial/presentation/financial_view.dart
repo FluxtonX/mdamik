@@ -14,13 +14,24 @@ class FinancialView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xFFF1F1F4)),
+              color: Colors.white,
+            ),
+            child: IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: const Icon(Icons.arrow_back,
+                  color: Color(0xFFF28B22), size: 18),
+            ),
+          ),
         ),
         title: Text(l10n?.financialTitle ?? 'Financial',
             style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold)),
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -28,13 +39,24 @@ class FinancialView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Total Budget Banner
+            // Total Budget Banner with Gradient
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: const Color(0xFFF28B22),
-                borderRadius: BorderRadius.circular(16),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFFF28B22), Color(0xFFE67E22)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFF28B22).withOpacity(0.3),
+                    blurRadius: 15,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,18 +65,23 @@ class FinancialView extends StatelessWidget {
                     l10n?.totalBudget ?? 'TOTAL BUDGET',
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.8),
-                      fontSize: 10,
+                      fontSize: 11,
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
+                      letterSpacing: 0.5,
                     ),
                   ),
                   const SizedBox(height: 8),
                   const Text(
                     '\$112k',
-                    style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w900),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,38 +89,54 @@ class FinancialView extends StatelessWidget {
                           Text(l10n?.spent ?? 'Spent',
                               style: TextStyle(
                                   color: Colors.white.withOpacity(0.7),
-                                  fontSize: 10,
+                                  fontSize: 11,
                                   fontWeight: FontWeight.w500)),
                           const SizedBox(height: 4),
-                          const Text('\$86.8k', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                          const Text('\$86.8k',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold)),
                         ],
                       ),
-                      const SizedBox(width: 32),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(l10n?.remaining ?? 'Remaining',
                               style: TextStyle(
                                   color: Colors.white.withOpacity(0.7),
-                                  fontSize: 10,
+                                  fontSize: 11,
                                   fontWeight: FontWeight.w500)),
                           const SizedBox(height: 4),
-                          const Text('\$25.3k', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+                          const Text('\$25.3k',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold)),
                         ],
                       ),
-                      const Spacer(),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.arrow_downward, color: Colors.white.withOpacity(0.8), size: 12),
+                              Icon(Icons.trending_down,
+                                  color: Colors.white.withOpacity(0.8),
+                                  size: 14),
                               const SizedBox(width: 4),
-                              Text('77%', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 14, fontWeight: FontWeight.bold)),
+                              Text('77%',
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.9),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold)),
                             ],
                           ),
-                          const SizedBox(height: 4),
-                          Text(l10n?.consumed ?? 'consumed', style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 10, fontWeight: FontWeight.w500)),
+                          const SizedBox(height: 2),
+                          Text(l10n?.consumed ?? 'Consumed',
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(0.6),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500)),
                         ],
                       ),
                     ],
@@ -105,9 +148,9 @@ class FinancialView extends StatelessWidget {
 
             // Budget by Category
             Text(l10n?.budgetByCategory ?? 'Budget by Category',
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 18)),
-            const SizedBox(height: 20),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+            const SizedBox(height: 16),
 
             const _BudgetCategoryItem(
               name: 'Materials',
@@ -159,8 +202,8 @@ class FinancialView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(l10n?.recentTransactions ?? 'Recent Transactions',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18)),
+                    style:
+                        const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                 TextButton(
                   onPressed: () {},
                   child: Text(l10n?.viewAll ?? 'View All',
@@ -177,25 +220,21 @@ class FinancialView extends StatelessWidget {
               title: 'Cement - 200 bags',
               date: 'Today, 2:30 PM',
               amount: '\$2,400',
-              icon: Icons.receipt_long_outlined,
             ),
             const _TransactionItem(
               title: 'Mason Team Payment',
               date: 'Today, 10:15 AM',
               amount: '\$1,200',
-              icon: Icons.receipt_long_outlined,
             ),
             const _TransactionItem(
               title: 'Engineering Consultation',
               date: 'Yesterday',
               amount: '\$800',
-              icon: Icons.receipt_long_outlined,
             ),
             const _TransactionItem(
               title: 'Steel Rebar Delivery',
               date: '2 days ago',
               amount: '\$3,500',
-              icon: Icons.receipt_long_outlined,
             ),
 
             const SizedBox(height: 24),
@@ -211,7 +250,15 @@ class FinancialView extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.info_outline, color: Color(0xFFF28B22), size: 22),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.warning_amber_rounded,
+                        color: Color(0xFFF28B22), size: 20),
+                  ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Column(
@@ -221,7 +268,7 @@ class FinancialView extends StatelessWidget {
                           l10n?.budgetWarning ?? '2 Categories Approaching Limit',
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 13,
+                              fontSize: 14,
                               color: Color(0xFFF28B22)),
                         ),
                         const SizedBox(height: 4),
@@ -260,15 +307,14 @@ class _BudgetCategoryItem extends StatelessWidget {
   final int total;
   final int remaining;
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(color: const Color(0xFFF1F1F4)),
       ),
       child: Column(
@@ -276,11 +322,16 @@ class _BudgetCategoryItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-              Text('$percentage%', style: TextStyle(color: Colors.black.withOpacity(0.4), fontWeight: FontWeight.bold, fontSize: 13)),
+              Text(name,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              Text('$percentage%',
+                  style: TextStyle(
+                      color: Colors.black.withOpacity(0.4),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13)),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(
@@ -290,17 +341,23 @@ class _BudgetCategoryItem extends StatelessWidget {
               minHeight: 6,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 '\$${_formatNumber(spent)} / \$${_formatNumber(total)}',
-                style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.3),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500),
               ),
               Text(
                 '\$${_formatNumber(remaining)} left',
-                style: const TextStyle(color: Color(0xFFF28B22), fontSize: 12, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    color: Color(0xFFF28B22),
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -328,13 +385,11 @@ class _TransactionItem extends StatelessWidget {
     required this.title,
     required this.date,
     required this.amount,
-    required this.icon,
   });
 
   final String title;
   final String date;
   final String amount;
-  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -343,7 +398,7 @@ class _TransactionItem extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(color: const Color(0xFFF1F1F4)),
       ),
       child: Row(
@@ -351,23 +406,33 @@ class _TransactionItem extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFFCE6D3).withOpacity(0.5),
+              color: const Color(0xFFFEE7E7),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(icon, color: const Color(0xFFF28B22), size: 20),
+            child: const Icon(Icons.trending_down,
+                color: Color(0xFFE53935), size: 20),
           ),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                Text(title,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                 const SizedBox(height: 4),
-                Text(date, style: TextStyle(color: Colors.black.withOpacity(0.25), fontSize: 11, fontWeight: FontWeight.w500)),
+                Text(date,
+                    style: TextStyle(
+                        color: Colors.black.withOpacity(0.3),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500)),
               ],
             ),
           ),
-          Text(amount, style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 15)),
+          Text(amount,
+              style: const TextStyle(
+                  color: Color(0xFFE53935),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16)),
         ],
       ),
     );

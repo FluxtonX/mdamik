@@ -31,6 +31,16 @@ import '../features/profile/presentation/security_privacy_view.dart';
 import '../features/profile/presentation/notifications_settings_view.dart';
 import '../features/splash/presentation/splash_view.dart';
 import '../features/language/presentation/choose_language_view.dart';
+import '../features/management/presentation/management_view.dart';
+import '../features/management/presentation/management_details_view.dart';
+import '../features/profile/presentation/language_region_view.dart';
+import '../features/profile/presentation/payment_methods_view.dart';
+import '../features/profile/presentation/support_view.dart';
+import '../features/payment/presentation/payment_options_view.dart';
+import '../features/payment/presentation/payment_info_view.dart';
+import '../features/payment/presentation/payment_review_view.dart';
+import '../features/payment/presentation/payment_processing_view.dart';
+import '../features/payment/presentation/payment_successful_view.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -100,6 +110,16 @@ class App extends StatelessWidget {
         NotificationsSettingsView.routeName: (_) =>
             const NotificationsSettingsView(),
         ChooseLanguageView.routeName: (_) => const ChooseLanguageView(),
+        ManagementView.routeName: (_) => const ManagementView(),
+        ManagementDetailsView.routeName: (_) => const ManagementDetailsView(),
+        LanguageRegionView.routeName: (_) => const LanguageRegionView(),
+        PaymentMethodsView.routeName: (_) => const PaymentMethodsView(),
+        SupportView.routeName: (_) => const SupportView(),
+        PaymentOptionsView.routeName: (_) => const PaymentOptionsView(),
+        PaymentInfoView.routeName: (_) => const PaymentInfoView(),
+        PaymentReviewView.routeName: (_) => const PaymentReviewView(),
+        PaymentProcessingView.routeName: (_) => const PaymentProcessingView(),
+        PaymentSuccessfulView.routeName: (_) => const PaymentSuccessfulView(),
       },
     );
       },
