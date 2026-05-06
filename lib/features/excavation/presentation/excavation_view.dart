@@ -242,7 +242,7 @@ class _ExcavationViewState extends State<ExcavationView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Cost Breakdown', style: TextStyle(color: Colors.black26, fontWeight: FontWeight.bold, fontSize: 12)),
+                Text(l10n?.costBreakdown ?? 'Cost Breakdown', style: const TextStyle(color: Colors.black26, fontWeight: FontWeight.bold, fontSize: 12)),
                 const SizedBox(height: 16),
                 _buildBreakdownRow(l10n?.volume ?? 'Volume', '${_volume.toStringAsFixed(2)} m\u00b3'),
                 const SizedBox(height: 12),
@@ -255,7 +255,13 @@ class _ExcavationViewState extends State<ExcavationView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(l10n?.totalEstimate ?? 'Total Estimate', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFFF28B22))),
-                    Text('\$${totalEstimate.toStringAsFixed(2)}', style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 20, color: Color(0xFFF28B22))),
+                    Text.rich(
+                      TextSpan(children: [
+                        const TextSpan(text: '\$'),
+                        TextSpan(text: totalEstimate.toStringAsFixed(2)),
+                      ]),
+                      style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 20, color: Color(0xFFF28B22)),
+                    ),
                   ],
                 ),
               ],

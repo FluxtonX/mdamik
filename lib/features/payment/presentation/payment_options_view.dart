@@ -125,21 +125,22 @@ class _PaymentOptionsViewState extends State<PaymentOptionsView> {
                     const SizedBox(height: 12),
                     _buildCurrencyItem(
                       title: l10n?.sudanesePound ?? 'Sudanese Pound',
-                      subtitle: 'جنيه سوداني',
+                      subtitle:
+                          l10n?.currencySudanesePoundNative ?? 'جنيه سوداني',
                       value: 'Sudanese Pound',
                       groupValue: _selectedCurrency,
                       onChanged: (v) => setState(() => _selectedCurrency = v!),
                     ),
                     _buildCurrencyItem(
                       title: l10n?.usDollar ?? 'US Dollar',
-                      subtitle: 'دولار',
+                      subtitle: l10n?.currencyUsDollarNative ?? 'دولار',
                       value: 'US Dollar',
                       groupValue: _selectedCurrency,
                       onChanged: (v) => setState(() => _selectedCurrency = v!),
                     ),
                     _buildCurrencyItem(
                       title: l10n?.saudiRiyal ?? 'Saudi Riyal',
-                      subtitle: 'ريال',
+                      subtitle: l10n?.currencySaudiRiyalNative ?? 'ريال',
                       value: 'Saudi Riyal',
                       groupValue: _selectedCurrency,
                       onChanged: (v) => setState(() => _selectedCurrency = v!),
@@ -155,7 +156,7 @@ class _PaymentOptionsViewState extends State<PaymentOptionsView> {
                       controller: _amountController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        hintText: 'Enter amount',
+                        hintText: l10n?.enterAmount ?? 'Enter amount',
                         hintStyle: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 14),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                         enabledBorder: OutlineInputBorder(

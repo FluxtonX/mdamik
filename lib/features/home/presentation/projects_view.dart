@@ -323,9 +323,14 @@ class _ActiveProjectCard extends StatelessWidget {
                         color: Colors.black26,
                         fontSize: 12,
                         fontWeight: FontWeight.w500)),
-                Text('${(progress * 100).toInt()}%',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 12)),
+                Text.rich(
+                  TextSpan(children: [
+                    TextSpan(text: ((progress * 100).toInt()).toString()),
+                    TextSpan(text: AppLocalizations.of(context)!.percentSymbol),
+                  ]),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 12),
+                ),
               ],
             ),
             const SizedBox(height: 8),
@@ -376,7 +381,7 @@ class _ActiveProjectCard extends StatelessWidget {
                     Icon(Icons.people_outline,
                         color: Colors.black.withOpacity(0.3), size: 16),
                     const SizedBox(width: 6),
-                    Text('$teamCount',
+                    Text(teamCount.toString(),
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 13)),
                   ],

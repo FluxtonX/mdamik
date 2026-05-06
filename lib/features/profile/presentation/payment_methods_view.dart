@@ -89,9 +89,9 @@ class PaymentMethodsView extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 32),
-                  const Text(
-                    '••••  ••••  ••••  4532',
-                    style: TextStyle(
+                  Text(
+                    l10n?.maskedCardPrimary ?? '••••  ••••  ••••  4532',
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -101,17 +101,17 @@ class PaymentMethodsView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('John Doe',
-                              style: TextStyle(
+                          Text(l10n?.cardholderName ?? 'John Doe',
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500)),
                         ],
                       ),
-                      Text('12/26',
+                      Text(l10n?.cardExpiry ?? '12/26',
                           style: TextStyle(
                               color: Colors.white.withOpacity(0.8),
                               fontSize: 14,
@@ -125,8 +125,8 @@ class PaymentMethodsView extends StatelessWidget {
             // Other Card
             _PaymentItem(
               icon: Icons.credit_card,
-              title: '•••• 8821',
-              subtitle: 'Expires 09/27',
+              title: l10n?.maskedCardOther ?? '•••• 8821',
+              subtitle: l10n?.expires0927 ?? 'Expires 09/27',
               actionLabel: l10n?.remove ?? 'Remove',
               onActionTap: () {},
             ),
@@ -135,8 +135,8 @@ class PaymentMethodsView extends StatelessWidget {
             const SizedBox(height: 16),
             _PaymentItem(
               icon: Icons.account_balance_wallet_outlined,
-              title: 'MyFawry',
-              subtitle: '+249 300 1234567',
+              title: l10n?.myFawry ?? 'MyFawry',
+              subtitle: l10n?.myFawryPhone ?? '+249 300 1234567',
               badge: l10n?.linked ?? 'LINKED',
               onTap: () {},
             ),
@@ -145,7 +145,7 @@ class PaymentMethodsView extends StatelessWidget {
             const SizedBox(height: 16),
             _PaymentItem(
               icon: Icons.account_balance_outlined,
-              title: 'Bangkok Bank',
+              title: l10n?.bangkokBank ?? 'Bangkok Bank',
               subtitle: l10n?.forDirectTransfers ?? 'For direct transfers',
               actionIcon: Icons.add,
               onTap: () {},

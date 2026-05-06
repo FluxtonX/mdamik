@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/professional_card.dart';
 
 class ProfessionalListView extends StatelessWidget {
@@ -8,6 +9,7 @@ class ProfessionalListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final title = args['title'] as String;
     final subtitle = args['subtitle'] as String;
@@ -61,13 +63,13 @@ class ProfessionalListView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    children: const [
-                      Text('All professionals are verified', style: TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 13)),
+                    children: [
+                      Text(l10n.allProfessionalsVerified, style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 13)),
                     ],
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Licensed engineers with proven track records',
+                    l10n.licensedEngineers,
                     style: TextStyle(color: Colors.black.withOpacity(0.4), fontSize: 11, fontWeight: FontWeight.w500),
                   ),
                 ],
@@ -85,7 +87,7 @@ class ProfessionalListView extends StatelessWidget {
                   projects: p['projects'],
                 )),
             const SizedBox(height: 16),
-            _NeedHelpFooter(),
+            const _NeedHelpFooter(),
           ],
         ),
       ),
@@ -94,15 +96,17 @@ class ProfessionalListView extends StatelessWidget {
 }
 
 class _NeedHelpFooter extends StatelessWidget {
+  const _NeedHelpFooter();
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Need help choosing?', style: TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 14)),
+        Text(l10n.needHelpChoosing, style: const TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 14)),
         const SizedBox(height: 8),
         Text(
-          'Our team can recommend the best professional for your specific needs',
+          l10n.recommendProfessional,
           style: TextStyle(color: Colors.black.withOpacity(0.4), fontSize: 12, height: 1.5),
         ),
         const SizedBox(height: 12),
@@ -110,10 +114,10 @@ class _NeedHelpFooter extends StatelessWidget {
           onTap: () {},
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              Icon(Icons.support_agent, color: Color(0xFFF28B22), size: 18),
-              SizedBox(width: 8),
-              Text('Talk to an Advisor', style: TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 13)),
+            children: [
+              const Icon(Icons.support_agent, color: Color(0xFFF28B22), size: 18),
+              const SizedBox(width: 8),
+              Text(l10n.talkToAdvisor, style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 13)),
             ],
           ),
         ),

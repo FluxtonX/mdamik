@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/agent_card.dart';
 
 class PropertyDetailsView extends StatefulWidget {
@@ -28,6 +29,7 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> with SingleTi
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       body: Column(
@@ -82,8 +84,8 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> with SingleTi
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              'Modern Villa',
+                            Text(
+                              l10n.modernVilla,
                               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                             ),
                             Container(
@@ -93,10 +95,10 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> with SingleTi
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Row(
-                                children: const [
+                                children: [
                                   Icon(Icons.star, color: Colors.amber, size: 14),
                                   SizedBox(width: 4),
-                                  Text('4.8', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                                  Text(4.8.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                                 ],
                               ),
                             ),
@@ -108,14 +110,14 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> with SingleTi
                             const Icon(Icons.location_on_outlined, color: Colors.black26, size: 16),
                             const SizedBox(width: 4),
                             Text(
-                              'Beverly Hills, CA',
+                              l10n.beverlyHills,
                               style: TextStyle(color: Colors.black.withOpacity(0.3), fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
                         const SizedBox(height: 16),
-                        const Text(
-                          '\$450,000',
+                        Text(
+                          l10n.price450000,
                           style: TextStyle(color: Color(0xFFF28B22), fontSize: 28, fontWeight: FontWeight.w900),
                         ),
                         const SizedBox(height: 24),
@@ -123,11 +125,11 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> with SingleTi
                         // Stats Row
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            _StatItem(icon: Icons.king_bed_outlined, label: '4', subLabel: 'Beds'),
-                            _StatItem(icon: Icons.bathtub_outlined, label: '3', subLabel: 'Baths'),
-                            _StatItem(icon: Icons.square_foot_outlined, label: '3200', subLabel: 'Sqft'),
-                            _StatItem(icon: Icons.calendar_today_outlined, label: '2021', subLabel: 'Built'),
+                          children: [
+                            _StatItem(icon: Icons.king_bed_outlined, label: '4', subLabel: l10n.beds),
+                            _StatItem(icon: Icons.bathtub_outlined, label: '3', subLabel: l10n.baths),
+                            _StatItem(icon: Icons.square_foot_outlined, label: '3200', subLabel: l10n.sqft),
+                            _StatItem(icon: Icons.calendar_today_outlined, label: '2021', subLabel: l10n.built),
                           ],
                         ),
                         const SizedBox(height: 32),
@@ -145,10 +147,10 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> with SingleTi
                             indicatorWeight: 3,
                             labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                             unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                            tabs: const [
-                              Tab(text: 'Overview'),
-                              Tab(text: 'Features'),
-                              Tab(text: 'Agent'),
+                            tabs: [
+                              Tab(text: l10n.tabOverview),
+                              Tab(text: l10n.features),
+                              Tab(text: l10n.team),
                             ],
                           ),
                         ),
@@ -194,7 +196,7 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> with SingleTi
                       minimumSize: const Size(double.infinity, 56),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     ),
-                    child: const Text('Schedule Tour', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: Text(l10n.scheduleTour, style: const TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -209,7 +211,7 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> with SingleTi
                       elevation: 4,
                       shadowColor: const Color(0xFFF28B22).withOpacity(0.4),
                     ),
-                    child: const Text('Make Offer', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: Text(l10n.makeOffer, style: const TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],
@@ -221,13 +223,14 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> with SingleTi
   }
 
   Widget _buildOverview() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Description', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        Text(l10n.descriptionTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         const SizedBox(height: 12),
         Text(
-          'Beautiful modern villa located in the heart of Beverly Hills. This stunning property features contemporary architecture, high-end finishes, and luxurious amenities. Perfect for those seeking elegance and comfort.',
+          l10n.propertyDescriptionText,
           style: TextStyle(color: Colors.black.withOpacity(0.5), fontSize: 14, height: 1.6),
         ),
       ],
@@ -235,15 +238,16 @@ class _PropertyDetailsViewState extends State<PropertyDetailsView> with SingleTi
   }
 
   Widget _buildFeatures() {
+    final l10n = AppLocalizations.of(context)!;
     final features = [
-      'Smart home technology',
-      'Gourmet kitchen with premium appliances',
-      'Master suite with spa-like bathroom',
-      'Private backyard with pool',
-      '2-car garage',
-      'Central air conditioning',
-      'Hardwood floors throughout',
-      'Energy efficient windows',
+      l10n.smartHomeTechnology,
+      l10n.gourmetKitchen,
+      l10n.masterSuite,
+      l10n.privateBackyardPool,
+      l10n.twoCarGarage,
+      l10n.centralAirConditioning,
+      l10n.hardwoodFloors,
+      l10n.energyEfficientWindows,
     ];
 
     return ListView.separated(

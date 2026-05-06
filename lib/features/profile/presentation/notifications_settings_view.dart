@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationsSettingsView extends StatefulWidget {
   const NotificationsSettingsView({super.key});
@@ -22,6 +23,7 @@ class _NotificationsSettingsViewState extends State<NotificationsSettingsView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -42,8 +44,8 @@ class _NotificationsSettingsViewState extends State<NotificationsSettingsView> {
             ),
           ),
         ),
-        title: const Text('Notifications',
-            style: TextStyle(
+        title: Text(l10n?.notificationsTitle ?? 'Notifications',
+            style: const TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
         centerTitle: false,
       ),
@@ -53,62 +55,65 @@ class _NotificationsSettingsViewState extends State<NotificationsSettingsView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // PUSH NOTIFICATIONS
-            _buildSectionTitle('PUSH NOTIFICATIONS'),
+            _buildSectionTitle(l10n?.pushNotifications ?? 'PUSH NOTIFICATIONS'),
             _NotificationToggle(
               icon: Icons.notifications_none_outlined,
-              title: 'Project Updates',
-              subtitle: 'Milestone changes, daily reports',
+              title: l10n?.projectUpdates ?? 'Project Updates',
+              subtitle: l10n?.projectUpdatesSubtitle ??
+                  'Milestone changes, daily reports',
               value: _projectUpdates,
               onChanged: (v) => setState(() => _projectUpdates = v),
             ),
             _NotificationToggle(
               icon: Icons.monetization_on_outlined,
-              title: 'Payment Alerts',
-              subtitle: 'Invoice due, payment received',
+              title: l10n?.paymentAlerts ?? 'Payment Alerts',
+              subtitle:
+                  l10n?.paymentAlertsSubtitle ?? 'Invoice due, payment received',
               value: _paymentAlerts,
               onChanged: (v) => setState(() => _paymentAlerts = v),
             ),
             _NotificationToggle(
               icon: Icons.chat_bubble_outline,
-              title: 'Labor Availability',
-              subtitle: 'When saved workers become available',
+              title: l10n?.laborAvailability ?? 'Labor Availability',
+              subtitle: l10n?.laborAvailabilitySubtitle ??
+                  'When saved workers become available',
               value: _laborAvailability,
               onChanged: (v) => setState(() => _laborAvailability = v),
             ),
             _NotificationToggle(
               icon: Icons.notifications_none_outlined,
-              title: 'Price Drop Alerts',
-              subtitle: 'Saved materials on sale',
+              title: l10n?.priceDropAlerts ?? 'Price Drop Alerts',
+              subtitle: l10n?.priceDropAlertsSubtitle ?? 'Saved materials on sale',
               value: _priceDropAlerts,
               onChanged: (v) => setState(() => _priceDropAlerts = v),
             ),
             const SizedBox(height: 32),
 
             // REPORTS & SUMMARIES
-            _buildSectionTitle('REPORTS & SUMMARIES'),
+            _buildSectionTitle(l10n?.reportsSummaries ?? 'REPORTS & SUMMARIES'),
             _NotificationToggleSimple(
-              title: 'Weekly Project Summary',
+              title: l10n?.weeklyProjectSummary ?? 'Weekly Project Summary',
               value: _weeklyProjectSummary,
               onChanged: (v) => setState(() => _weeklyProjectSummary = v),
             ),
             _NotificationToggleSimple(
-              title: 'Platform Announcements',
+              title: l10n?.platformAnnouncements ?? 'Platform Announcements',
               value: _platformAnnouncements,
               onChanged: (v) => setState(() => _platformAnnouncements = v),
             ),
             const SizedBox(height: 32),
 
             // DELIVERY METHOD
-            _buildSectionTitle('DELIVERY METHOD'),
+            _buildSectionTitle(l10n?.deliveryMethod ?? 'DELIVERY METHOD'),
             _NotificationToggle(
               icon: Icons.email_outlined,
-              title: 'Email Notifications',
+              title: l10n?.emailNotifications ?? 'Email Notifications',
               value: _emailNotifications,
               onChanged: (v) => setState(() => _emailNotifications = v),
             ),
             _NotificationToggle(
               icon: Icons.chat_bubble_outline,
-              title: 'SMS Notifications',
+              title: l10n?.smsNotifications ?? 'SMS Notifications',
               value: _smsNotifications,
               onChanged: (v) => setState(() => _smsNotifications = v),
             ),

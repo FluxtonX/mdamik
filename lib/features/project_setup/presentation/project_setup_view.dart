@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/setup_progress_bar.dart';
 
 class ProjectSetupView extends StatefulWidget {
@@ -48,6 +49,7 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -66,8 +68,18 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Project Setup', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16)),
-            Text('Step $_currentStep of 4', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 10, fontWeight: FontWeight.w500)),
+            Text(l10n.projectSetup, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16)),
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(text: l10n.step),
+                  const TextSpan(text: ' '),
+                  TextSpan(text: _currentStep.toString()),
+                  const TextSpan(text: ' / 4'),
+                ],
+              ),
+              style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 10, fontWeight: FontWeight.w500),
+            ),
           ],
         ),
         centerTitle: false,
@@ -100,7 +112,7 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                             elevation: 4,
                             shadowColor: const Color(0xFFF28B22).withOpacity(0.4),
                           ),
-                          child: const Text('Hire Now', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          child: Text(l10n.hireNow, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -113,7 +125,7 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                             minimumSize: const Size(double.infinity, 56),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                           ),
-                          child: const Text('Save Project', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          child: Text(l10n.saveProject, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                       ),
                     ],
@@ -128,7 +140,7 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                       elevation: 4,
                       shadowColor: const Color(0xFFF28B22).withOpacity(0.4),
                     ),
-                    child: const Text('Continue', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    child: Text(l10n.continueText, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   ),
           ),
         ],
@@ -161,9 +173,9 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Select Project Type', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        Text(AppLocalizations.of(context)!.selectProjectType, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         const SizedBox(height: 4),
-        Text('Choose the type of construction project', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+        Text(AppLocalizations.of(context)!.chooseProjectTypeDesc, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
         const SizedBox(height: 24),
         GridView.builder(
           shrinkWrap: true,
@@ -194,9 +206,9 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Select Services', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        Text(AppLocalizations.of(context)!.selectServicesTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         const SizedBox(height: 4),
-        Text('Choose the services you need', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+        Text(AppLocalizations.of(context)!.chooseServicesNeed, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
         const SizedBox(height: 24),
         ListView.separated(
           shrinkWrap: true,
@@ -231,12 +243,12 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Input Quantity', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        Text(AppLocalizations.of(context)!.inputQuantity, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         const SizedBox(height: 4),
-        Text('Enter area and select material type', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+        Text(AppLocalizations.of(context)!.enterAreaSelectMaterial, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
         const SizedBox(height: 24),
         // Area Selector
-        const Text('AREA (m²)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.black26)),
+        Text(AppLocalizations.of(context)!.areaSqm, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.black26)),
         const SizedBox(height: 12),
         Container(
           padding: const EdgeInsets.all(16),
@@ -256,7 +268,7 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
               Column(
                 children: [
                   Text(_area.toString(), style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Color(0xFFF28B22))),
-                  const Text('meters²', style: TextStyle(fontSize: 12, color: Color(0xFFFCE6D3), fontWeight: FontWeight.w600)),
+                  Text(AppLocalizations.of(context)!.metersSq, style: const TextStyle(fontSize: 12, color: Color(0xFFFCE6D3), fontWeight: FontWeight.w600)),
                 ],
               ),
               IconButton(
@@ -269,7 +281,7 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
         ),
         const SizedBox(height: 24),
         // Material Type Dropdown
-        const Text('MATERIAL TYPE', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.black26)),
+        Text(AppLocalizations.of(context)!.materialType, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.black26)),
         const SizedBox(height: 12),
         Column(
           children: [
@@ -339,9 +351,9 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Cost Estimation', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        Text(AppLocalizations.of(context)!.costEstimationTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
         const SizedBox(height: 4),
-        Text('Detailed breakdown of your project', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+        Text(AppLocalizations.of(context)!.detailedBreakdownProject, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
         const SizedBox(height: 24),
         Container(
           padding: const EdgeInsets.all(20),
@@ -355,7 +367,17 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Shop • ${_area}m²', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(text: AppLocalizations.of(context)!.projectTypeShop),
+                        const TextSpan(text: ' • '),
+                        TextSpan(text: _area.toString()),
+                        TextSpan(text: AppLocalizations.of(context)!.sqUnit),
+                      ],
+                    ),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
@@ -370,22 +392,22 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: Divider(color: Color(0xFFF1F1F4)),
               ),
-              _CostItem(label: 'Materials', value: '\$12,500'),
+              _CostItem(label: AppLocalizations.of(context)!.materials, value: AppLocalizations.of(context)!.cost12500),
               const SizedBox(height: 16),
-              _CostItem(label: 'Labor', value: '\$8,200'),
+              _CostItem(label: AppLocalizations.of(context)!.labor, value: AppLocalizations.of(context)!.cost8200),
               const SizedBox(height: 16),
-              _CostItem(label: 'Engineering', value: '\$4,800'),
+              _CostItem(label: AppLocalizations.of(context)!.engineeringTitle, value: AppLocalizations.of(context)!.cost4800),
               const SizedBox(height: 16),
-              _CostItem(label: 'Finishing', value: '\$3,500'),
+              _CostItem(label: AppLocalizations.of(context)!.finishing, value: AppLocalizations.of(context)!.cost3500),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: Divider(color: Color(0xFFF1F1F4)),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Total', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                  Text('\$29,000', style: TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.w800, fontSize: 20)),
+                children: [
+                  Text(AppLocalizations.of(context)!.totalLabel, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(AppLocalizations.of(context)!.cost29000, style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.w800, fontSize: 20)),
                 ],
               ),
             ],

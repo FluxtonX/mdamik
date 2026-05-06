@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AgentCard extends StatelessWidget {
   const AgentCard({super.key, required this.name, required this.title, required this.initials});
@@ -9,6 +10,7 @@ class AgentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -43,7 +45,7 @@ class AgentCard extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: () {},
             icon: const Icon(Icons.call, size: 18),
-            label: const Text('Call Agent', style: TextStyle(fontWeight: FontWeight.bold)),
+            label: Text(l10n.callAgent, style: const TextStyle(fontWeight: FontWeight.bold)),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFF28B22),
               foregroundColor: Colors.white,
@@ -56,7 +58,7 @@ class AgentCard extends StatelessWidget {
           OutlinedButton.icon(
             onPressed: () {},
             icon: const Icon(Icons.chat_bubble_outline, size: 18),
-            label: const Text('Send Message', style: TextStyle(fontWeight: FontWeight.bold)),
+            label: Text(l10n.sendMessage, style: const TextStyle(fontWeight: FontWeight.bold)),
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.black87,
               side: const BorderSide(color: Color(0xFFF1F1F4)),

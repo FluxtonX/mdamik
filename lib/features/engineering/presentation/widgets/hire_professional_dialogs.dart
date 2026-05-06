@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HireProfessionalFlow {
   static void show(BuildContext context, Map<String, dynamic> professional) {
@@ -16,6 +17,7 @@ class _ProjectDetailsDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: Padding(
@@ -30,9 +32,9 @@ class _ProjectDetailsDialog extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Project Details', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                    Text(l10n.projectDetails, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                     const SizedBox(height: 4),
-                    Text('Hiring ${professional['name']}', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+                    Text(l10n.hiringName(professional['name']), style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
                   ],
                 ),
                 IconButton(
@@ -82,18 +84,18 @@ class _ProjectDetailsDialog extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Rate:', style: TextStyle(color: Colors.black26, fontSize: 13)),
+                Text(l10n.rateLabel, style: const TextStyle(color: Colors.black26, fontSize: 13)),
                 Text(professional['price'], style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 14)),
               ],
             ),
             const SizedBox(height: 24),
-            const Text('Project Title', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+            Text(l10n.projectTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
             const SizedBox(height: 8),
-            _buildInput('e.g., Modern Home Design'),
+            _buildInput(l10n.projectTitleHint),
             const SizedBox(height: 16),
-            const Text('Budget', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+            Text(l10n.budgetLabel, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
             const SizedBox(height: 8),
-            _buildInput('e.g., \$5,000'),
+            _buildInput(l10n.budgetHintExample),
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
@@ -111,7 +113,7 @@ class _ProjectDetailsDialog extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 elevation: 0,
               ),
-              child: const Text('Continue', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(l10n.continueText, style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -144,6 +146,7 @@ class _ProjectRequirementsDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: Padding(
@@ -158,9 +161,9 @@ class _ProjectRequirementsDialog extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Project Requirements', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                    Text(l10n.projectRequirements, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                     const SizedBox(height: 4),
-                    Text('Tell us more about your project', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+                    Text(l10n.projectRequirementsSubtitle, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
                   ],
                 ),
                 IconButton(
@@ -170,7 +173,7 @@ class _ProjectRequirementsDialog extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 24),
-            const Text('Project Description', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+            Text(l10n.projectDescription, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
             const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.all(16),
@@ -179,17 +182,17 @@ class _ProjectRequirementsDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: const Color(0xFFF1F1F4)),
               ),
-              child: const TextField(
+              child: TextField(
                 maxLines: 4,
                 decoration: InputDecoration(
-                  hintText: 'Describe your project requirements...',
-                  hintStyle: TextStyle(color: Colors.black12, fontSize: 13),
+                  hintText: l10n.projectDescriptionHint,
+                  hintStyle: const TextStyle(color: Colors.black12, fontSize: 13),
                   border: InputBorder.none,
                 ),
               ),
             ),
             const SizedBox(height: 16),
-            const Text('Timeline', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+            Text(l10n.timeline, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
             const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -198,10 +201,10 @@ class _ProjectRequirementsDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: const Color(0xFFF1F1F4)),
               ),
-              child: const TextField(
+              child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'e.g., 2-3 weeks',
-                  hintStyle: TextStyle(color: Colors.black12, fontSize: 13),
+                  hintText: l10n.timelineHint,
+                  hintStyle: const TextStyle(color: Colors.black12, fontSize: 13),
                   border: InputBorder.none,
                 ),
               ),
@@ -223,7 +226,7 @@ class _ProjectRequirementsDialog extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 elevation: 0,
               ),
-              child: const Text('Continue', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(l10n.continueText, style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -238,6 +241,7 @@ class _PaymentInfoDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: Padding(
@@ -252,9 +256,9 @@ class _PaymentInfoDialog extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Payment Information', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                    Text(l10n.paymentInformation, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                     const SizedBox(height: 4),
-                    Text('Complete your booking', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+                    Text(l10n.completeYourBooking, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
                   ],
                 ),
                 IconButton(
@@ -267,16 +271,16 @@ class _PaymentInfoDialog extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Professional fee', style: TextStyle(color: Colors.black54, fontSize: 14)),
+                Text(l10n.professionalFee, style: const TextStyle(color: Colors.black54, fontSize: 14)),
                 Text(professional['price'].split('/').first, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
               ],
             ),
             const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Platform fee', style: TextStyle(color: Colors.black54, fontSize: 14)),
-                Text('\$10', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+              children: [
+                Text(l10n.platformFee, style: const TextStyle(color: Colors.black54, fontSize: 14)),
+                Text(l10n.platformFeeAmount, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
               ],
             ),
             const Padding(
@@ -285,13 +289,13 @@ class _PaymentInfoDialog extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Total', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                Text('\$130', style: TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 18)),
+              children: [
+                Text(l10n.totalLabel, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                Text(l10n.bookingTotalAmount, style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 18)),
               ],
             ),
             const SizedBox(height: 32),
-            const Text('Card Number', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+            Text(l10n.cardNumber, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
             const SizedBox(height: 8),
             _buildInput('1234 5678 9012 3456'),
             const SizedBox(height: 16),
@@ -301,7 +305,7 @@ class _PaymentInfoDialog extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Expiry', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                      Text(l10n.expiry, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                       const SizedBox(height: 8),
                       _buildInput('MM/YY'),
                     ],
@@ -312,7 +316,7 @@ class _PaymentInfoDialog extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('CVV', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                      Text(l10n.cvv, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                       const SizedBox(height: 8),
                       _buildInput('123'),
                     ],
@@ -331,7 +335,7 @@ class _PaymentInfoDialog extends StatelessWidget {
                 );
               },
               icon: const Icon(Icons.payment, size: 18),
-              label: const Text('Complete Booking', style: TextStyle(fontWeight: FontWeight.bold)),
+              label: Text(l10n.completeBooking, style: const TextStyle(fontWeight: FontWeight.bold)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFF28B22),
                 foregroundColor: Colors.white,
@@ -370,6 +374,7 @@ class _BookingConfirmedDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: Padding(
@@ -393,17 +398,17 @@ class _BookingConfirmedDialog extends StatelessWidget {
               child: const Icon(Icons.check_circle_outline, color: Colors.green, size: 60),
             ),
             const SizedBox(height: 24),
-            const Text('Booking Confirmed!', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            Text(l10n.bookingConfirmed, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
             const SizedBox(height: 8),
             Text(
-              'Your project has been started',
+              l10n.yourProjectHasStarted,
               style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 13),
             ),
             const SizedBox(height: 24),
-            const Text('Booking Confirmed!', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(l10n.bookingConfirmed, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 8),
             Text(
-              'Ahmed Ali will contact you within 24 hours',
+              l10n.contactWithin24h,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.black.withOpacity(0.5), fontSize: 14),
             ),
@@ -417,7 +422,7 @@ class _BookingConfirmedDialog extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 elevation: 0,
               ),
-              child: const Text('Done', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(l10n.done, style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),

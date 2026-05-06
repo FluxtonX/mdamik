@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../core/mvvm/view_model_builder.dart';
 import 'auth_otp_view_model.dart';
@@ -16,6 +17,7 @@ class AuthOtpView extends StatelessWidget {
       builder: (context, vm, _) {
         final top = MediaQuery.paddingOf(context).top;
         final size = MediaQuery.sizeOf(context);
+        final l10n = AppLocalizations.of(context);
 
         return Scaffold(
           body: Stack(
@@ -34,8 +36,8 @@ class AuthOtpView extends StatelessWidget {
                       ),
                       decoration: const BoxDecoration(
                         color: Color(0xFFE57E2E),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(32),
+                        borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(32),
                         ),
                       ),
                       child: Column(
@@ -53,7 +55,7 @@ class AuthOtpView extends StatelessWidget {
                                 ),
                                 padding: const EdgeInsets.all(8),
                                 child: Image.asset(
-                                  'assets/images/mdamik_logo.png',
+                                  'assets/images/medamak_logo_fixed.png',
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -73,7 +75,7 @@ class AuthOtpView extends StatelessWidget {
                           ),
                           const SizedBox(height: 14),
                           Text(
-                            'Forgot your password?',
+                            l10n?.forgotPassword ?? 'Forgot Password?',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -153,9 +155,9 @@ class AuthOtpView extends StatelessWidget {
                                     ),
                                     child: TextButton(
                                       onPressed: vm.resend,
-                                      child: const Text(
-                                        'Resend',
-                                        style: TextStyle(
+                                      child: Text(
+                                        l10n?.resend ?? 'Resend',
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w800,
                                           fontSize: 14,
@@ -168,7 +170,8 @@ class AuthOtpView extends StatelessWidget {
                             ),
                             const SizedBox(height: 14),
                             Text(
-                              'We texted you a code to verify your phone\nnumber (+966) 12 275 00XX',
+                              l10n?.otpVerifyPhoneMessage ??
+                                  'We texted you a code to verify your phone\nnumber (+966) 12 275 00XX',
                               style: TextStyle(
                                 color: const Color(0xFFE57E2E).withOpacity(0.9),
                                 fontWeight: FontWeight.w600,
@@ -177,7 +180,8 @@ class AuthOtpView extends StatelessWidget {
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              "This code will expired 10 minutes after this\nmessage. If you don't get a message.",
+                              l10n?.otpExpiryMessage ??
+                                  "This code will expired 10 minutes after this\nmessage. If you don't get a message.",
                               style: TextStyle(
                                 color: const Color(0xFFE57E2E).withOpacity(0.9),
                                 fontWeight: FontWeight.w600,
@@ -208,7 +212,7 @@ class AuthOtpView extends StatelessWidget {
                                           .pushNamed('/auth/reset-password')
                                       : null,
                                   child: Text(
-                                    'Change Password',
+                                    l10n?.changePassword ?? 'Change Password',
                                     style: TextStyle(
                                       color: Colors.white.withOpacity(
                                         vm.canSubmit ? 1.0 : 0.85,
@@ -243,6 +247,7 @@ class _CodeField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       height: 50,
       decoration: BoxDecoration(
@@ -261,9 +266,9 @@ class _CodeField extends StatelessWidget {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(4),
               ],
-              decoration: const InputDecoration(
-                hintText: 'Code',
-                hintStyle: TextStyle(color: Color(0xFFC7C7CD)),
+              decoration: InputDecoration(
+                hintText: l10n?.code ?? 'Code',
+                hintStyle: const TextStyle(color: Color(0xFFC7C7CD)),
                 border: InputBorder.none,
               ),
               onChanged: onChanged,

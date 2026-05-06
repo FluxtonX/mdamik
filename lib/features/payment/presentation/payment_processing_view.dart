@@ -122,7 +122,13 @@ class _PaymentProcessingViewState extends State<PaymentProcessingView> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(l10n?.method ?? 'Method:', style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.w500, fontSize: 14)),
+                              Text(
+                                l10n?.methodLabel ?? (l10n?.method ?? 'Method:'),
+                                style: const TextStyle(
+                                    color: Color(0xFFF28B22),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14),
+                              ),
                               Text(method, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                             ],
                           ),
@@ -133,8 +139,24 @@ class _PaymentProcessingViewState extends State<PaymentProcessingView> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(l10n?.amount ?? 'Amount:', style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.w500, fontSize: 14)),
-                              Text('$currencyCode $amount', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                              Text(
+                                l10n?.amountLabel ?? (l10n?.amount ?? 'Amount:'),
+                                style: const TextStyle(
+                                    color: Color(0xFFF28B22),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14),
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(text: currencyCode),
+                                    const TextSpan(text: ' '),
+                                    TextSpan(text: amount),
+                                  ],
+                                ),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 14),
+                              ),
                             ],
                           ),
                         ],

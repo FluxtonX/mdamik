@@ -203,7 +203,7 @@ class _TransportViewState extends State<TransportView> {
             children: [
               Text(l10n?.selected ?? 'Selected', style: const TextStyle(color: Color(0xFFE57E2E), fontSize: 10, fontWeight: FontWeight.bold)),
               const SizedBox(height: 4),
-              Text('$_selectedServiceKey', style: const TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 14)),
+              Text(_selectedServiceKey ?? '', style: const TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 14)),
             ],
           ),
         ),
@@ -242,7 +242,7 @@ class _TransportViewState extends State<TransportView> {
               children: [
                 Text(l10n?.recommendedVehicle ?? 'Recommended Vehicle', style: const TextStyle(color: Color(0xFFE57E2E), fontSize: 11, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
-                Text('$_recommendedVehicleKey', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                Text(_recommendedVehicleKey ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
               ],
             ),
           ),

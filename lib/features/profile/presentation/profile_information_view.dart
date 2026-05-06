@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileInformationView extends StatefulWidget {
   const ProfileInformationView({super.key});
@@ -10,19 +11,31 @@ class ProfileInformationView extends StatefulWidget {
 }
 
 class _ProfileInformationViewState extends State<ProfileInformationView> {
-  String _selectedRole = 'Client / Owner';
+  String _selectedRoleKey = 'roleClientOwner';
   bool _isDropdownOpen = false;
 
-  final List<String> _roles = [
-    'Client / Owner',
-    'Contractor',
-    'Worker / Freelancer',
-    'Engineer / Consultant',
-    'Supplier',
+  final List<String> _roleKeys = [
+    'roleClientOwner',
+    'roleContractor',
+    'roleWorkerFreelancer',
+    'roleEngineerConsultant',
+    'roleSupplier',
   ];
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final roleLabels = <String, String>{
+      'roleClientOwner': l10n?.roleClientOwner ?? 'Client / Owner',
+      'roleContractor': l10n?.roleContractor ?? 'Contractor',
+      'roleWorkerFreelancer': l10n?.roleWorkerFreelancer ?? 'Worker / Freelancer',
+      'roleEngineerConsultant':
+          l10n?.roleEngineerConsultant ?? 'Engineer / Consultant',
+      'roleSupplier': l10n?.roleSupplier ?? 'Supplier',
+    };
+    final selectedRoleLabel =
+        roleLabels[_selectedRoleKey] ?? (l10n?.roleClientOwner ?? 'Client / Owner');
+
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -43,8 +56,8 @@ class _ProfileInformationViewState extends State<ProfileInformationView> {
             ),
           ),
         ),
-        title: const Text('Profile Information',
-            style: TextStyle(
+        title: Text(l10n?.profileInformationTitle ?? 'Profile Information',
+            style: const TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
         centerTitle: false,
       ),
@@ -66,9 +79,9 @@ class _ProfileInformationViewState extends State<ProfileInformationView> {
                           color: Color(0xFFF28B22),
                           shape: BoxShape.circle,
                         ),
-                        child: const Center(
-                          child: Text('JD',
-                              style: TextStyle(
+                        child: Center(
+                          child: Text(l10n?.sampleInitials ?? 'JD',
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 36)),
@@ -91,7 +104,7 @@ class _ProfileInformationViewState extends State<ProfileInformationView> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  Text('Tap to change photo',
+                  Text(l10n?.tapToChangePhoto ?? 'Tap to change photo',
                       style: TextStyle(
                           color: Colors.black.withOpacity(0.3),
                           fontSize: 12,
@@ -102,24 +115,37 @@ class _ProfileInformationViewState extends State<ProfileInformationView> {
             const SizedBox(height: 40),
 
             // Full Name
-            _buildInputField('Full Name', 'John Doe', showEditIcon: true),
+            _buildInputField(
+              l10n?.labelFullName ?? 'Full Name',
+              l10n?.sampleName ?? 'John Doe',
+              showEditIcon: true,
+            ),
             const SizedBox(height: 24),
 
             // Email
-            _buildInputField('Email', 'john.doe@example.com'),
+            _buildInputField(
+              l10n?.labelEmail ?? 'Email',
+              l10n?.sampleEmail ?? 'john.doe@example.com',
+            ),
             const SizedBox(height: 24),
 
             // Phone Number
-            _buildInputField('Phone Number', '+1 234 567 8900'),
+            _buildInputField(
+              l10n?.labelPhoneNumber ?? 'Phone Number',
+              l10n?.samplePhone ?? '+1 234 567 8900',
+            ),
             const SizedBox(height: 24),
 
             // Location
-            _buildInputField('Location', 'New York, USA'),
+            _buildInputField(
+              l10n?.labelLocation ?? 'Location',
+              l10n?.sampleLocation ?? 'New York, USA',
+            ),
             const SizedBox(height: 24),
 
             // Role
-            const Text('Role',
-                style: TextStyle(
+            Text(l10n?.labelRole ?? 'Role',
+                style: const TextStyle(
                     color: Color(0xFFF28B22),
                     fontWeight: FontWeight.bold,
                     fontSize: 12)),
@@ -139,7 +165,7 @@ class _ProfileInformationViewState extends State<ProfileInformationView> {
                     child: Row(
                       children: [
                         Expanded(
-                            child: Text(_selectedRole,
+                            child: Text(selectedRoleLabel,
                                 style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.w500))),
                         Icon(
@@ -168,13 +194,13 @@ class _ProfileInformationViewState extends State<ProfileInformationView> {
                       ],
                     ),
                     child: Column(
-                      children: _roles.asMap().entries.map((entry) {
+                      children: _roleKeys.asMap().entries.map((entry) {
                         final index = entry.key;
-                        final role = entry.value;
-                        final isSelected = _selectedRole == role;
+                        final roleKey = entry.value;
+                        final isSelected = _selectedRoleKey == roleKey;
                         return InkWell(
                           onTap: () => setState(() {
-                            _selectedRole = role;
+                            _selectedRoleKey = roleKey;
                             _isDropdownOpen = false;
                           }),
                           child: Container(
@@ -188,13 +214,13 @@ class _ProfileInformationViewState extends State<ProfileInformationView> {
                               borderRadius: index == 0
                                   ? const BorderRadius.vertical(
                                       top: Radius.circular(16))
-                                  : index == _roles.length - 1
+                                  : index == _roleKeys.length - 1
                                       ? const BorderRadius.vertical(
                                           bottom: Radius.circular(16))
                                       : null,
                             ),
                             child: Text(
-                              role,
+                              roleLabels[roleKey] ?? roleKey,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight:
@@ -222,8 +248,8 @@ class _ProfileInformationViewState extends State<ProfileInformationView> {
                     RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 elevation: 0,
               ),
-              child: const Text('Save Changes',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              child: Text(l10n?.saveChanges ?? 'Save Changes',
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ),
             const SizedBox(height: 40),
           ],

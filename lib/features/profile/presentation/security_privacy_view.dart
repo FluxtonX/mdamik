@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SecurityPrivacyView extends StatefulWidget {
   const SecurityPrivacyView({super.key});
@@ -14,6 +15,7 @@ class _SecurityPrivacyViewState extends State<SecurityPrivacyView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -34,8 +36,8 @@ class _SecurityPrivacyViewState extends State<SecurityPrivacyView> {
             ),
           ),
         ),
-        title: const Text('Security & Privacy',
-            style: TextStyle(
+        title: Text(l10n?.securityPrivacyTitle ?? 'Security & Privacy',
+            style: const TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
         centerTitle: false,
       ),
@@ -45,21 +47,26 @@ class _SecurityPrivacyViewState extends State<SecurityPrivacyView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Password Section
-            const Text('Password',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(l10n?.passwordSection ?? 'Password',
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 20),
 
-            _buildPasswordField('Current Password', 'Enter current password',
+            _buildPasswordField(
+                l10n?.currentPassword ?? 'Current Password',
+                l10n?.enterCurrentPassword ?? 'Enter current password',
                 showVisibilityToggle: true),
             const SizedBox(height: 20),
-            _buildPasswordField('New Password', 'Enter new password'),
+            _buildPasswordField(l10n?.newPasswordLabel ?? 'New Password',
+                l10n?.enterNewPassword ?? 'Enter new password'),
             const SizedBox(height: 20),
-            _buildPasswordField('Confirm New Password', 'Confirm new password'),
+            _buildPasswordField(
+                l10n?.confirmNewPasswordLabel ?? 'Confirm New Password',
+                l10n?.confirmNewPasswordHint ?? 'Confirm new password'),
             const SizedBox(height: 32),
 
             // Two-Factor Authentication
-            const Text('Two-Factor Authentication',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(l10n?.twoFactorAuthentication ?? 'Two-Factor Authentication',
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(16),
@@ -84,11 +91,11 @@ class _SecurityPrivacyViewState extends State<SecurityPrivacyView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('2FA via SMS',
-                            style: TextStyle(
+                        Text(l10n?.twoFaViaSms ?? '2FA via SMS',
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 15)),
                         const SizedBox(height: 2),
-                        Text('Extra security layer',
+                        Text(l10n?.extraSecurityLayer ?? 'Extra security layer',
                             style: TextStyle(
                                 color: Colors.black.withOpacity(0.3),
                                 fontSize: 12,
@@ -110,20 +117,20 @@ class _SecurityPrivacyViewState extends State<SecurityPrivacyView> {
             const SizedBox(height: 32),
 
             // Active Sessions
-            const Text('Active Sessions',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(l10n?.activeSessions ?? 'Active Sessions',
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 16),
 
             _buildSessionItem(
               icon: Icons.phone_iphone,
-              name: 'iPhone 14 Pro',
-              details: 'New York, USA • Active now',
+              name: l10n?.deviceIphone14Pro ?? 'iPhone 14 Pro',
+              details: l10n?.sessionActiveNow ?? 'New York, USA • Active now',
               isActive: true,
             ),
             _buildSessionItem(
               icon: Icons.laptop_mac,
-              name: 'MacBook Pro',
-              details: 'New York, USA • 2 hours ago',
+              name: l10n?.deviceMacbookPro ?? 'MacBook Pro',
+              details: l10n?.sessionTwoHoursAgo ?? 'New York, USA • 2 hours ago',
               onRevoke: () {},
             ),
             const SizedBox(height: 40),
@@ -139,8 +146,8 @@ class _SecurityPrivacyViewState extends State<SecurityPrivacyView> {
                     RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 elevation: 0,
               ),
-              child: const Text('Save Security Settings',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              child: Text(l10n?.saveSecuritySettings ?? 'Save Security Settings',
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ),
             const SizedBox(height: 40),
           ],
@@ -243,8 +250,8 @@ class _SecurityPrivacyViewState extends State<SecurityPrivacyView> {
           else if (onRevoke != null)
             TextButton(
               onPressed: onRevoke,
-              child: const Text('Revoke',
-                  style: TextStyle(
+              child: Text(AppLocalizations.of(context)?.revoke ?? 'Revoke',
+                  style: const TextStyle(
                       color: Colors.redAccent,
                       fontSize: 13,
                       fontWeight: FontWeight.bold)),

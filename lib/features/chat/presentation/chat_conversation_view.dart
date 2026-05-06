@@ -23,16 +23,16 @@ class ChatConversationView extends StatelessWidget {
         ),
         title: Row(
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 18,
               backgroundColor: Color(0xFFF28B22),
-              child: Text('AH', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+              child: Text(l10n?.sampleInitials ?? 'AH', style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
             ),
             const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Ahmed Hassan', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14)),
+                Text(l10n?.sampleName ?? 'Ahmed Hassan', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14)),
                 Text(l10n?.online ?? 'Online', style: TextStyle(color: Colors.green.shade600, fontSize: 10, fontWeight: FontWeight.w500)),
               ],
             ),

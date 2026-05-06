@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'widgets/auth_scaffold.dart';
 import 'widgets/auth_text_field.dart';
@@ -19,9 +20,10 @@ class _AuthResetPasswordViewState extends State<AuthResetPasswordView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return AuthScaffold(
-      title: 'مداميك',
-      headerTitle: 'Change Password',
+      title: l10n?.appName ?? 'مداميك',
+      headerTitle: l10n?.changePassword ?? 'Change Password',
       showBack: true,
       backgroundImageAsset: 'assets/images/construction_login_bg.png',
       child: Container(
@@ -40,7 +42,7 @@ class _AuthResetPasswordViewState extends State<AuthResetPasswordView> {
         child: Column(
           children: [
             AuthTextField(
-              hintText: 'Type your new password',
+              hintText: l10n?.typeYourNewPassword ?? 'Type your new password',
               obscureText: _obscureNew,
               prefixIcon: Icons.lock_outline,
               suffixIcon: IconButton(
@@ -54,7 +56,8 @@ class _AuthResetPasswordViewState extends State<AuthResetPasswordView> {
             ),
             const SizedBox(height: 16),
             AuthTextField(
-              hintText: 'Confirm your new password',
+              hintText:
+                  l10n?.confirmYourNewPassword ?? 'Confirm your new password',
               obscureText: _obscureConfirm,
               prefixIcon: Icons.lock_outline,
               suffixIcon: IconButton(
@@ -68,7 +71,7 @@ class _AuthResetPasswordViewState extends State<AuthResetPasswordView> {
             ),
             const SizedBox(height: 24),
             PrimaryButton(
-              label: 'Change Password',
+              label: l10n?.changePassword ?? 'Change Password',
               onPressed: () =>
                   Navigator.of(context).pushNamed('/auth/success'),
             ),

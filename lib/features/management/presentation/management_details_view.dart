@@ -47,12 +47,12 @@ class _ManagementDetailsViewState extends State<ManagementDetailsView> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Residential Villa',
+            Text(l10n?.residentialVilla ?? 'Residential Villa',
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 18)),
-            Text('House • Phase 1',
+            Text(l10n?.housePhase1 ?? 'House • Phase 1',
                 style: TextStyle(
                     color: Colors.black.withOpacity(0.3),
                     fontSize: 11,
@@ -112,11 +112,18 @@ class _ManagementDetailsViewState extends State<ManagementDetailsView> {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  const Text('65%',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold)),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        const TextSpan(text: '65'),
+                        TextSpan(text: AppLocalizations.of(context)!.percentSymbol),
+                      ],
+                    ),
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 16),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(6),
@@ -219,8 +226,16 @@ class _ManagementDetailsViewState extends State<ManagementDetailsView> {
                       Text(l10n?.currentMilestone ?? 'Current Milestone',
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16)),
-                      const Text('75% Complete',
-                          style: TextStyle(
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            const TextSpan(text: '75'),
+                            TextSpan(text: AppLocalizations.of(context)!.percentSymbol),
+                            const TextSpan(text: ' '),
+                            TextSpan(text: AppLocalizations.of(context)!.completeWord),
+                          ],
+                        ),
+                          style: const TextStyle(
                               color: Color(0xFFF28B22),
                               fontSize: 12,
                               fontWeight: FontWeight.bold)),
@@ -285,7 +300,11 @@ class _ManagementDetailsViewState extends State<ManagementDetailsView> {
                     border: Border.all(color: Colors.white, width: 2),
                   ),
                   child: const Center(
-                    child: Text('+7',
+                    child: Text.rich(
+                      TextSpan(children: [
+                        const TextSpan(text: '+'),
+                        const TextSpan(text: '7'),
+                      ]),
                         style: TextStyle(
                             color: Color(0xFFF28B22),
                             fontSize: 12,

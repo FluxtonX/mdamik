@@ -18,22 +18,12 @@ class ManagementView extends StatelessWidget {
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFF1F1F4)),
-              color: Colors.white,
-            ),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.arrow_back,
-                  color: Color(0xFFF28B22), size: 18),
-            ),
-          ),
         ),
         title: Text(l10n?.management ?? 'Management',
             style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20)),
         centerTitle: false,
         actions: [
           Padding(
@@ -107,7 +97,8 @@ class ManagementView extends StatelessWidget {
               status: l10n?.onTrack ?? 'On Track',
               statusColor: const Color(0xFF00B16A),
               onTap: () {
-                Navigator.of(context).pushNamed(ManagementDetailsView.routeName);
+                Navigator.of(context)
+                    .pushNamed(ManagementDetailsView.routeName);
               },
             ),
             const SizedBox(height: 16),
@@ -213,8 +204,8 @@ class _StatCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(value,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 18)),
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           const SizedBox(height: 4),
           Text(label,
               style: const TextStyle(
@@ -274,8 +265,8 @@ class _ActiveProjectCard extends StatelessWidget {
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 15))),
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
                     color: statusColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
@@ -286,8 +277,7 @@ class _ActiveProjectCard extends StatelessWidget {
                           width: 6,
                           height: 6,
                           decoration: BoxDecoration(
-                              color: statusColor,
-                              shape: BoxShape.circle)),
+                              color: statusColor, shape: BoxShape.circle)),
                       const SizedBox(width: 6),
                       Text(status,
                           style: TextStyle(
@@ -314,9 +304,17 @@ class _ActiveProjectCard extends StatelessWidget {
                         color: Colors.black26,
                         fontSize: 12,
                         fontWeight: FontWeight.w500)),
-                Text('${(progress * 100).toInt()}%',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 12)),
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(text: ((progress * 100).toInt()).toString()),
+                      TextSpan(
+                          text: AppLocalizations.of(context)!.percentSymbol),
+                    ],
+                  ),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 12),
+                ),
               ],
             ),
             const SizedBox(height: 8),
@@ -367,7 +365,7 @@ class _ActiveProjectCard extends StatelessWidget {
                     Icon(Icons.people_outline,
                         color: Colors.black.withOpacity(0.3), size: 16),
                     const SizedBox(width: 6),
-                    Text('$teamCount',
+                    Text(teamCount.toString(),
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 13)),
                   ],

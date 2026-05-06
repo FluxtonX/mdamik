@@ -21,8 +21,8 @@ class ProjectDetailsView extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Residential Villa', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18)),
-            Text('House • Phase 1', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500)),
+            Text(l10n?.residentialVilla ?? 'Residential Villa', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18)),
+            Text(l10n?.housePhase1 ?? 'House • Phase 1', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500)),
           ],
         ),
         centerTitle: false,
@@ -62,7 +62,13 @@ class ProjectDetailsView extends StatelessWidget {
                         children: [
                           Text(l10n?.overallProgress ?? 'Overall Progress', style: const TextStyle(color: Colors.white70, fontSize: 12)),
                           const SizedBox(height: 4),
-                          const Text('65%', style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
+                          Text.rich(
+                            TextSpan(children: [
+                              const TextSpan(text: '65'),
+                              TextSpan(text: AppLocalizations.of(context)!.percentSymbol),
+                            ]),
+                            style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
+                          ),
                         ],
                       ),
                       Container(
@@ -117,7 +123,15 @@ class ProjectDetailsView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(l10n?.currentMilestone ?? 'Current Milestone', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                      const Text('75% Complete', style: TextStyle(color: Color(0xFFF28B22), fontSize: 11, fontWeight: FontWeight.bold)),
+                      Text.rich(
+                        TextSpan(children: [
+                          const TextSpan(text: '75'),
+                          TextSpan(text: AppLocalizations.of(context)!.percentSymbol),
+                          const TextSpan(text: ' '),
+                          TextSpan(text: AppLocalizations.of(context)!.completeWord),
+                        ]),
+                        style: const TextStyle(color: Color(0xFFF28B22), fontSize: 11, fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 12),

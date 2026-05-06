@@ -71,9 +71,9 @@ class FinancialView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    '\$112k',
-                    style: TextStyle(
+                  Text(
+                    l10n?.budgetTotalSample ?? '\$112k',
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 40,
                         fontWeight: FontWeight.bold),
@@ -92,8 +92,8 @@ class FinancialView extends StatelessWidget {
                                   fontSize: 11,
                                   fontWeight: FontWeight.w500)),
                           const SizedBox(height: 4),
-                          const Text('\$86.8k',
-                              style: TextStyle(
+                          Text(l10n?.budgetSpentSample ?? '\$86.8k',
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold)),
@@ -108,8 +108,8 @@ class FinancialView extends StatelessWidget {
                                   fontSize: 11,
                                   fontWeight: FontWeight.w500)),
                           const SizedBox(height: 4),
-                          const Text('\$25.3k',
-                              style: TextStyle(
+                          Text(l10n?.budgetRemainingSample ?? '\$25.3k',
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold)),
@@ -124,7 +124,7 @@ class FinancialView extends StatelessWidget {
                                   color: Colors.white.withOpacity(0.8),
                                   size: 14),
                               const SizedBox(width: 4),
-                              Text('77%',
+                              Text(l10n?.budgetConsumedPercentSample ?? '77%',
                                   style: TextStyle(
                                       color: Colors.white.withOpacity(0.9),
                                       fontSize: 16,
@@ -152,43 +152,43 @@ class FinancialView extends StatelessWidget {
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             const SizedBox(height: 16),
 
-            const _BudgetCategoryItem(
-              name: 'Materials',
+            _BudgetCategoryItem(
+              name: l10n?.materials ?? 'Materials',
               percentage: 85,
               spent: 38250,
               total: 45000,
               remaining: 6750,
             ),
-            const _BudgetCategoryItem(
-              name: 'Labor',
+            _BudgetCategoryItem(
+              name: l10n?.labor ?? 'Labor',
               percentage: 80,
               spent: 22400,
               total: 28000,
               remaining: 5600,
             ),
-            const _BudgetCategoryItem(
-              name: 'Engineering',
+            _BudgetCategoryItem(
+              name: l10n?.engineeringTitle ?? 'Engineering',
               percentage: 80,
               spent: 12000,
               total: 15000,
               remaining: 3000,
             ),
-            const _BudgetCategoryItem(
-              name: 'Transport',
+            _BudgetCategoryItem(
+              name: l10n?.transport ?? 'Transport',
               percentage: 90,
               spent: 7200,
               total: 8000,
               remaining: 800,
             ),
-            const _BudgetCategoryItem(
-              name: 'Services',
+            _BudgetCategoryItem(
+              name: l10n?.services ?? 'Services',
               percentage: 80,
               spent: 4800,
               total: 6000,
               remaining: 1200,
             ),
-            const _BudgetCategoryItem(
-              name: 'Contingency',
+            _BudgetCategoryItem(
+              name: l10n?.catContingency ?? 'Contingency',
               percentage: 21,
               spent: 2100,
               total: 10000,
@@ -216,25 +216,28 @@ class FinancialView extends StatelessWidget {
             ),
             const SizedBox(height: 12),
 
-            const _TransactionItem(
-              title: 'Cement - 200 bags',
-              date: 'Today, 2:30 PM',
-              amount: '\$2,400',
+            _TransactionItem(
+              title: l10n?.transactionCement200Bags ?? 'Cement - 200 bags',
+              date: l10n?.transactionToday230pm ?? 'Today, 2:30 PM',
+              amount: l10n?.amount2400 ?? '\$2,400',
             ),
-            const _TransactionItem(
-              title: 'Mason Team Payment',
-              date: 'Today, 10:15 AM',
-              amount: '\$1,200',
+            _TransactionItem(
+              title:
+                  l10n?.transactionMasonTeamPayment ?? 'Mason Team Payment',
+              date: l10n?.transactionToday1015am ?? 'Today, 10:15 AM',
+              amount: l10n?.amount1200 ?? '\$1,200',
             ),
-            const _TransactionItem(
-              title: 'Engineering Consultation',
-              date: 'Yesterday',
-              amount: '\$800',
+            _TransactionItem(
+              title: l10n?.transactionEngineeringConsultation ??
+                  'Engineering Consultation',
+              date: l10n?.transactionYesterday ?? 'Yesterday',
+              amount: l10n?.amount800 ?? '\$800',
             ),
-            const _TransactionItem(
-              title: 'Steel Rebar Delivery',
-              date: '2 days ago',
-              amount: '\$3,500',
+            _TransactionItem(
+              title: l10n?.transactionSteelRebarDelivery ??
+                  'Steel Rebar Delivery',
+              date: l10n?.transactionTwoDaysAgo ?? '2 days ago',
+              amount: l10n?.amount3500 ?? '\$3,500',
             ),
 
             const SizedBox(height: 24),
@@ -309,6 +312,7 @@ class _BudgetCategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(20),
@@ -324,11 +328,18 @@ class _BudgetCategoryItem extends StatelessWidget {
             children: [
               Text(name,
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              Text('$percentage%',
-                  style: TextStyle(
-                      color: Colors.black.withOpacity(0.4),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13)),
+              Text.rich(
+                TextSpan(
+                  text: percentage.toString(),
+                  children: [
+                    TextSpan(text: l10n.percentSymbol),
+                  ],
+                ),
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.4),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13),
+              ),
             ],
           ),
           const SizedBox(height: 16),
@@ -353,7 +364,7 @@ class _BudgetCategoryItem extends StatelessWidget {
                     fontWeight: FontWeight.w500),
               ),
               Text(
-                '\$${_formatNumber(remaining)} left',
+                '\$${_formatNumber(remaining)} ${l10n.left}',
                 style: const TextStyle(
                     color: Color(0xFFF28B22),
                     fontSize: 13,

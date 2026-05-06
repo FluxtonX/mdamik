@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PropertyFilterBottomSheet extends StatefulWidget {
   const PropertyFilterBottomSheet({super.key});
@@ -9,11 +10,15 @@ class PropertyFilterBottomSheet extends StatefulWidget {
 
 class _PropertyFilterBottomSheetState extends State<PropertyFilterBottomSheet> {
   RangeValues _priceRange = const RangeValues(50000, 500000);
-  final Set<String> _propertyTypes = {'House', 'Apartment'};
+  final Set<String> _propertyTypes = {};
   String _bedrooms = '1';
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    if (_propertyTypes.isEmpty) {
+      _propertyTypes.addAll({l10n.projectCustomHome, l10n.projectApartment});
+    }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       decoration: const BoxDecoration(
@@ -30,9 +35,9 @@ class _PropertyFilterBottomSheetState extends State<PropertyFilterBottomSheet> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Filters', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(l10n.filters, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
-                  Text('Customize your property search', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+                  Text(l10n.customizePropertySearch, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
                 ],
               ),
               IconButton(
@@ -44,7 +49,7 @@ class _PropertyFilterBottomSheetState extends State<PropertyFilterBottomSheet> {
           const SizedBox(height: 32),
 
           // Price Range
-          const Text('Price Range', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          Text(l10n.priceRange, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           const SizedBox(height: 16),
           RangeSlider(
             values: _priceRange,
@@ -62,45 +67,59 @@ class _PropertyFilterBottomSheetState extends State<PropertyFilterBottomSheet> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('\$${(_priceRange.start / 1000).round()}K', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black26)),
-              Text('\$${(_priceRange.end / 1000).round()}K', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black26)),
+              Text.rich(
+                TextSpan(children: [
+                  const TextSpan(text: '\$'),
+                  TextSpan(text: (_priceRange.start / 1000).round().toString()),
+                  const TextSpan(text: 'K'),
+                ]),
+                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black26),
+              ),
+              Text.rich(
+                TextSpan(children: [
+                  const TextSpan(text: '\$'),
+                  TextSpan(text: (_priceRange.end / 1000).round().toString()),
+                  const TextSpan(text: 'K'),
+                ]),
+                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black26),
+              ),
             ],
           ),
           const SizedBox(height: 32),
 
           // Property Type
-          const Text('Property Type', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          Text(l10n.propertyType, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           const SizedBox(height: 16),
           Wrap(
             spacing: 24,
             runSpacing: 12,
             children: [
               _FilterCheckbox(
-                label: 'House',
-                isSelected: _propertyTypes.contains('House'),
-                onChanged: (val) => _toggleType('House', val),
+                label: l10n.projectCustomHome,
+                isSelected: _propertyTypes.contains(l10n.projectCustomHome),
+                onChanged: (val) => _toggleType(l10n.projectCustomHome, val),
               ),
               _FilterCheckbox(
-                label: 'Apartment',
-                isSelected: _propertyTypes.contains('Apartment'),
-                onChanged: (val) => _toggleType('Apartment', val),
+                label: l10n.projectApartment,
+                isSelected: _propertyTypes.contains(l10n.projectApartment),
+                onChanged: (val) => _toggleType(l10n.projectApartment, val),
               ),
               _FilterCheckbox(
-                label: 'Villa',
-                isSelected: _propertyTypes.contains('Villa'),
-                onChanged: (val) => _toggleType('Villa', val),
+                label: l10n.propertyVilla,
+                isSelected: _propertyTypes.contains(l10n.propertyVilla),
+                onChanged: (val) => _toggleType(l10n.propertyVilla, val),
               ),
               _FilterCheckbox(
-                label: 'Studio',
-                isSelected: _propertyTypes.contains('Studio'),
-                onChanged: (val) => _toggleType('Studio', val),
+                label: l10n.propertyApartment,
+                isSelected: _propertyTypes.contains(l10n.propertyApartment),
+                onChanged: (val) => _toggleType(l10n.propertyApartment, val),
               ),
             ],
           ),
           const SizedBox(height: 32),
 
           // Bedrooms
-          const Text('Bedrooms', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          Text(l10n.bedroomsLabel, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,7 +159,7 @@ class _PropertyFilterBottomSheetState extends State<PropertyFilterBottomSheet> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               elevation: 0,
             ),
-            child: const Text('Apply Filters', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            child: Text(l10n.applyFilters, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'payment_success_view.dart';
 
 class PaymentView extends StatelessWidget {
@@ -8,6 +9,7 @@ class PaymentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -17,7 +19,7 @@ class PaymentView extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Payment', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n.paymentMethod, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -36,24 +38,24 @@ class PaymentView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Order Summary', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  Text(l10n.orderSummary, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   const SizedBox(height: 24),
-                  _SummaryItem(label: 'House Construction (200m²)', value: '\$12,500'),
+                  _SummaryItem(label: l10n.houseConstruction200, value: l10n.cost12500),
                   const SizedBox(height: 16),
-                  _SummaryItem(label: 'Engineering Services', value: '\$4,800'),
+                  _SummaryItem(label: l10n.engineeringServices, value: l10n.cost4800),
                   const SizedBox(height: 16),
-                  _SummaryItem(label: 'Labor (15 workers × 30 days)', value: '\$8,200'),
+                  _SummaryItem(label: l10n.labor15x30, value: l10n.cost8200),
                   const SizedBox(height: 16),
-                  _SummaryItem(label: 'Finishing & Materials', value: '\$3,500'),
+                  _SummaryItem(label: l10n.finishingMaterials, value: l10n.cost3500),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 20),
                     child: Divider(color: Color(0xFFF1F1F4)),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('Total', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                      Text('\$29,000', style: TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.w900, fontSize: 24)),
+                    children: [
+                      Text(l10n.totalLabel, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                      Text(l10n.cost29000, style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.w900, fontSize: 24)),
                     ],
                   ),
                 ],
@@ -72,7 +74,7 @@ class PaymentView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Payment Method', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  Text(l10n.paymentMethod, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   const SizedBox(height: 20),
                   Container(
                     padding: const EdgeInsets.all(16),
@@ -94,9 +96,9 @@ class PaymentView extends StatelessWidget {
                         const SizedBox(width: 16),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text('**** **** **** 4242', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                            Text('Visa • Expires 12/28', style: TextStyle(color: Colors.black26, fontSize: 11, fontWeight: FontWeight.w500)),
+                          children: [
+                            Text(l10n.maskedCard4242, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                            Text(l10n.visaExpires1228, style: const TextStyle(color: Colors.black26, fontSize: 11, fontWeight: FontWeight.w500)),
                           ],
                         ),
                       ],
@@ -109,10 +111,10 @@ class PaymentView extends StatelessWidget {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(Icons.shield_outlined, color: Colors.green, size: 16),
-                SizedBox(width: 8),
-                Text('Secured by 256-bit SSL encryption', style: TextStyle(color: Colors.black26, fontSize: 12, fontWeight: FontWeight.w500)),
+              children: [
+                const Icon(Icons.shield_outlined, color: Colors.green, size: 16),
+                const SizedBox(width: 8),
+                Text(l10n.securedSsl256, style: const TextStyle(color: Colors.black26, fontSize: 12, fontWeight: FontWeight.w500)),
               ],
             ),
             const SizedBox(height: 32),
@@ -127,7 +129,7 @@ class PaymentView extends StatelessWidget {
                 elevation: 8,
                 shadowColor: const Color(0xFFF28B22).withOpacity(0.4),
               ),
-              child: const Text('Pay \$29,000', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              child: Text(l10n.pay29000, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ),
           ],
         ),

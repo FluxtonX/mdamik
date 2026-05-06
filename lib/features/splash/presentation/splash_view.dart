@@ -20,7 +20,7 @@ class SplashView extends StatelessWidget {
             duration: const Duration(seconds: 3),
             onDone: () {
             if (!context.mounted) return;
-            Navigator.of(context).pushReplacementNamed('/auth/login');
+            Navigator.of(context).pushReplacementNamed('/language/choose');
             },
           );
         });
@@ -98,7 +98,7 @@ class _BrandBlock extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(14),
           child: Image.asset(
-            'assets/images/mdamik_logo.png',
+            'assets/images/medamak_logo_fixed.png',
             fit: BoxFit.contain,
           ),
         ),

@@ -15,18 +15,18 @@ class HomeView extends StatelessWidget {
       backgroundColor: const Color(0xFFFBFBFB),
       body: SingleChildScrollView(
         padding:
-            EdgeInsets.only(top: top + 16, left: 16, right: 16, bottom: 24),
+            EdgeInsetsDirectional.only(top: top + 16, start: 16, end: 16, bottom: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Header
             Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 20,
                   backgroundColor: Color(0xFFF28B22),
-                  child: Text('JD',
-                      style: TextStyle(
+                  child: Text(l10n?.sampleInitials ?? 'JD',
+                      style: const TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold)),
                 ),
                 const SizedBox(width: 12),
@@ -36,8 +36,8 @@ class HomeView extends StatelessWidget {
                     Text(l10n?.goodMorning ?? 'Good morning',
                         style: const TextStyle(
                             color: Colors.black26, fontSize: 12)),
-                    const Text('John Doe',
-                        style: TextStyle(
+                    Text(l10n?.sampleName ?? 'John Doe',
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16)),
                   ],
                 ),
@@ -222,8 +222,12 @@ class HomeView extends StatelessWidget {
                 Text(l10n?.featuredProjects ?? 'Featured Projects',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 18)),
-                const Icon(Icons.arrow_forward,
-                    color: Colors.black26, size: 20),
+                Icon(
+                  Icons.arrow_forward,
+                  color: Colors.black26,
+                  size: 20,
+                  textDirection: Directionality.of(context),
+                ),
               ],
             ),
             const SizedBox(height: 16),

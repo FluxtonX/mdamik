@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentSuccessView extends StatelessWidget {
   const PaymentSuccessView({super.key});
@@ -7,6 +8,7 @@ class PaymentSuccessView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -16,7 +18,7 @@ class PaymentSuccessView extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Payment', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n.paymentMethod, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: false,
       ),
       body: Center(
@@ -41,14 +43,14 @@ class PaymentSuccessView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 40),
-              const Text(
-                'Payment Successful!',
+              Text(
+                l10n.paymentSuccessful,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
               Text(
-                'Your project has been confirmed and is being processed.',
+                l10n.projectConfirmedProcessing,
                 style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 14, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.center,
               ),
@@ -61,7 +63,7 @@ class PaymentSuccessView extends StatelessWidget {
                   minimumSize: const Size(200, 56),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 ),
-                child: const Text('Back to Home', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                child: Text(l10n.backToHome, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
               ),
             ],
           ),

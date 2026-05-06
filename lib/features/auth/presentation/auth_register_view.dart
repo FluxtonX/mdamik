@@ -35,8 +35,8 @@ class AuthRegisterView extends StatelessWidget {
                       ),
                       decoration: const BoxDecoration(
                         color: Color(0xFFE57E2E),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(32),
+                        borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(32),
                         ),
                       ),
                       child: Column(
@@ -54,7 +54,7 @@ class AuthRegisterView extends StatelessWidget {
                                 ),
                                 padding: const EdgeInsets.all(8),
                                 child: Image.asset(
-                                  'assets/images/mdamik_logo.png',
+                                  'assets/images/medamak_logo_fixed.png',
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -181,7 +181,7 @@ class AuthRegisterView extends StatelessWidget {
                                 ),
                                 child: TextButton(
                                   onPressed: () => Navigator.of(context)
-                                      .pushReplacementNamed('/language/choose'),
+                                      .pushReplacementNamed('/home/main'),
                                   child: Text(
                                     l10n?.createAccount ?? 'Create Account',
                                     style: const TextStyle(
@@ -227,7 +227,7 @@ class AuthRegisterView extends StatelessWidget {
                               height: 48,
                               child: OutlinedButton(
                                 onPressed: () => Navigator.of(context)
-                                    .pushReplacementNamed('/language/choose'),
+                                    .pushReplacementNamed('/home/main'),
                                 style: OutlinedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   side: BorderSide(

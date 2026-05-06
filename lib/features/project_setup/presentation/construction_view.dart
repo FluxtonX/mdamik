@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'project_setup_view.dart';
 
 class ConstructionView extends StatelessWidget {
@@ -8,6 +9,7 @@ class ConstructionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       appBar: AppBar(
@@ -17,7 +19,7 @@ class ConstructionView extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Construction', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n.catConstruction, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -26,7 +28,7 @@ class ConstructionView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Select your project type to get started',
+              l10n.chooseProjectTypeDesc,
               style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 13, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 24),
@@ -40,42 +42,42 @@ class ConstructionView extends StatelessWidget {
               children: [
                 _ConstructionTypeCard(
                   icon: Icons.home_outlined,
-                  label: 'Houses',
+                  label: l10n.catConstruction,
                   onTap: () => Navigator.of(context).pushNamed(ProjectSetupView.routeName),
                 ),
                 _ConstructionTypeCard(
                   icon: Icons.business_outlined,
-                  label: 'Apartment',
+                  label: l10n.projectApartment,
                   onTap: () => Navigator.of(context).pushNamed(ProjectSetupView.routeName),
                 ),
                 _ConstructionTypeCard(
                   icon: Icons.apartment_outlined,
-                  label: 'Building',
+                  label: l10n.svcConstruction,
                   onTap: () => Navigator.of(context).pushNamed(ProjectSetupView.routeName),
                 ),
                 _ConstructionTypeCard(
                   icon: Icons.factory_outlined,
-                  label: 'Factory',
+                  label: l10n.projectTypeShop,
                   onTap: () => Navigator.of(context).pushNamed(ProjectSetupView.routeName),
                 ),
                 _ConstructionTypeCard(
                   icon: Icons.storefront_outlined,
-                  label: 'Shop',
+                  label: l10n.projectTypeShop,
                   onTap: () => Navigator.of(context).pushNamed(ProjectSetupView.routeName),
                 ),
                 _ConstructionTypeCard(
                   icon: Icons.edit_road_outlined,
-                  label: 'Roads',
+                  label: l10n.catTransport,
                   onTap: () => Navigator.of(context).pushNamed(ProjectSetupView.routeName),
                 ),
                 _ConstructionTypeCard(
                   icon: Icons.park_outlined,
-                  label: 'Gardens',
+                  label: l10n.environmental,
                   onTap: () => Navigator.of(context).pushNamed(ProjectSetupView.routeName),
                 ),
                 _ConstructionTypeCard(
                   icon: Icons.warehouse_outlined,
-                  label: 'Warehouse',
+                  label: l10n.services,
                   onTap: () => Navigator.of(context).pushNamed(ProjectSetupView.routeName),
                 ),
               ],

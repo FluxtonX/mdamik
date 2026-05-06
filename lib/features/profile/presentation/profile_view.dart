@@ -23,16 +23,13 @@ class ProfileView extends StatelessWidget {
               border: Border.all(color: const Color(0xFFF1F1F4)),
               color: Colors.white,
             ),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.arrow_back,
-                  color: Color(0xFFF28B22), size: 18),
-            ),
           ),
         ),
         title: Text(l10n?.accountSettings ?? 'Account & Settings',
             style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -59,9 +56,9 @@ class ProfileView extends StatelessWidget {
                           color: Color(0xFFF28B22),
                           shape: BoxShape.circle,
                         ),
-                        child: const Center(
-                          child: Text('JD',
-                              style: TextStyle(
+                        child: Center(
+                          child: Text(l10n?.sampleInitials ?? 'JD',
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 22)),
@@ -72,13 +69,13 @@ class ProfileView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('John Doe',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18)),
+                            Text(l10n?.sampleName ?? 'John Doe',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18)),
                             const SizedBox(height: 4),
                             Text(
-                              'Client • Member since\nJan 2026',
+                              l10n?.profileMemberSince ??
+                                  'Client • Member since\nJan 2026',
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.3),
                                   fontSize: 12,
@@ -101,7 +98,8 @@ class ProfileView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(l10n?.verificationProgress ?? 'Verification Progress',
+                      Text(
+                          l10n?.verificationProgress ?? 'Verification Progress',
                           style: TextStyle(
                               color: Colors.black.withOpacity(0.4),
                               fontSize: 12,
@@ -138,7 +136,9 @@ class ProfileView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(l10n?.completeVerification ?? 'Complete Your Verification',
+                  Text(
+                      l10n?.completeVerification ??
+                          'Complete Your Verification',
                       style: const TextStyle(
                           color: Color(0xFFF28B22),
                           fontWeight: FontWeight.bold,
@@ -154,17 +154,25 @@ class ProfileView extends StatelessWidget {
                   const SizedBox(height: 16),
                   Row(
                     children: [
-                      Expanded(child: _VerificationChip(label: l10n?.phone ?? 'Phone')),
+                      Expanded(
+                          child:
+                              _VerificationChip(label: l10n?.phone ?? 'Phone')),
                       const SizedBox(width: 12),
-                      Expanded(child: _VerificationChip(label: l10n?.email ?? 'Email')),
+                      Expanded(
+                          child:
+                              _VerificationChip(label: l10n?.email ?? 'Email')),
                     ],
                   ),
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      Expanded(child: _VerificationChip(label: l10n?.national ?? 'National')),
+                      Expanded(
+                          child: _VerificationChip(
+                              label: l10n?.national ?? 'National')),
                       const SizedBox(width: 12),
-                      Expanded(child: _VerificationChip(label: l10n?.business ?? 'Business')),
+                      Expanded(
+                          child: _VerificationChip(
+                              label: l10n?.business ?? 'Business')),
                     ],
                   ),
                 ],
@@ -176,8 +184,8 @@ class ProfileView extends StatelessWidget {
             _SettingsItem(
                 icon: Icons.person_outline,
                 label: l10n?.profileInformation ?? 'Profile Information',
-                onTap: () => Navigator.of(context)
-                    .pushNamed('/profile/information')),
+                onTap: () =>
+                    Navigator.of(context).pushNamed('/profile/information')),
             _SettingsItem(
                 icon: Icons.verified_user_outlined,
                 label: l10n?.verificationStatus ?? 'Verification Status'),
@@ -192,8 +200,8 @@ class ProfileView extends StatelessWidget {
             _SettingsItem(
                 icon: Icons.notifications_none_outlined,
                 label: l10n?.notificationsSettings ?? 'Notifications',
-                onTap: () => Navigator.of(context)
-                    .pushNamed('/profile/notifications')),
+                onTap: () =>
+                    Navigator.of(context).pushNamed('/profile/notifications')),
             _SettingsItem(
                 icon: Icons.language_outlined,
                 label: l10n?.languageRegion ?? 'Language & Region',
@@ -216,7 +224,8 @@ class ProfileView extends StatelessWidget {
 
             // Log Out
             InkWell(
-              onTap: () {},
+              onTap: () => Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/auth/login', (route) => false),
               borderRadius: BorderRadius.circular(20),
               child: Container(
                 padding:
@@ -288,8 +297,7 @@ class _VerificationChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.check_circle,
-              color: Color(0xFF00B16A), size: 16),
+          const Icon(Icons.check_circle, color: Color(0xFF00B16A), size: 16),
           const SizedBox(width: 10),
           Expanded(
             child: Text(label,
@@ -305,8 +313,7 @@ class _VerificationChip extends StatelessWidget {
 }
 
 class _SettingsItem extends StatelessWidget {
-  const _SettingsItem(
-      {required this.icon, required this.label, this.onTap});
+  const _SettingsItem({required this.icon, required this.label, this.onTap});
   final IconData icon;
   final String label;
   final VoidCallback? onTap;
@@ -318,8 +325,7 @@ class _SettingsItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
-        padding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),

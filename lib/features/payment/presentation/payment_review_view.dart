@@ -96,9 +96,26 @@ class PaymentReviewView extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          Text('Total Amount', style: TextStyle(color: const Color(0xFFF28B22).withOpacity(0.8), fontSize: 12, fontWeight: FontWeight.bold)),
+                          Text(
+                            l10n?.paymentTotalAmount ?? 'Total Amount',
+                            style: TextStyle(
+                              color: const Color(0xFFF28B22).withOpacity(0.8),
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           const SizedBox(height: 8),
-                          Text('$currencyCode $amount', style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w900)),
+                          Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(text: currencyCode),
+                                const TextSpan(text: ' '),
+                                TextSpan(text: amount),
+                              ],
+                            ),
+                            style: const TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.w900),
+                          ),
                           const SizedBox(height: 8),
                           Text(currency, style: TextStyle(color: const Color(0xFFF28B22).withOpacity(0.8), fontSize: 12, fontWeight: FontWeight.w500)),
                         ],
@@ -148,9 +165,16 @@ class PaymentReviewView extends StatelessWidget {
                             l10n?.amountToPay ?? 'Amount to pay',
                             style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 14),
                           ),
-                          Text(
-                            '$currencyCode $amount',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(text: currencyCode),
+                                const TextSpan(text: ' '),
+                                TextSpan(text: amount),
+                              ],
+                            ),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
                           ),
                         ],
                       ),
@@ -166,11 +190,29 @@ class PaymentReviewView extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     
-                    _buildDetailItem(icon: Icons.person_outline, title: 'Full Name', value: fullName),
-                    _buildDetailItem(icon: Icons.phone_outlined, title: 'Phone Number', value: phone),
-                    if (email.isNotEmpty) _buildDetailItem(icon: Icons.email_outlined, title: 'Email', value: email),
-                    _buildDetailItem(icon: Icons.location_on_outlined, title: 'Delivery Address', value: address),
-                    if (notes.isNotEmpty) _buildDetailItem(icon: Icons.description_outlined, title: 'Notes', value: notes, isLast: true),
+                    _buildDetailItem(
+                        icon: Icons.person_outline,
+                        title: l10n?.labelFullName ?? 'Full Name',
+                        value: fullName),
+                    _buildDetailItem(
+                        icon: Icons.phone_outlined,
+                        title: l10n?.labelPhoneNumber ?? 'Phone Number',
+                        value: phone),
+                    if (email.isNotEmpty)
+                      _buildDetailItem(
+                          icon: Icons.email_outlined,
+                          title: l10n?.labelEmail ?? 'Email',
+                          value: email),
+                    _buildDetailItem(
+                        icon: Icons.location_on_outlined,
+                        title: l10n?.deliveryAddress ?? 'Delivery Address',
+                        value: address),
+                    if (notes.isNotEmpty)
+                      _buildDetailItem(
+                          icon: Icons.description_outlined,
+                          title: l10n?.notes ?? 'Notes',
+                          value: notes,
+                          isLast: true),
                     
                     const SizedBox(height: 32),
                     

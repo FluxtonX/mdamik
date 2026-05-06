@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SiteServicesListView extends StatefulWidget {
   const SiteServicesListView({super.key});
@@ -14,6 +15,7 @@ class _SiteServicesListViewState extends State<SiteServicesListView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final title = args['title'] as String;
 
@@ -26,7 +28,7 @@ class _SiteServicesListViewState extends State<SiteServicesListView> {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
-        title: const Text('Site Services', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n.svcServices, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -45,9 +47,9 @@ class _SiteServicesListViewState extends State<SiteServicesListView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Service Type', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(l10n.serviceType, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
                   const SizedBox(height: 4),
-                  Text('Choose how you need the service', style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 11)),
+                  Text(l10n.chooseServiceTypeHelp, style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 11)),
                   const SizedBox(height: 16),
                   Container(
                     height: 44,
@@ -67,7 +69,7 @@ class _SiteServicesListViewState extends State<SiteServicesListView> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
-                                'One-Time',
+                                l10n.oneTime,
                                 style: TextStyle(
                                   color: _isOneTime ? const Color(0xFF8B7722) : Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -87,7 +89,7 @@ class _SiteServicesListViewState extends State<SiteServicesListView> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
-                                'Recurring',
+                                l10n.recurring,
                                 style: TextStyle(
                                   color: !_isOneTime ? const Color(0xFF8B7722) : Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -106,7 +108,7 @@ class _SiteServicesListViewState extends State<SiteServicesListView> {
             const SizedBox(height: 24),
 
             // Start Date
-            const Text('Start Date', style: TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 12)),
+            Text(l10n.startDate, style: const TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 12)),
             const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -116,10 +118,10 @@ class _SiteServicesListViewState extends State<SiteServicesListView> {
                 border: Border.all(color: const Color(0xFFF1F1F4)),
               ),
               child: Row(
-                children: const [
-                  Icon(Icons.calendar_today_outlined, color: Color(0xFFF28B22), size: 16),
-                  SizedBox(width: 12),
-                  Text('dd/mm/yyyy', style: TextStyle(color: Colors.black12, fontSize: 14)),
+                children: [
+                  const Icon(Icons.calendar_today_outlined, color: Color(0xFFF28B22), size: 16),
+                  const SizedBox(width: 12),
+                  Text(l10n.datePlaceholder, style: const TextStyle(color: Colors.black12, fontSize: 14)),
                 ],
               ),
             ),
@@ -129,8 +131,8 @@ class _SiteServicesListViewState extends State<SiteServicesListView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Service Providers', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                Text('4 available', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+                Text(l10n.serviceProviders, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                Text(l10n.availableCount, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
               ],
             ),
             const SizedBox(height: 16),
@@ -193,10 +195,10 @@ class _SiteServicesListViewState extends State<SiteServicesListView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Bundle Services & Save', style: TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 14)),
+                  Text(l10n.bundleServices, style: const TextStyle(color: Color(0xFFE57E2E), fontWeight: FontWeight.bold, fontSize: 14)),
                   const SizedBox(height: 8),
                   Text(
-                    'Book multiple services together for better rates',
+                    l10n.bundleServicesDesc,
                     style: TextStyle(color: Colors.black.withOpacity(0.4), fontSize: 12, height: 1.5),
                   ),
                   const SizedBox(height: 16),
@@ -209,7 +211,7 @@ class _SiteServicesListViewState extends State<SiteServicesListView> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       elevation: 0,
                     ),
-                    child: const Text('View Bundles', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                    child: Text(l10n.viewBundles, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                   ),
                 ],
               ),
@@ -246,6 +248,7 @@ class _ServiceProviderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
@@ -296,11 +299,29 @@ class _ServiceProviderCard extends StatelessWidget {
                         const SizedBox(width: 4),
                         Text(rating.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                         const SizedBox(width: 4),
-                        Text('($reviews)', style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 11)),
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              const TextSpan(text: '('),
+                              TextSpan(text: reviews.toString()),
+                              const TextSpan(text: ')'),
+                            ],
+                          ),
+                          style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 11),
+                        ),
                         const SizedBox(width: 8),
                         Container(width: 4, height: 4, decoration: const BoxDecoration(color: Colors.black12, shape: BoxShape.circle)),
                         const SizedBox(width: 8),
-                        Text('$experience years', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500)),
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: experience.toString()),
+                              const TextSpan(text: ' '),
+                              TextSpan(text: l10n.years),
+                            ],
+                          ),
+                          style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -312,7 +333,16 @@ class _ServiceProviderCard extends StatelessWidget {
                         const SizedBox(width: 8),
                         Container(width: 4, height: 4, decoration: const BoxDecoration(color: Colors.black12, shape: BoxShape.circle)),
                         const SizedBox(width: 8),
-                        Text('$jobs jobs', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 11, fontWeight: FontWeight.w500)),
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: jobs.toString()),
+                              const TextSpan(text: ' '),
+                              TextSpan(text: l10n.jobsSuffix),
+                            ],
+                          ),
+                          style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 11, fontWeight: FontWeight.w500),
+                        ),
                       ],
                     ),
                   ],
@@ -328,10 +358,10 @@ class _ServiceProviderCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
-              children: const [
-                Icon(Icons.bolt, color: Color(0xFF26A69A), size: 16),
-                SizedBox(width: 8),
-                Text('Available Now', style: TextStyle(color: Color(0xFF26A69A), fontWeight: FontWeight.bold, fontSize: 12)),
+              children: [
+                const Icon(Icons.bolt, color: Color(0xFF26A69A), size: 16),
+                const SizedBox(width: 8),
+                Text(l10n.availableNow, style: const TextStyle(color: Color(0xFF26A69A), fontWeight: FontWeight.bold, fontSize: 12)),
               ],
             ),
           ),
@@ -349,10 +379,10 @@ class _ServiceProviderCard extends StatelessWidget {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.chat_bubble_outline, size: 16),
-                      SizedBox(width: 8),
-                      Text('Chat', style: TextStyle(fontWeight: FontWeight.bold)),
+                    children: [
+                      const Icon(Icons.chat_bubble_outline, size: 16),
+                      const SizedBox(width: 8),
+                      Text(l10n.chat, style: const TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),
@@ -368,7 +398,7 @@ class _ServiceProviderCard extends StatelessWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     elevation: 0,
                   ),
-                  child: const Text('Hire Now', style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text(l10n.hireNow, style: const TextStyle(fontWeight: FontWeight.bold)),
                 ),
               ),
             ],

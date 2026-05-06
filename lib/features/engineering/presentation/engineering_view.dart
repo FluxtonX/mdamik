@@ -148,8 +148,8 @@ class EngineeringView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Need help deciding?',
-                      style: TextStyle(
+                  Text(l10n?.needHelpDeciding ?? 'Need help deciding?',
+                      style: const TextStyle(
                           color: Color(0xFFE57E2E),
                           fontWeight: FontWeight.bold,
                           fontSize: 14)),

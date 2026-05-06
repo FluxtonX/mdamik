@@ -112,11 +112,25 @@ class LaborCard extends StatelessWidget {
                         const SizedBox(width: 4),
                         Text(rating.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                         const SizedBox(width: 4),
-                        Text('($reviews)', style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 11)),
+                        Text.rich(
+                          TextSpan(children: [
+                            const TextSpan(text: '('),
+                            TextSpan(text: reviews.toString()),
+                            const TextSpan(text: ')'),
+                          ]),
+                          style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 11),
+                        ),
                         const SizedBox(width: 8),
                         Container(width: 4, height: 4, decoration: const BoxDecoration(color: Colors.black12, shape: BoxShape.circle)),
                         const SizedBox(width: 8),
-                        Text('$distance ${l10n?.away ?? 'away'}', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500)),
+                        Text.rich(
+                          TextSpan(children: [
+                            TextSpan(text: distance),
+                            const TextSpan(text: ' '),
+                            TextSpan(text: l10n?.away ?? 'away'),
+                          ]),
+                          style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500),
+                        ),
                       ],
                     ),
                   ],

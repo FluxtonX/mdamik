@@ -36,8 +36,8 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Residential Villa', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18)),
-            Text('House • Phase 1', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 11, fontWeight: FontWeight.w500)),
+            Text(l10n?.residentialVilla ?? 'Residential Villa', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18)),
+            Text(l10n?.housePhase1 ?? 'House • Phase 1', style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 11, fontWeight: FontWeight.w500)),
           ],
         ),
         centerTitle: false,
@@ -72,7 +72,13 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
                       ),
                     ],
                   ),
-                  const Text('65%', style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w900)),
+                  Text.rich(
+                    TextSpan(children: [
+                      const TextSpan(text: '65'),
+                      TextSpan(text: AppLocalizations.of(context)!.percentSymbol),
+                    ]),
+                    style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w900),
+                  ),
                   const SizedBox(height: 12),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
@@ -148,7 +154,15 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(l10n?.currentMilestone ?? 'Current Milestone', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                      const Text('75% Complete', style: TextStyle(color: Color(0xFFF28B22), fontSize: 11, fontWeight: FontWeight.bold)),
+                      Text.rich(
+                        TextSpan(children: [
+                          const TextSpan(text: '75'),
+                          TextSpan(text: AppLocalizations.of(context)!.percentSymbol),
+                          const TextSpan(text: ' '),
+                          TextSpan(text: AppLocalizations.of(context)!.completeWord),
+                        ]),
+                        style: const TextStyle(color: Color(0xFFF28B22), fontSize: 11, fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 12),
@@ -184,11 +198,11 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: const Color(0xFFF1F1F4)),
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Text('Team Members', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                  Spacer(),
-                  Icon(Icons.chevron_right, color: Colors.black26),
+                  Text(l10n?.teamMembers ?? 'Team Members', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                  const Spacer(),
+                  const Icon(Icons.chevron_right, color: Colors.black26),
                 ],
               ),
             ),
@@ -210,8 +224,11 @@ class _ProjectManagementDetailsViewState extends State<ProjectManagementDetailsV
                       shape: BoxShape.circle,
                       border: Border.all(color: Colors.white, width: 2),
                     ),
-                    child: const Center(
-                      child: Text('+7', style: TextStyle(color: Color(0xFFF28B22), fontSize: 10, fontWeight: FontWeight.bold)),
+                    child: Center(
+                      child: Text.rich(
+                        const TextSpan(children: [TextSpan(text: '+'), TextSpan(text: '7')]),
+                        style: const TextStyle(color: Color(0xFFF28B22), fontSize: 10, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ],

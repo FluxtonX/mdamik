@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'hire_professional_dialogs.dart';
 
 class ProfessionalCard extends StatelessWidget {
@@ -25,6 +26,7 @@ class ProfessionalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
@@ -91,7 +93,12 @@ class ProfessionalCard extends StatelessWidget {
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 12)),
                         const SizedBox(width: 4),
-                        Text('($reviews)',
+                        Text.rich(
+                          TextSpan(children: [
+                            const TextSpan(text: '('),
+                            TextSpan(text: reviews.toString()),
+                            const TextSpan(text: ')'),
+                          ]),
                             style: TextStyle(
                                 color: Colors.black.withOpacity(0.2),
                                 fontSize: 11)),
@@ -102,7 +109,12 @@ class ProfessionalCard extends StatelessWidget {
                             decoration: const BoxDecoration(
                                 color: Colors.black12, shape: BoxShape.circle)),
                         const SizedBox(width: 8),
-                        Text('$experience years',
+                        Text.rich(
+                          TextSpan(children: [
+                            TextSpan(text: experience.toString()),
+                            const TextSpan(text: ' '),
+                            TextSpan(text: l10n.years),
+                          ]),
                             style: TextStyle(
                                 color: Colors.black.withOpacity(0.3),
                                 fontSize: 12,
@@ -110,7 +122,12 @@ class ProfessionalCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    Text('$projects projects completed',
+                    Text.rich(
+                      TextSpan(children: [
+                        TextSpan(text: projects.toString()),
+                        const TextSpan(text: ' '),
+                        TextSpan(text: l10n.jobsDone),
+                      ]),
                         style: TextStyle(
                             color: Colors.black.withOpacity(0.3),
                             fontSize: 12,
@@ -127,7 +144,7 @@ class ProfessionalCard extends StatelessWidget {
                 child: OutlinedButton.icon(
                   onPressed: () {},
                   icon: const Icon(Icons.chat_bubble_outline, size: 16),
-                  label: const Text('Chat',
+                  label: Text(l10n.chat,
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: const Color(0xFFF28B22),
@@ -155,7 +172,7 @@ class ProfessionalCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     elevation: 0,
                   ),
-                  child: const Text('Hire Now',
+                  child: Text(l10n.hireNow,
                       style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
               ),

@@ -74,7 +74,7 @@ class AuthScaffold extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.all(4),
                           child: Image.asset(
-                            'assets/images/mdamik_logo.png',
+                            'assets/images/medamak_logo_fixed.png',
                             fit: BoxFit.contain,
                           ),
                         ),
