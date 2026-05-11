@@ -7,6 +7,8 @@ import 'support_view.dart';
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
+  static const routeName = '/profile';
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -15,16 +17,6 @@ class ProfileView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFF1F1F4)),
-              color: Colors.white,
-            ),
-          ),
-        ),
         title: Text(l10n?.accountSettings ?? 'Account & Settings',
             style: const TextStyle(
                 color: Colors.black,

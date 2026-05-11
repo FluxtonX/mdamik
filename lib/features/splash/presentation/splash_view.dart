@@ -19,8 +19,8 @@ class SplashView extends StatelessWidget {
           vm.startCountdown(
             duration: const Duration(seconds: 3),
             onDone: () {
-            if (!context.mounted) return;
-            Navigator.of(context).pushReplacementNamed('/language/choose');
+              if (!context.mounted) return;
+              Navigator.of(context).pushReplacementNamed('/language/choose');
             },
           );
         });
@@ -86,8 +86,8 @@ class _BrandBlock extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          width: 108,
-          height: 108,
+          width: 200,
+          height: 200,
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.12),
             borderRadius: BorderRadius.circular(24),
@@ -165,4 +165,3 @@ class _WelcomeBlock extends StatelessWidget {
     );
   }
 }
-

@@ -21,7 +21,7 @@ class EngineeringView extends StatelessWidget {
         ),
         title: Text(l10n?.engineeringTitle ?? 'Engineering',
             style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold)),
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24)),
         centerTitle: false,
       ),
       body: SingleChildScrollView(
@@ -33,7 +33,7 @@ class EngineeringView extends StatelessWidget {
             l10n?.engineeringHelp ?? 'What do you need help with?',
             style: TextStyle(
                 color: Colors.black.withOpacity(0.3),
-                fontSize: 13,
+                fontSize: 17,
                 fontWeight: FontWeight.w500),
           ),
             const SizedBox(height: 24),
@@ -43,7 +43,7 @@ class EngineeringView extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
-              childAspectRatio: 1.1,
+              childAspectRatio: 1.0,
               children: [
                 _EngineeringServiceCard(
                   icon: Icons.architecture_outlined,
@@ -152,14 +152,14 @@ class EngineeringView extends StatelessWidget {
                       style: const TextStyle(
                           color: Color(0xFFE57E2E),
                           fontWeight: FontWeight.bold,
-                          fontSize: 14)),
+                          fontSize: 18)),
                   const SizedBox(height: 8),
                   Text(
                     l10n?.needHelpDesc ??
                         'Our assistant can guide you to the right service based on your needs.',
                     style: TextStyle(
                         color: Colors.black.withOpacity(0.4),
-                        fontSize: 12,
+                        fontSize: 16,
                         height: 1.5),
                   ),
                   const SizedBox(height: 16),
@@ -176,7 +176,7 @@ class EngineeringView extends StatelessWidget {
                     child: Text(
                         l10n?.talkToAssistant ?? 'Talk to Assistant',
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 12)),
+                            fontWeight: FontWeight.bold, fontSize: 15)),
                   ),
                 ],
               ),
@@ -203,9 +203,8 @@ class _EngineeringServiceCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0x26F58220),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xFFF1F1F4)),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -213,15 +212,22 @@ class _EngineeringServiceCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: const Color(0xFFFCE6D3).withOpacity(0.5),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFF58220).withOpacity(0.12),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
-              child: Icon(icon, color: const Color(0xFFF28B22), size: 24),
+              child: Icon(icon, color: const Color(0xFFF58220), size: 32),
             ),
             const SizedBox(height: 12),
-            Text(label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+            Text(label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
             const SizedBox(height: 2),
-            Text(subtitle, style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 10, fontWeight: FontWeight.w500)),
+            Text(subtitle, style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 14, fontWeight: FontWeight.w500)),
           ],
         ),
       ),

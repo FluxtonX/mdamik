@@ -16,27 +16,48 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
   String? _selectedType;
   final Set<String> _selectedServices = {};
   int _area = 100;
-  String _selectedMaterial = 'Concrete';
+  String _selectedMaterial = 'materialConcrete';
   bool _isMaterialDropdownOpen = false;
 
-  final List<String> _materials = ['Concrete', 'Sand', 'Backfill', 'Mortar'];
+  final List<String> _materials = [
+    'materialConcrete',
+    'materialSand',
+    'materialBackfill',
+    'materialMortar'
+  ];
 
   final List<Map<String, dynamic>> _projectTypes = [
-    {'icon': Icons.home_outlined, 'label': 'House'},
-    {'icon': Icons.business_outlined, 'label': 'Apartment'},
-    {'icon': Icons.apartment_outlined, 'label': 'Building'},
-    {'icon': Icons.factory_outlined, 'label': 'Factory'},
-    {'icon': Icons.storefront_outlined, 'label': 'Shop'},
-    {'icon': Icons.edit_road_outlined, 'label': 'Roads'},
-    {'icon': Icons.park_outlined, 'label': 'Gardens'},
-    {'icon': Icons.warehouse_outlined, 'label': 'Warehouse'},
+    {'icon': Icons.home_outlined, 'key': 'typeHouses'},
+    {'icon': Icons.business_outlined, 'key': 'typeApartment'},
+    {'icon': Icons.apartment_outlined, 'key': 'typeBuilding'},
+    {'icon': Icons.factory_outlined, 'key': 'typeFactory'},
+    {'icon': Icons.storefront_outlined, 'key': 'typeShop'},
+    {'icon': Icons.edit_road_outlined, 'key': 'typeRoads'},
+    {'icon': Icons.park_outlined, 'key': 'typeGardens'},
+    {'icon': Icons.warehouse_outlined, 'key': 'typeWarehouse'},
   ];
 
   final List<Map<String, dynamic>> _services = [
-    {'icon': Icons.engineering_outlined, 'label': 'Engineering', 'desc': 'Design & Planning'},
-    {'icon': Icons.layers_outlined, 'label': 'Materials', 'desc': 'Supply & Delivery'},
-    {'icon': Icons.engineering_outlined, 'label': 'Labor', 'desc': 'Skilled Workers'},
-    {'icon': Icons.format_paint_outlined, 'label': 'Finishing', 'desc': 'Paint & Tiles'},
+    {
+      'icon': Icons.engineering_outlined,
+      'key': 'engineeringTitle',
+      'descKey': 'svcDescDesignPlanning'
+    },
+    {
+      'icon': Icons.layers_outlined,
+      'key': 'materials',
+      'descKey': 'svcDescSupplyDelivery'
+    },
+    {
+      'icon': Icons.engineering_outlined,
+      'key': 'labor',
+      'descKey': 'svcDescSkilledWorkers'
+    },
+    {
+      'icon': Icons.format_paint_outlined,
+      'key': 'finishing',
+      'descKey': 'svcDescPaintTiles'
+    },
   ];
 
   void _onNext() {
@@ -63,12 +84,17 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
               Navigator.of(context).pop();
             }
           },
-          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
+          icon: const Icon(Icons.arrow_back_ios_new,
+              color: Color(0xFFF28B22), size: 20),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(l10n.projectSetup, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(l10n.projectSetup,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20)),
             Text.rich(
               TextSpan(
                 children: [
@@ -78,7 +104,10 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                   const TextSpan(text: ' / 4'),
                 ],
               ),
-              style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 10, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  color: Colors.black.withOpacity(0.3),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500),
             ),
           ],
         ),
@@ -97,7 +126,8 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 40, top: 12),
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, bottom: 40, top: 12),
             child: _currentStep == 4
                 ? Row(
                     children: [
@@ -108,24 +138,32 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                             backgroundColor: const Color(0xFFF28B22),
                             foregroundColor: Colors.white,
                             minimumSize: const Size(double.infinity, 56),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16)),
                             elevation: 4,
-                            shadowColor: const Color(0xFFF28B22).withOpacity(0.4),
+                            shadowColor:
+                                const Color(0xFFF28B22).withOpacity(0.4),
                           ),
-                          child: Text(l10n.hireNow, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          child: Text(l10n.hireNow,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
+                          onPressed: () => Navigator.of(context)
+                              .popUntil((route) => route.isFirst),
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(color: Color(0xFFF28B22)),
                             foregroundColor: const Color(0xFFF28B22),
                             minimumSize: const Size(double.infinity, 56),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16)),
                           ),
-                          child: Text(l10n.saveProject, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          child: Text(l10n.saveProject,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                       ),
                     ],
@@ -136,11 +174,14 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                       backgroundColor: const Color(0xFFF28B22),
                       foregroundColor: Colors.white,
                       minimumSize: const Size(double.infinity, 56),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
                       elevation: 4,
                       shadowColor: const Color(0xFFF28B22).withOpacity(0.4),
                     ),
-                    child: Text(l10n.continueText, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    child: Text(l10n.continueText,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
                   ),
           ),
         ],
@@ -152,6 +193,57 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
     if (_currentStep == 1) return _selectedType != null;
     if (_currentStep == 2) return _selectedServices.isNotEmpty;
     return true;
+  }
+
+  String _getLocalizedText(String key, AppLocalizations l10n) {
+    switch (key) {
+      // Project Types
+      case 'typeHouses':
+        return l10n.typeHouses;
+      case 'typeApartment':
+        return l10n.typeApartment;
+      case 'typeBuilding':
+        return l10n.typeBuilding;
+      case 'typeFactory':
+        return l10n.typeFactory;
+      case 'typeShop':
+        return l10n.typeShop;
+      case 'typeRoads':
+        return l10n.typeRoads;
+      case 'typeGardens':
+        return l10n.typeGardens;
+      case 'typeWarehouse':
+        return l10n.typeWarehouse;
+      // Services
+      case 'engineeringTitle':
+        return l10n.engineeringTitle;
+      case 'materials':
+        return l10n.materials;
+      case 'labor':
+        return l10n.labor;
+      case 'finishing':
+        return l10n.finishing;
+      // Service Descs
+      case 'svcDescDesignPlanning':
+        return l10n.svcDescDesignPlanning;
+      case 'svcDescSupplyDelivery':
+        return l10n.svcDescSupplyDelivery;
+      case 'svcDescSkilledWorkers':
+        return l10n.svcDescSkilledWorkers;
+      case 'svcDescPaintTiles':
+        return l10n.svcDescPaintTiles;
+      // Materials
+      case 'materialConcrete':
+        return l10n.materialConcrete;
+      case 'materialSand':
+        return l10n.materialSand;
+      case 'materialBackfill':
+        return l10n.materialBackfill;
+      case 'materialMortar':
+        return l10n.materialMortar;
+      default:
+        return key;
+    }
   }
 
   Widget _buildStepContent() {
@@ -170,12 +262,16 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
   }
 
   Widget _buildStep1() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppLocalizations.of(context)!.selectProjectType, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        Text(l10n.selectProjectType,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
         const SizedBox(height: 4),
-        Text(AppLocalizations.of(context)!.chooseProjectTypeDesc, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+        Text(l10n.chooseProjectTypeDesc,
+            style:
+                TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 16)),
         const SizedBox(height: 24),
         GridView.builder(
           shrinkWrap: true,
@@ -184,17 +280,17 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
             crossAxisCount: 2,
             mainAxisSpacing: 16,
             crossAxisSpacing: 16,
-            childAspectRatio: 1.1,
+            childAspectRatio: 1.0,
           ),
           itemCount: _projectTypes.length,
           itemBuilder: (context, index) {
             final type = _projectTypes[index];
-            final isSelected = _selectedType == type['label'];
+            final isSelected = _selectedType == type['key'];
             return _SelectableCard(
               icon: type['icon'],
-              label: type['label'],
+              label: _getLocalizedText(type['key'], l10n),
               isSelected: isSelected,
-              onTap: () => setState(() => _selectedType = type['label']),
+              onTap: () => setState(() => _selectedType = type['key']),
             );
           },
         ),
@@ -203,12 +299,16 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
   }
 
   Widget _buildStep2() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppLocalizations.of(context)!.selectServicesTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        Text(l10n.selectServicesTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
         const SizedBox(height: 4),
-        Text(AppLocalizations.of(context)!.chooseServicesNeed, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+        Text(l10n.chooseServicesNeed,
+            style:
+                TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 16)),
         const SizedBox(height: 24),
         ListView.separated(
           shrinkWrap: true,
@@ -217,18 +317,18 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
           separatorBuilder: (context, index) => const SizedBox(height: 16),
           itemBuilder: (context, index) {
             final service = _services[index];
-            final isSelected = _selectedServices.contains(service['label']);
+            final isSelected = _selectedServices.contains(service['key']);
             return _ServiceSelectionItem(
               icon: service['icon'],
-              label: service['label'],
-              desc: service['desc'],
+              label: _getLocalizedText(service['key'], l10n),
+              desc: _getLocalizedText(service['descKey'], l10n),
               isSelected: isSelected,
               onTap: () {
                 setState(() {
                   if (isSelected) {
-                    _selectedServices.remove(service['label']);
+                    _selectedServices.remove(service['key']);
                   } else {
-                    _selectedServices.add(service['label']);
+                    _selectedServices.add(service['key']);
                   }
                 });
               },
@@ -240,15 +340,23 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
   }
 
   Widget _buildStep3() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppLocalizations.of(context)!.inputQuantity, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        Text(l10n.inputQuantity,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
         const SizedBox(height: 4),
-        Text(AppLocalizations.of(context)!.enterAreaSelectMaterial, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+        Text(l10n.enterAreaSelectMaterial,
+            style:
+                TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 16)),
         const SizedBox(height: 24),
         // Area Selector
-        Text(AppLocalizations.of(context)!.areaSqm, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.black26)),
+        Text(l10n.areaSqm,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.black26)),
         const SizedBox(height: 12),
         Container(
           padding: const EdgeInsets.all(16),
@@ -261,34 +369,56 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                onPressed: () => setState(() => _area = _area > 0 ? _area - 1 : 0),
+                onPressed: () =>
+                    setState(() => _area = _area > 0 ? _area - 1 : 0),
                 icon: const Icon(Icons.remove),
-                style: IconButton.styleFrom(backgroundColor: const Color(0xFFF1F1F4), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                style: IconButton.styleFrom(
+                    backgroundColor: const Color(0xFFF1F1F4),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8))),
               ),
               Column(
                 children: [
-                  Text(_area.toString(), style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Color(0xFFF28B22))),
-                  Text(AppLocalizations.of(context)!.metersSq, style: const TextStyle(fontSize: 12, color: Color(0xFFFCE6D3), fontWeight: FontWeight.w600)),
+                  Text(_area.toString(),
+                      style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFF28B22))),
+                  Text(l10n.metersSq,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Color(0xFFFCE6D3),
+                          fontWeight: FontWeight.w600)),
                 ],
               ),
               IconButton(
                 onPressed: () => setState(() => _area++),
                 icon: const Icon(Icons.add),
-                style: IconButton.styleFrom(backgroundColor: const Color(0xFFF28B22), foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                style: IconButton.styleFrom(
+                    backgroundColor: const Color(0xFFF28B22),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8))),
               ),
             ],
           ),
         ),
         const SizedBox(height: 24),
         // Material Type Dropdown
-        Text(AppLocalizations.of(context)!.materialType, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.black26)),
+        Text(l10n.materialType,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.black26)),
         const SizedBox(height: 12),
         Column(
           children: [
             InkWell(
-              onTap: () => setState(() => _isMaterialDropdownOpen = !_isMaterialDropdownOpen),
+              onTap: () => setState(
+                  () => _isMaterialDropdownOpen = !_isMaterialDropdownOpen),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
@@ -297,9 +427,13 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(_selectedMaterial, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                    Text(_getLocalizedText(_selectedMaterial, l10n),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
                     Icon(
-                      _isMaterialDropdownOpen ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                      _isMaterialDropdownOpen
+                          ? Icons.keyboard_arrow_up
+                          : Icons.keyboard_arrow_down,
                       color: const Color(0xFFF28B22),
                     ),
                   ],
@@ -323,17 +457,23 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                         _isMaterialDropdownOpen = false;
                       }),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 16),
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: isSelected ? const Color(0xFFFCE6D3).withOpacity(0.5) : Colors.transparent,
+                          color: isSelected
+                              ? const Color(0xFFFCE6D3).withOpacity(0.5)
+                              : Colors.transparent,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Text(
-                          m,
+                          _getLocalizedText(m, l10n),
                           style: TextStyle(
-                            fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                            color: isSelected ? const Color(0xFFF28B22) : Colors.black,
+                            fontWeight:
+                                isSelected ? FontWeight.bold : FontWeight.w500,
+                            color: isSelected
+                                ? const Color(0xFFF28B22)
+                                : Colors.black,
                           ),
                         ),
                       ),
@@ -348,12 +488,16 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
   }
 
   Widget _buildStep4() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppLocalizations.of(context)!.costEstimationTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        Text(l10n.costEstimationTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
         const SizedBox(height: 4),
-        Text(AppLocalizations.of(context)!.detailedBreakdownProject, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12)),
+        Text(l10n.detailedBreakdownProject,
+            style:
+                TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 16)),
         const SizedBox(height: 24),
         Container(
           padding: const EdgeInsets.all(20),
@@ -370,21 +514,29 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                   Text.rich(
                     TextSpan(
                       children: [
-                        TextSpan(text: AppLocalizations.of(context)!.projectTypeShop),
+                        TextSpan(
+                            text:
+                                l10n.projectTypeShop),
                         const TextSpan(text: ' • '),
                         TextSpan(text: _area.toString()),
-                        TextSpan(text: AppLocalizations.of(context)!.sqUnit),
+                        TextSpan(text: l10n.sqUnit),
                       ],
                     ),
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
                       color: const Color(0xFFFCE6D3).withOpacity(0.5),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text(_selectedMaterial, style: const TextStyle(color: Color(0xFFF28B22), fontSize: 10, fontWeight: FontWeight.bold)),
+                    child: Text(_getLocalizedText(_selectedMaterial, l10n),
+                        style: const TextStyle(
+                            color: Color(0xFFF28B22),
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
@@ -392,13 +544,21 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: Divider(color: Color(0xFFF1F1F4)),
               ),
-              _CostItem(label: AppLocalizations.of(context)!.materials, value: AppLocalizations.of(context)!.cost12500),
+              _CostItem(
+                  label: l10n.materials,
+                  value: l10n.cost12500),
               const SizedBox(height: 16),
-              _CostItem(label: AppLocalizations.of(context)!.labor, value: AppLocalizations.of(context)!.cost8200),
+              _CostItem(
+                  label: l10n.labor,
+                  value: l10n.cost8200),
               const SizedBox(height: 16),
-              _CostItem(label: AppLocalizations.of(context)!.engineeringTitle, value: AppLocalizations.of(context)!.cost4800),
+              _CostItem(
+                  label: l10n.engineeringTitle,
+                  value: l10n.cost4800),
               const SizedBox(height: 16),
-              _CostItem(label: AppLocalizations.of(context)!.finishing, value: AppLocalizations.of(context)!.cost3500),
+              _CostItem(
+                  label: l10n.finishing,
+                  value: l10n.cost3500),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 20),
                 child: Divider(color: Color(0xFFF1F1F4)),
@@ -406,8 +566,14 @@ class _ProjectSetupViewState extends State<ProjectSetupView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(AppLocalizations.of(context)!.totalLabel, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                  Text(AppLocalizations.of(context)!.cost29000, style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.w800, fontSize: 20)),
+                  Text(l10n.totalLabel,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20)),
+                  Text(l10n.cost29000,
+                      style: const TextStyle(
+                          color: Color(0xFFF28B22),
+                          fontWeight: FontWeight.w800,
+                          fontSize: 24)),
                 ],
               ),
             ],
@@ -428,16 +594,21 @@ class _CostItem extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: const TextStyle(color: Colors.black26, fontWeight: FontWeight.w500)),
+        Text(label,
+            style: const TextStyle(
+                color: Colors.black26, fontWeight: FontWeight.w500)),
         Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
       ],
     );
   }
 }
 
-
 class _SelectableCard extends StatelessWidget {
-  const _SelectableCard({required this.icon, required this.label, required this.isSelected, required this.onTap});
+  const _SelectableCard(
+      {required this.icon,
+      required this.label,
+      required this.isSelected,
+      required this.onTap});
 
   final IconData icon;
   final String label;
@@ -451,10 +622,10 @@ class _SelectableCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0x26F58220),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? const Color(0xFFF28B22) : const Color(0xFFF1F1F4),
+            color: isSelected ? const Color(0xFFF58220) : Colors.transparent,
             width: isSelected ? 1.5 : 1.0,
           ),
         ),
@@ -464,17 +635,24 @@ class _SelectableCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFFFCE6D3) : const Color(0xFFFCE6D3).withOpacity(0.5),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFF58220).withOpacity(0.12),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
-              child: Icon(icon, color: const Color(0xFFF28B22), size: 28),
+              child: Icon(icon, color: const Color(0xFFF58220), size: 38),
             ),
             const SizedBox(height: 12),
             Text(
               label,
               style: TextStyle(
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                fontSize: 13,
+                fontSize: 17,
               ),
             ),
           ],
@@ -507,10 +685,10 @@ class _ServiceSelectionItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color(0x26F58220),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? const Color(0xFFF28B22) : const Color(0xFFF1F1F4),
+            color: isSelected ? const Color(0xFFF58220) : Colors.transparent,
             width: isSelected ? 1.5 : 1.0,
           ),
         ),
@@ -519,19 +697,30 @@ class _ServiceSelectionItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: const Color(0xFFFCE6D3).withOpacity(0.5),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFF58220).withOpacity(0.12),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
-              child: Icon(icon, color: const Color(0xFFF28B22), size: 24),
+              child: Icon(icon, color: const Color(0xFFF58220), size: 32),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  Text(label,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18)),
                   const SizedBox(height: 2),
-                  Text(desc, style: const TextStyle(color: Colors.black26, fontSize: 11)),
+                  Text(desc,
+                      style:
+                          const TextStyle(color: Colors.black26, fontSize: 15)),
                 ],
               ),
             ),
@@ -541,12 +730,17 @@ class _ServiceSelectionItem extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isSelected ? const Color(0xFFF28B22) : const Color(0xFFF1F1F4),
+                  color: isSelected
+                      ? const Color(0xFFF28B22)
+                      : const Color(0xFFF1F1F4),
                   width: 1.5,
                 ),
-                color: isSelected ? const Color(0xFFF28B22) : Colors.transparent,
+                color:
+                    isSelected ? const Color(0xFFF28B22) : Colors.transparent,
               ),
-              child: isSelected ? const Icon(Icons.check, color: Colors.white, size: 12) : null,
+              child: isSelected
+                  ? const Icon(Icons.check, color: Colors.white, size: 12)
+                  : null,
             ),
           ],
         ),

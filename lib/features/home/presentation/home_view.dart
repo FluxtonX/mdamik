@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'all_services_view.dart';
 import 'notifications_view.dart';
 
 class HomeView extends StatelessWidget {
@@ -14,8 +13,8 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFFBFBFB),
       body: SingleChildScrollView(
-        padding:
-            EdgeInsetsDirectional.only(top: top + 16, start: 16, end: 16, bottom: 24),
+        padding: EdgeInsetsDirectional.only(
+            top: top + 16, start: 16, end: 16, bottom: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,7 +34,7 @@ class HomeView extends StatelessWidget {
                   children: [
                     Text(l10n?.goodMorning ?? 'Good morning',
                         style: const TextStyle(
-                            color: Colors.black26, fontSize: 12)),
+                            color: Colors.black26, fontSize: 15)),
                     Text(l10n?.sampleName ?? 'John Doe',
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16)),
@@ -46,7 +45,7 @@ class HomeView extends StatelessWidget {
                   onPressed: () => Navigator.of(context)
                       .pushNamed(NotificationsView.routeName),
                   icon: const Icon(Icons.notifications_none,
-                      color: Colors.black26),
+                      color: Color.fromARGB(255, 231, 141, 6)),
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white,
                     side: const BorderSide(color: Color(0xFFF1F1F4)),
@@ -54,13 +53,12 @@ class HomeView extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 12),
 
-            // Search Bar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color(0xFFFCE6D3).withOpacity(0.45),
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(color: const Color(0xFFF1F1F4)),
               ),
@@ -68,19 +66,20 @@ class HomeView extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: l10n?.searchHint ?? 'Search services, materials...',
                   hintStyle:
-                      const TextStyle(color: Colors.black12, fontSize: 14),
-                  prefixIcon:
-                      const Icon(Icons.search, color: Colors.black12),
+                      const TextStyle(color: Colors.black26, fontSize: 16),
+                  prefixIcon: const Icon(Icons.search, color: Colors.black12),
                   border: InputBorder.none,
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 12),
 
             // Banner
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              height: 145,
+              clipBehavior: Clip.hardEdge,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
@@ -89,58 +88,71 @@ class HomeView extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(6),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            l10n?.limitedOffer ?? 'LIMITED OFFER',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          l10n?.bannerTitle ?? '20% Off Your First Project',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              height: 1.2),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          l10n?.bannerSubtitle ??
+                              'Get started with our premium services',
+                          style: TextStyle(
+                              color: Colors.white.withOpacity(0.8),
+                              fontSize: 14),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
-                    child: Text(
-                      l10n?.limitedOffer ?? 'LIMITED OFFER',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold),
-                    ),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    l10n?.bannerTitle ?? '20% Off Your First\nProject',
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    l10n?.bannerSubtitle ??
-                        'Get started with our premium services',
-                    style: TextStyle(
-                        color: Colors.white.withOpacity(0.8), fontSize: 12),
-                  ),
-                  const SizedBox(height: 16),
+                  const SizedBox(width: 12),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: const Color(0xFFF28B22),
                       elevation: 0,
-                      minimumSize: const Size(100, 36),
+                      minimumSize: const Size(80, 32),
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                     ),
                     child: Text(l10n?.claimNow ?? 'Claim Now',
-                        style:
-                            const TextStyle(fontWeight: FontWeight.bold)),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15)),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 12),
 
             // Categories
             Row(
@@ -148,108 +160,93 @@ class HomeView extends StatelessWidget {
               children: [
                 Text(l10n?.categories ?? 'Categories',
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18)),
-                TextButton(
-                  onPressed: () => Navigator.of(context)
-                      .pushNamed(AllServicesView.routeName),
-                  child: Text(l10n?.seeAll ?? 'See all',
-                      style: const TextStyle(color: Color(0xFFF28B22))),
-                ),
+                        fontWeight: FontWeight.bold, fontSize: 22)),
               ],
             ),
             const SizedBox(height: 8),
             GridView.count(
-              crossAxisCount: 4,
+              crossAxisCount: 3,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 8,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 10,
+              childAspectRatio: 0.8,
               children: [
                 _CategoryItem(
                   icon: Icons.home_repair_service_outlined,
                   label: l10n?.catConstruction ?? 'Construction',
-                  onTap: () =>
-                      Navigator.of(context).pushNamed('/construction'),
+                  subtitle:
+                      l10n?.svcConstructionDesc ?? 'Build your dream project',
+                  onTap: () => Navigator.of(context).pushNamed('/construction'),
                 ),
                 _CategoryItem(
                   icon: Icons.real_estate_agent_outlined,
                   label: l10n?.catRealEstate ?? 'Real Estate',
-                  onTap: () =>
-                      Navigator.of(context).pushNamed('/real-estate'),
+                  subtitle: l10n?.svcRealEstateDesc ??
+                      'Buy, sell, or rent properties',
+                  onTap: () => Navigator.of(context).pushNamed('/real-estate'),
                 ),
                 _CategoryItem(
                   icon: Icons.engineering_outlined,
                   label: l10n?.catEngineering ?? 'Engineering',
-                  onTap: () =>
-                      Navigator.of(context).pushNamed('/engineering'),
+                  subtitle: l10n?.svcEngineeringDesc ?? 'Design & planning',
+                  onTap: () => Navigator.of(context).pushNamed('/engineering'),
                 ),
                 _CategoryItem(
                   icon: Icons.layers_outlined,
                   label: l10n?.catMaterials ?? 'Materials',
-                  onTap: () =>
-                      Navigator.of(context).pushNamed('/materials'),
+                  subtitle: l10n?.svcMaterialsDesc ?? 'Construction supplies',
+                  onTap: () => Navigator.of(context).pushNamed('/materials'),
                 ),
                 _CategoryItem(
                   icon: Icons.construction_outlined,
                   label: l10n?.catExcavation ?? 'Excavation',
-                  onTap: () =>
-                      Navigator.of(context).pushNamed('/excavation'),
+                  subtitle: l10n?.svcExcavationDesc ?? 'Excavation services',
+                  onTap: () => Navigator.of(context).pushNamed('/excavation'),
                 ),
                 _CategoryItem(
                   icon: Icons.engineering_outlined,
                   label: l10n?.catLabor ?? 'Labor',
+                  subtitle: l10n?.svcLaborDesc ?? 'Hire skilled workers',
                   onTap: () => Navigator.of(context).pushNamed('/labor'),
                 ),
                 _CategoryItem(
                   icon: Icons.local_shipping_outlined,
                   label: l10n?.catTransport ?? 'Transport',
-                  onTap: () =>
-                      Navigator.of(context).pushNamed('/transport'),
+                  subtitle: l10n?.svcTransportDesc ?? 'Logistics & shipping',
+                  onTap: () => Navigator.of(context).pushNamed('/transport'),
                 ),
                 _CategoryItem(
-                  icon: Icons.more_horiz,
-                  label: l10n?.catMore ?? 'More',
+                  icon: Icons.auto_awesome_outlined,
+                  label: l10n?.svcServices ?? 'Services',
+                  subtitle: l10n?.svcServicesDesc ?? 'Operations support',
                   onTap: () => Navigator.of(context).pushNamed('/services'),
                 ),
-              ],
-            ),
-            const SizedBox(height: 32),
-
-            // Featured Projects
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(l10n?.featuredProjects ?? 'Featured Projects',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18)),
-                Icon(
-                  Icons.arrow_forward,
-                  color: Colors.black26,
-                  size: 20,
-                  textDirection: Directionality.of(context),
+                _CategoryItem(
+                  icon: Icons.assignment_outlined,
+                  label: l10n?.management ?? 'Management',
+                  subtitle: l10n?.svcManagementDesc ?? 'Project oversight',
+                  onTap: () => Navigator.of(context).pushNamed('/management'),
+                ),
+                _CategoryItem(
+                  icon: Icons.monetization_on_outlined,
+                  label: l10n?.financialTitle ?? 'Financial',
+                  subtitle: l10n?.svcFinancialDesc ?? 'Budgeting & costs',
+                  onTap: () => Navigator.of(context).pushNamed('/financial'),
+                ),
+                _CategoryItem(
+                  icon: Icons.account_balance_outlined,
+                  label: l10n?.account ?? 'Account',
+                  subtitle: l10n?.svcAccountDesc ?? 'Settings & verification',
+                  onTap: () => Navigator.of(context).pushNamed('/profile'),
+                ),
+                _CategoryItem(
+                  icon: Icons.support_agent_outlined,
+                  label: l10n?.support ?? 'Support',
+                  subtitle: l10n?.svcSupportDesc ?? 'Help & customer support',
+                  onTap: () => Navigator.of(context).pushNamed('/profile/support'),
                 ),
               ],
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              height: 200,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  _ProjectCard(
-                    title: l10n?.projectCustomHome ?? 'Custom Home Build',
-                    price: l10n?.projectCustomHomePrice ?? 'From \$45,000',
-                    imagePath: 'assets/images/project_home_build.png',
-                  ),
-                  const SizedBox(width: 16),
-                  _ProjectCard(
-                    title: l10n?.projectApartment ?? 'Apartment Complex',
-                    price:
-                        l10n?.projectApartmentPrice ?? 'From \$120,000',
-                    imagePath: 'assets/images/project_apartment.png',
-                  ),
-                ],
-              ),
             ),
           ],
         ),
@@ -259,95 +256,73 @@ class HomeView extends StatelessWidget {
 }
 
 class _CategoryItem extends StatelessWidget {
-  const _CategoryItem({required this.icon, required this.label, this.onTap});
+  const _CategoryItem(
+      {required this.icon, required this.label, this.subtitle, this.onTap});
 
   final IconData icon;
   final String label;
+  final String? subtitle;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFCE6D3).withOpacity(0.5),
-              borderRadius: BorderRadius.circular(12),
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0x26F58220),
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFF28B22).withOpacity(0.12),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Icon(icon, color: const Color(0xFFF58220), size: 36),
             ),
-            child: Icon(icon, color: const Color(0xFFF28B22), size: 24),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            label,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                color: Colors.black87),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ProjectCard extends StatelessWidget {
-  const _ProjectCard(
-      {required this.title, required this.price, required this.imagePath});
-
-  final String title;
-  final String price;
-  final String imagePath;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 160,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.asset(imagePath,
-                height: 110, width: 160, fit: BoxFit.cover),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 13)),
-                const SizedBox(height: 4),
-                Text(price,
-                    style: const TextStyle(
-                        color: Color(0xFFF28B22),
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600)),
-              ],
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
-        ],
+            if (subtitle != null) ...[
+              const SizedBox(height: 2),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Text(
+                  subtitle!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black.withOpacity(0.4)),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }

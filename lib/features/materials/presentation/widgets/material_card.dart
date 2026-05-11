@@ -47,38 +47,38 @@ class MaterialCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Text(
-                      price,
-                      style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.w900, fontSize: 14),
-                    ),
-                    Text(
-                      '/$unit',
-                      style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 10, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFF28B22),
-                    foregroundColor: Colors.white,
-                    minimumSize: const Size(double.infinity, 32),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    elevation: 0,
-                    padding: EdgeInsets.zero,
+                  Text(
+                    title,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  child: Text(l10n?.addToCart ?? 'Add to Cart', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11)),
-                ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Text(
+                        price,
+                        style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.w900, fontSize: 18),
+                      ),
+                      Text(
+                        '/$unit',
+                        style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFF28B22),
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 32),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      elevation: 0,
+                      padding: EdgeInsets.zero,
+                    ),
+                    child: Text(l10n?.addToCart ?? 'Add to Cart', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  ),
               ],
             ),
           ),

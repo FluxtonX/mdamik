@@ -149,9 +149,8 @@ class _ServiceGridItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0x26F58220),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFF1F1F4)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -159,10 +158,17 @@ class _ServiceGridItem extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: const Color(0xFFFCE6D3).withOpacity(0.5),
+              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFFF28B22).withOpacity(0.12),
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
-            child: Icon(icon, color: const Color(0xFFF28B22), size: 28),
+            child: Icon(icon, color: const Color(0xFFF58220), size: 28),
           ),
           const SizedBox(height: 12),
           Text(
@@ -174,7 +180,7 @@ class _ServiceGridItem extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             desc,
-            style: const TextStyle(color: Colors.black26, fontSize: 10),
+            style: const TextStyle(color: Colors.black45, fontSize: 10),
             textAlign: TextAlign.center,
           ),
         ],

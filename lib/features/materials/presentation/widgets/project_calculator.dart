@@ -38,7 +38,7 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
                   const SizedBox(width: 8),
                   Text(
                     l10n?.projectCalculator ?? 'Project Calculator',
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ],
               ),
@@ -58,13 +58,13 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
           const SizedBox(height: 4),
           Text(
             l10n?.autoCalcQuantities ?? 'Auto-calculate quantities for your project',
-            style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 11),
+            style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 15),
           ),
           const SizedBox(height: 20),
           if (!_isCalculated) ...[
             Text(
               l10n?.projectAreaM2 ?? 'Project Area (m²)',
-              style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500),
+              style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
             Row(
@@ -83,7 +83,7 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: l10n?.enterAreaM2 ?? 'Enter area in square meters',
-                        hintStyle: const TextStyle(color: Colors.white38, fontSize: 12),
+                        hintStyle: const TextStyle(color: Colors.white38, fontSize: 16),
                         border: InputBorder.none,
                       ),
                     ),
@@ -99,7 +99,7 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
                     minimumSize: const Size(100, 44),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
-                  child: Text(l10n?.calculate ?? 'Calculate', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                  child: Text(l10n?.calculate ?? 'Calculate', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                 ),
               ],
             ),
@@ -140,7 +140,7 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
             const SizedBox(height: 20),
             Text(
               l10n?.recommendedQuantities ?? 'Recommended Quantities:',
-              style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+              style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
             _buildResultRow(l10n?.catCement ?? 'Cement:', '3 ${l10n?.unitBag ?? 'bags'}'),
@@ -170,8 +170,8 @@ class _ProjectCalculatorState extends State<ProjectCalculator> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 12)),
-          Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)),
+          Text(label, style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 16)),
+          Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
         ],
       ),
     );

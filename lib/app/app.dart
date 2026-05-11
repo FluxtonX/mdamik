@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mdamik/features/profile/presentation/profile_view.dart';
 import 'package:mdamik/features/projects/presentation/project_details_view.dart';
 
 import '../features/auth/presentation/auth_login_view.dart';
@@ -71,57 +72,63 @@ class App extends StatelessWidget {
             Locale('ar'),
           ],
           title: 'MDAMIK',
-      theme: ThemeData(
-        useMaterial3: true,
-        fontFamily: null,
-      ),
-      initialRoute: SplashView.routeName,
-      routes: {
-        SplashView.routeName: (_) => const SplashView(),
-        AuthLoginView.routeName: (_) => const AuthLoginView(),
-        AuthOtpView.routeName: (_) => const AuthOtpView(),
-        AuthRegisterView.routeName: (_) => const AuthRegisterView(),
-        AuthResetPasswordView.routeName: (_) => const AuthResetPasswordView(),
-        AuthSuccessView.routeName: (_) => const AuthSuccessView(),
-        MainNavView.routeName: (_) => const MainNavView(),
-        AllServicesView.routeName: (_) => const AllServicesView(),
-        NotificationsView.routeName: (_) => const NotificationsView(),
-        ProjectDetailsView.routeName: (_) => const ProjectDetailsView(),
-        ChatConversationView.routeName: (_) => const ChatConversationView(),
-        ConstructionView.routeName: (_) => const ConstructionView(),
-        ProjectSetupView.routeName: (_) => const ProjectSetupView(),
-        PaymentView.routeName: (_) => const PaymentView(),
-        PaymentSuccessView.routeName: (_) => const PaymentSuccessView(),
-        RealEstateView.routeName: (_) => const RealEstateView(),
-        PropertyDetailsView.routeName: (_) => const PropertyDetailsView(),
-        EngineeringView.routeName: (_) => const EngineeringView(),
-        ProfessionalListView.routeName: (_) => const ProfessionalListView(),
-        MaterialsView.routeName: (_) => const MaterialsView(),
-        LaborHiringView.routeName: (_) => const LaborHiringView(),
-        ExcavationView.routeName: (_) => const ExcavationView(),
-        TransportView.routeName: (_) => const TransportView(),
-        ServicesView.routeName: (_) => const ServicesView(),
-        SiteServicesListView.routeName: (_) => const SiteServicesListView(),
-        ProjectManagementDetailsView.routeName: (_) =>
-            const ProjectManagementDetailsView(),
-        FinancialView.routeName: (_) => const FinancialView(),
-        ProfileInformationView.routeName: (_) => const ProfileInformationView(),
-        SecurityPrivacyView.routeName: (_) => const SecurityPrivacyView(),
-        NotificationsSettingsView.routeName: (_) =>
-            const NotificationsSettingsView(),
-        ChooseLanguageView.routeName: (_) => const ChooseLanguageView(),
-        ManagementView.routeName: (_) => const ManagementView(),
-        ManagementDetailsView.routeName: (_) => const ManagementDetailsView(),
-        LanguageRegionView.routeName: (_) => const LanguageRegionView(),
-        PaymentMethodsView.routeName: (_) => const PaymentMethodsView(),
-        SupportView.routeName: (_) => const SupportView(),
-        PaymentOptionsView.routeName: (_) => const PaymentOptionsView(),
-        PaymentInfoView.routeName: (_) => const PaymentInfoView(),
-        PaymentReviewView.routeName: (_) => const PaymentReviewView(),
-        PaymentProcessingView.routeName: (_) => const PaymentProcessingView(),
-        PaymentSuccessfulView.routeName: (_) => const PaymentSuccessfulView(),
-      },
-    );
+          theme: ThemeData(
+            useMaterial3: true,
+            fontFamily: null,
+          ),
+          initialRoute: SplashView.routeName,
+          routes: {
+            SplashView.routeName: (_) => const SplashView(),
+            AuthLoginView.routeName: (_) => const AuthLoginView(),
+            AuthOtpView.routeName: (_) => const AuthOtpView(),
+            AuthRegisterView.routeName: (_) => const AuthRegisterView(),
+            AuthResetPasswordView.routeName: (_) =>
+                const AuthResetPasswordView(),
+            AuthSuccessView.routeName: (_) => const AuthSuccessView(),
+            MainNavView.routeName: (_) => const MainNavView(),
+            AllServicesView.routeName: (_) => const AllServicesView(),
+            NotificationsView.routeName: (_) => const NotificationsView(),
+            ProjectDetailsView.routeName: (_) => const ProjectDetailsView(),
+            ChatConversationView.routeName: (_) => const ChatConversationView(),
+            ConstructionView.routeName: (_) => const ConstructionView(),
+            ProjectSetupView.routeName: (_) => const ProjectSetupView(),
+            PaymentView.routeName: (_) => const PaymentView(),
+            PaymentSuccessView.routeName: (_) => const PaymentSuccessView(),
+            RealEstateView.routeName: (_) => const RealEstateView(),
+            PropertyDetailsView.routeName: (_) => const PropertyDetailsView(),
+            EngineeringView.routeName: (_) => const EngineeringView(),
+            ProfessionalListView.routeName: (_) => const ProfessionalListView(),
+            MaterialsView.routeName: (_) => const MaterialsView(),
+            LaborHiringView.routeName: (_) => const LaborHiringView(),
+            ExcavationView.routeName: (_) => const ExcavationView(),
+            TransportView.routeName: (_) => const TransportView(),
+            ServicesView.routeName: (_) => const ServicesView(),
+            SiteServicesListView.routeName: (_) => const SiteServicesListView(),
+            ProjectManagementDetailsView.routeName: (_) =>
+                const ProjectManagementDetailsView(),
+            FinancialView.routeName: (_) => const FinancialView(),
+            ProfileView.routeName: (_) => const ProfileView(),
+            ProfileInformationView.routeName: (_) =>
+                const ProfileInformationView(),
+            SecurityPrivacyView.routeName: (_) => const SecurityPrivacyView(),
+            NotificationsSettingsView.routeName: (_) =>
+                const NotificationsSettingsView(),
+            ChooseLanguageView.routeName: (_) => const ChooseLanguageView(),
+            ManagementView.routeName: (_) => const ManagementView(),
+            ManagementDetailsView.routeName: (_) =>
+                const ManagementDetailsView(),
+            LanguageRegionView.routeName: (_) => const LanguageRegionView(),
+            PaymentMethodsView.routeName: (_) => const PaymentMethodsView(),
+            SupportView.routeName: (_) => const SupportView(),
+            PaymentOptionsView.routeName: (_) => const PaymentOptionsView(),
+            PaymentInfoView.routeName: (_) => const PaymentInfoView(),
+            PaymentReviewView.routeName: (_) => const PaymentReviewView(),
+            PaymentProcessingView.routeName: (_) =>
+                const PaymentProcessingView(),
+            PaymentSuccessfulView.routeName: (_) =>
+                const PaymentSuccessfulView(),
+          },
+        );
       },
     );
   }

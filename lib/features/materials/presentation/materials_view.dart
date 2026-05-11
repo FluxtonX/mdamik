@@ -68,7 +68,7 @@ class _MaterialsViewState extends State<MaterialsView> {
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFFF28B22), size: 20),
         ),
-        title: Text(l10n?.materials ?? 'Materials', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: Text(l10n?.materials ?? 'Materials', style: const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
             onPressed: () {},
@@ -107,7 +107,7 @@ class _MaterialsViewState extends State<MaterialsView> {
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: l10n?.searchMaterials ?? 'Search materials...',
-                        hintStyle: const TextStyle(color: Colors.black12, fontSize: 14),
+                        hintStyle: const TextStyle(color: Colors.black12, fontSize: 16),
                         prefixIcon: const Icon(Icons.search, color: Colors.black12),
                         border: InputBorder.none,
                       ),
@@ -166,7 +166,7 @@ class _MaterialsViewState extends State<MaterialsView> {
                       crossAxisCount: 2,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
-                      childAspectRatio: 0.7,
+                      childAspectRatio: 0.65,
                     ),
                     itemCount: allMaterials.length,
                     itemBuilder: (context, index) {

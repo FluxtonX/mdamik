@@ -96,21 +96,21 @@ class LaborCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                        Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                         const SizedBox(width: 4),
                         const Icon(Icons.verified, color: Color(0xFFF28B22), size: 14),
                         const Spacer(),
-                        Text(rate, style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 16)),
+                        Text(rate, style: const TextStyle(color: Color(0xFFF28B22), fontWeight: FontWeight.bold, fontSize: 20)),
                       ],
                     ),
                     const SizedBox(height: 2),
-                    Text(skill, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500)),
+                    Text(skill, style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 16, fontWeight: FontWeight.w500)),
                     const SizedBox(height: 8),
                     Row(
                       children: [
                         const Icon(Icons.star, color: Colors.amber, size: 14),
                         const SizedBox(width: 4),
-                        Text(rating.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                        Text(rating.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                         const SizedBox(width: 4),
                         Text.rich(
                           TextSpan(children: [
@@ -118,7 +118,7 @@ class LaborCard extends StatelessWidget {
                             TextSpan(text: reviews.toString()),
                             const TextSpan(text: ')'),
                           ]),
-                          style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 11),
+                          style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 14),
                         ),
                         const SizedBox(width: 8),
                         Container(width: 4, height: 4, decoration: const BoxDecoration(color: Colors.black12, shape: BoxShape.circle)),
@@ -129,7 +129,7 @@ class LaborCard extends StatelessWidget {
                             const TextSpan(text: ' '),
                             TextSpan(text: l10n?.away ?? 'away'),
                           ]),
-                          style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 12, fontWeight: FontWeight.w500),
+                          style: TextStyle(color: Colors.black.withOpacity(0.3), fontSize: 15, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -151,12 +151,12 @@ class LaborCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   statusText,
-                  style: TextStyle(color: statusTextColor, fontWeight: FontWeight.bold, fontSize: 12),
+                  style: TextStyle(color: statusTextColor, fontWeight: FontWeight.bold, fontSize: 15),
                 ),
                 const Spacer(),
                 Text(
                   '$experience ${l10n?.experienceYears ?? 'years exp'} • $jobs ${l10n?.jobsDone ?? 'jobs'}',
-                  style: TextStyle(color: statusTextColor.withOpacity(0.6), fontSize: 11, fontWeight: FontWeight.w500),
+                  style: TextStyle(color: statusTextColor.withOpacity(0.6), fontSize: 14, fontWeight: FontWeight.w500),
                 ),
               ],
             ),

@@ -137,24 +137,30 @@ class AuthRegisterView extends StatelessWidget {
                               onSignUp: vm.selectSignUp,
                               l10n: l10n,
                             ),
-                            const SizedBox(height: 18),
+                            const SizedBox(height: 22),
                             _AuthInput(
                               hint: l10n?.fullName ?? 'Full Name',
                               icon: Icons.person_outline,
                               keyboardType: TextInputType.name,
                             ),
                             const SizedBox(height: 12),
-                            _AuthInput(
-                              hint: l10n?.emailAddress ?? 'Email address',
-                              icon: Icons.email_outlined,
-                              keyboardType: TextInputType.emailAddress,
+                            _MethodToggle(
+                              useEmail: vm.useEmail,
+                              onChanged: vm.setUseEmail,
                             ),
-                            const SizedBox(height: 12),
-                            _AuthInput(
-                              hint: l10n?.phoneNumber ?? 'Phone number',
-                              icon: Icons.phone_outlined,
-                              keyboardType: TextInputType.phone,
-                            ),
+                            const SizedBox(height: 20),
+                            if (vm.useEmail)
+                              _AuthInput(
+                                hint: l10n?.emailAddress ?? 'Email address',
+                                icon: Icons.email_outlined,
+                                keyboardType: TextInputType.emailAddress,
+                              )
+                            else
+                              _AuthInput(
+                                hint: l10n?.phoneNumber ?? 'Phone number',
+                                icon: Icons.phone_outlined,
+                                keyboardType: TextInputType.phone,
+                              ),
                             const SizedBox(height: 12),
                             _AuthInput(
                               hint: l10n?.password ?? 'Password',
@@ -193,70 +199,6 @@ class AuthRegisterView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 18),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors.grey.shade300,
-                                    thickness: 1,
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 10),
-                                  child: Text(
-                                    l10n?.orContinueWith ?? 'or continue with',
-                                    style: TextStyle(
-                                      color: Colors.grey.shade600,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Divider(
-                                    color: Colors.grey.shade300,
-                                    thickness: 1,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 14),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 48,
-                              child: OutlinedButton(
-                                onPressed: () => Navigator.of(context)
-                                    .pushReplacementNamed('/home/main'),
-                                style: OutlinedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  side: BorderSide(
-                                    color: Colors.grey.shade300,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/google_icon.png',
-                                      height: 18,
-                                      width: 18,
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      l10n?.continueWithGoogle ?? 'Continue with Google',
-                                      style: const TextStyle(
-                                        color: Colors.black87,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -272,6 +214,90 @@ class AuthRegisterView extends StatelessWidget {
     );
   }
 }
+
+class _MethodToggle extends StatelessWidget {
+  const _MethodToggle({
+    required this.useEmail,
+    required this.onChanged,
+  });
+
+  final bool useEmail;
+  final Function(bool) onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 44,
+      decoration: BoxDecoration(
+        color: const Color(0xFFF3F3F6),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: _MethodButton(
+              label: 'Email',
+              active: useEmail,
+              onTap: () => onChanged(true),
+            ),
+          ),
+          Expanded(
+            child: _MethodButton(
+              label: 'Phone',
+              active: !useEmail,
+              onTap: () => onChanged(false),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MethodButton extends StatelessWidget {
+  const _MethodButton({
+    required this.label,
+    required this.active,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool active;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: active ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: active
+              ? [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  )
+                ]
+              : null,
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          label,
+          style: TextStyle(
+            color: active ? const Color(0xFFE57E2E) : Colors.black45,
+            fontWeight: active ? FontWeight.w700 : FontWeight.w500,
+            fontSize: 14,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 class _SegmentedTabs extends StatelessWidget {
   const _SegmentedTabs({

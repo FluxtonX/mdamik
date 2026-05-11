@@ -2,6 +2,7 @@ import '../../../core/mvvm/base_view_model.dart';
 
 class AuthRegisterViewModel extends BaseViewModel {
   bool isLogin = false;
+  bool useEmail = true;
 
   void selectLogin() {
     if (isLogin) return;
@@ -12,6 +13,12 @@ class AuthRegisterViewModel extends BaseViewModel {
   void selectSignUp() {
     if (!isLogin) return;
     isLogin = false;
+    notifyListeners();
+  }
+
+  void setUseEmail(bool value) {
+    if (useEmail == value) return;
+    useEmail = value;
     notifyListeners();
   }
 }
