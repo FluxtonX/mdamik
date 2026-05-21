@@ -139,7 +139,7 @@ class _TransportViewState extends State<TransportView> {
             crossAxisCount: 2,
             mainAxisSpacing: 16,
             crossAxisSpacing: 16,
-            childAspectRatio: 0.8,
+            childAspectRatio: 1.0,
           ),
           itemCount: services.length,
           itemBuilder: (context, index) {
@@ -179,11 +179,6 @@ class _TransportViewState extends State<TransportView> {
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      service['desc'],
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 13, fontWeight: FontWeight.w500),
-                    ),
                   ],
                 ),
               ),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "840104590731",
+    "project_id": "mdamik-daada",
+    "storage_bucket": "mdamik-daada.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840104590731:android:68f634e53e76300ae7038e",
+        "android_client_info": {
+          "package_name": "com.example.mdamik"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJfgIvzf4ay1yvzyjmf0Wc5frcR98x94w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

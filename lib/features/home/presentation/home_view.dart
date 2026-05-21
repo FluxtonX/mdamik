@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../core/mvvm/view_model_builder.dart';
+import 'home_view_model.dart';
 import 'notifications_view.dart';
 
 class HomeView extends StatelessWidget {
@@ -7,39 +9,48 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final top = MediaQuery.paddingOf(context).top;
-    final l10n = AppLocalizations.of(context);
+    return ViewModelBuilder<HomeViewModel>(
+      viewModelBuilder: () => HomeViewModel(),
+      onViewModelReady: (vm) => vm.fetchProfile(),
+      builder: (context, vm, _) {
+        final top = MediaQuery.paddingOf(context).top;
+        final l10n = AppLocalizations.of(context);
+        final profile = vm.profile;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFFFBFBFB),
-      body: SingleChildScrollView(
-        padding: EdgeInsetsDirectional.only(
-            top: top + 16, start: 16, end: 16, bottom: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header
-            Row(
+        return Scaffold(
+          backgroundColor: const Color(0xFFFBFBFB),
+          body: SingleChildScrollView(
+            padding: EdgeInsetsDirectional.only(
+                top: top + 16, start: 16, end: 16, bottom: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Color(0xFFF28B22),
-                  child: Text(l10n?.sampleInitials ?? 'JD',
-                      style: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold)),
-                ),
-                const SizedBox(width: 12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                // Header
+                Row(
                   children: [
-                    Text(l10n?.goodMorning ?? 'Good morning',
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: const Color(0xFFF28B22),
+                      child: Text(
+                        profile?.ui.initials ?? l10n?.sampleInitials ?? 'JD',
                         style: const TextStyle(
-                            color: Colors.black26, fontSize: 15)),
-                    Text(l10n?.sampleName ?? 'John Doe',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
-                  ],
-                ),
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(l10n?.goodMorning ?? 'Good morning',
+                            style: const TextStyle(
+                                color: Colors.black26, fontSize: 15)),
+                        Text(
+                          profile?.ui.name ?? l10n?.sampleName ?? 'John Doe',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      ],
+                    ),
                 const Spacer(),
                 IconButton(
                   onPressed: () => Navigator.of(context)
@@ -170,80 +181,66 @@ class HomeView extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               mainAxisSpacing: 12,
               crossAxisSpacing: 10,
-              childAspectRatio: 0.8,
+              childAspectRatio: 1.0,
               children: [
                 _CategoryItem(
                   icon: Icons.home_repair_service_outlined,
                   label: l10n?.catConstruction ?? 'Construction',
-                  subtitle:
-                      l10n?.svcConstructionDesc ?? 'Build your dream project',
                   onTap: () => Navigator.of(context).pushNamed('/construction'),
                 ),
                 _CategoryItem(
                   icon: Icons.real_estate_agent_outlined,
                   label: l10n?.catRealEstate ?? 'Real Estate',
-                  subtitle: l10n?.svcRealEstateDesc ??
-                      'Buy, sell, or rent properties',
                   onTap: () => Navigator.of(context).pushNamed('/real-estate'),
                 ),
                 _CategoryItem(
                   icon: Icons.engineering_outlined,
                   label: l10n?.catEngineering ?? 'Engineering',
-                  subtitle: l10n?.svcEngineeringDesc ?? 'Design & planning',
                   onTap: () => Navigator.of(context).pushNamed('/engineering'),
                 ),
                 _CategoryItem(
                   icon: Icons.layers_outlined,
                   label: l10n?.catMaterials ?? 'Materials',
-                  subtitle: l10n?.svcMaterialsDesc ?? 'Construction supplies',
                   onTap: () => Navigator.of(context).pushNamed('/materials'),
                 ),
                 _CategoryItem(
                   icon: Icons.construction_outlined,
                   label: l10n?.catExcavation ?? 'Excavation',
-                  subtitle: l10n?.svcExcavationDesc ?? 'Excavation services',
                   onTap: () => Navigator.of(context).pushNamed('/excavation'),
                 ),
                 _CategoryItem(
                   icon: Icons.engineering_outlined,
                   label: l10n?.catLabor ?? 'Labor',
-                  subtitle: l10n?.svcLaborDesc ?? 'Hire skilled workers',
                   onTap: () => Navigator.of(context).pushNamed('/labor'),
                 ),
                 _CategoryItem(
                   icon: Icons.local_shipping_outlined,
                   label: l10n?.catTransport ?? 'Transport',
-                  subtitle: l10n?.svcTransportDesc ?? 'Logistics & shipping',
                   onTap: () => Navigator.of(context).pushNamed('/transport'),
                 ),
                 _CategoryItem(
                   icon: Icons.auto_awesome_outlined,
                   label: l10n?.svcServices ?? 'Services',
-                  subtitle: l10n?.svcServicesDesc ?? 'Operations support',
                   onTap: () => Navigator.of(context).pushNamed('/services'),
                 ),
                 _CategoryItem(
                   icon: Icons.assignment_outlined,
                   label: l10n?.management ?? 'Management',
-                  subtitle: l10n?.svcManagementDesc ?? 'Project oversight',
                   onTap: () => Navigator.of(context).pushNamed('/management'),
                 ),
                 _CategoryItem(
                   icon: Icons.monetization_on_outlined,
                   label: l10n?.financialTitle ?? 'Financial',
-                  subtitle: l10n?.svcFinancialDesc ?? 'Budgeting & costs',
                   onTap: () => Navigator.of(context).pushNamed('/financial'),
                 ),
                 _CategoryItem(
                   icon: Icons.account_balance_outlined,
                   label: l10n?.account ?? 'Account',
-                  subtitle: l10n?.svcAccountDesc ?? 'Settings & verification',
                   onTap: () => Navigator.of(context).pushNamed('/profile'),
                 ),
                 _CategoryItem(
                   icon: Icons.support_agent_outlined,
                   label: l10n?.support ?? 'Support',
-                  subtitle: l10n?.svcSupportDesc ?? 'Help & customer support',
                   onTap: () => Navigator.of(context).pushNamed('/profile/support'),
                 ),
               ],
@@ -252,16 +249,17 @@ class HomeView extends StatelessWidget {
         ),
       ),
     );
+      },
+    );
   }
 }
 
 class _CategoryItem extends StatelessWidget {
   const _CategoryItem(
-      {required this.icon, required this.label, this.subtitle, this.onTap});
+      {required this.icon, required this.label, this.onTap});
 
   final IconData icon;
   final String label;
-  final String? subtitle;
   final VoidCallback? onTap;
 
   @override
@@ -305,22 +303,7 @@ class _CategoryItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            if (subtitle != null) ...[
-              const SizedBox(height: 2),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: Text(
-                  subtitle!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black.withOpacity(0.4)),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
+            const SizedBox(height: 4),
           ],
         ),
       ),

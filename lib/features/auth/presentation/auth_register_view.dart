@@ -139,6 +139,7 @@ class AuthRegisterView extends StatelessWidget {
                             ),
                             const SizedBox(height: 22),
                             _AuthInput(
+                              controller: vm.fullNameController,
                               hint: l10n?.fullName ?? 'Full Name',
                               icon: Icons.person_outline,
                               keyboardType: TextInputType.name,
@@ -151,18 +152,21 @@ class AuthRegisterView extends StatelessWidget {
                             const SizedBox(height: 20),
                             if (vm.useEmail)
                               _AuthInput(
+                                controller: vm.emailController,
                                 hint: l10n?.emailAddress ?? 'Email address',
                                 icon: Icons.email_outlined,
                                 keyboardType: TextInputType.emailAddress,
                               )
                             else
                               _AuthInput(
+                                controller: vm.phoneNumberController,
                                 hint: l10n?.phoneNumber ?? 'Phone number',
                                 icon: Icons.phone_outlined,
                                 keyboardType: TextInputType.phone,
                               ),
                             const SizedBox(height: 12),
                             _AuthInput(
+                              controller: vm.passwordController,
                               hint: l10n?.password ?? 'Password',
                               icon: Icons.lock_outline,
                               obscureText: true,
@@ -186,16 +190,48 @@ class AuthRegisterView extends StatelessWidget {
                                   ],
                                 ),
                                 child: TextButton(
-                                  onPressed: () => Navigator.of(context)
-                                      .pushReplacementNamed('/home/main'),
-                                  child: Text(
-                                    l10n?.createAccount ?? 'Create Account',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 16,
-                                    ),
-                                  ),
+                                  onPressed: vm.isLoading
+                                      ? null
+                                      : () async {
+                                          if (!vm.useEmail) {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              const SnackBar(
+                                                content: Text('Phone sign up is not enabled. Please use Email.'),
+                                                backgroundColor: Colors.orange,
+                                              ),
+                                            );
+                                            return;
+                                          }
+                                          final error = await vm.signUp();
+                                          if (!context.mounted) return;
+                                          if (error != null) {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text(error),
+                                                backgroundColor: Colors.redAccent,
+                                              ),
+                                            );
+                                          } else {
+                                            Navigator.of(context).pushReplacementNamed('/home/main');
+                                          }
+                                        },
+                                  child: vm.isLoading
+                                      ? const SizedBox(
+                                          width: 24,
+                                          height: 24,
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                            strokeWidth: 2.5,
+                                          ),
+                                        )
+                                      : Text(
+                                          l10n?.createAccount ?? 'Create Account',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 16,
+                                          ),
+                                        ),
                                 ),
                               ),
                             ),
@@ -396,6 +432,7 @@ class _AuthInput extends StatefulWidget {
     this.keyboardType,
     this.obscureText = false,
     this.showEye = false,
+    this.controller,
   });
 
   final String hint;
@@ -403,6 +440,7 @@ class _AuthInput extends StatefulWidget {
   final TextInputType? keyboardType;
   final bool obscureText;
   final bool showEye;
+  final TextEditingController? controller;
 
   @override
   State<_AuthInput> createState() => _AuthInputState();
@@ -432,6 +470,7 @@ class _AuthInputState extends State<_AuthInput> {
           const SizedBox(width: 10),
           Expanded(
             child: TextField(
+              controller: widget.controller,
               keyboardType: widget.keyboardType,
               obscureText: _obscure,
               decoration: InputDecoration(

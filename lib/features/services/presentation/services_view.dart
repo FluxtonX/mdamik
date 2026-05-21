@@ -37,12 +37,11 @@ class ServicesView extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
-              childAspectRatio: 0.9,
+              childAspectRatio: 1.1,
               children: [
                 _ServiceCard(
                   icon: Icons.auto_awesome_outlined,
                   title: l10n?.siteCleaning ?? 'Site Cleaning',
-                  subtitle: l10n?.siteCleaningSubtitle ?? 'During & post-construction cleanup',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
                     arguments: {'title': l10n?.siteCleaning ?? 'Site Cleaning'},
@@ -51,7 +50,6 @@ class ServicesView extends StatelessWidget {
                 _ServiceCard(
                   icon: Icons.shield_outlined,
                   title: l10n?.security ?? 'Security',
-                  subtitle: l10n?.securitySubtitle ?? '24/7 guards & CCTV setup',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
                     arguments: {'title': l10n?.security ?? 'Security Services'},
@@ -60,7 +58,6 @@ class ServicesView extends StatelessWidget {
                 _ServiceCard(
                   icon: Icons.bolt_outlined,
                   title: l10n?.utilitySetup ?? 'Utility Setup',
-                  subtitle: l10n?.utilitySetupSubtitle ?? 'Electricity, water & internet',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
                     arguments: {'title': l10n?.utilitySetup ?? 'Utility Setup'},
@@ -69,7 +66,6 @@ class ServicesView extends StatelessWidget {
                 _ServiceCard(
                   icon: Icons.fact_check_outlined,
                   title: l10n?.safetyCompliance ?? 'Safety &\nCompliance',
-                  subtitle: l10n?.safetyComplianceSubtitle ?? 'HSE inspections & audits',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
                     arguments: {'title': l10n?.safetyCompliance ?? 'Safety & Compliance'},
@@ -78,7 +74,6 @@ class ServicesView extends StatelessWidget {
                 _ServiceCard(
                   icon: Icons.opacity_outlined,
                   title: l10n?.sanitation ?? 'Sanitation',
-                  subtitle: l10n?.sanitationSubtitle ?? 'Portable toilets & hygiene',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
                     arguments: {'title': l10n?.sanitation ?? 'Sanitation Services'},
@@ -87,7 +82,6 @@ class ServicesView extends StatelessWidget {
                 _ServiceCard(
                   icon: Icons.fence_outlined,
                   title: l10n?.siteSetup ?? 'Site Setup',
-                  subtitle: l10n?.siteSetupSubtitle ?? 'Hoarding, fencing & signage',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
                     arguments: {'title': l10n?.siteSetup ?? 'Site Setup'},
@@ -96,7 +90,6 @@ class ServicesView extends StatelessWidget {
                 _ServiceCard(
                   icon: Icons.eco_outlined,
                   title: l10n?.environmental ?? 'Environmental',
-                  subtitle: l10n?.environmentalSubtitle ?? 'Dust control & restoration',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
                     arguments: {'title': l10n?.environmental ?? 'Environmental Services'},
@@ -105,7 +98,6 @@ class ServicesView extends StatelessWidget {
                 _ServiceCard(
                   icon: Icons.camera_alt_outlined,
                   title: l10n?.documentation ?? 'Documentation',
-                  subtitle: l10n?.documentationSubtitle ?? 'Drone surveys & photography',
                   onTap: () => Navigator.of(context).pushNamed(
                     '/services/list',
                     arguments: {'title': l10n?.documentation ?? 'Documentation Services'},
@@ -153,11 +145,10 @@ class ServicesView extends StatelessWidget {
 }
 
 class _ServiceCard extends StatelessWidget {
-  const _ServiceCard({required this.icon, required this.title, required this.subtitle, required this.onTap});
+  const _ServiceCard({required this.icon, required this.title, required this.onTap});
 
   final IconData icon;
   final String title;
-  final String subtitle;
   final VoidCallback onTap;
 
   @override
@@ -196,11 +187,6 @@ class _ServiceCard extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
             ),
             const SizedBox(height: 4),
-            Text(
-              subtitle,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 9, fontWeight: FontWeight.w500),
-            ),
           ],
         ),
       ),

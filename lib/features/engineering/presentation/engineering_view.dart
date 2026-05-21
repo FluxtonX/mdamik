@@ -43,12 +43,11 @@ class EngineeringView extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
-              childAspectRatio: 1.0,
+              childAspectRatio: 1.2,
               children: [
                 _EngineeringServiceCard(
                   icon: Icons.architecture_outlined,
                   label: l10n?.engDesignPlanning ?? 'Design & Planning',
-                  subtitle: l10n?.engDesignSubtitle ?? 'Architectural & blueprints',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -61,7 +60,6 @@ class EngineeringView extends StatelessWidget {
                 _EngineeringServiceCard(
                   icon: Icons.attach_money_outlined,
                   label: l10n?.engCostEstimation ?? 'Cost Estimation',
-                  subtitle: l10n?.engCostSubtitle ?? 'Project cost breakdown',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -74,7 +72,6 @@ class EngineeringView extends StatelessWidget {
                 _EngineeringServiceCard(
                   icon: Icons.visibility_outlined,
                   label: l10n?.engSupervision ?? 'Supervision',
-                  subtitle: l10n?.engSupervisionSubtitle ?? 'Construction oversight',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -87,7 +84,6 @@ class EngineeringView extends StatelessWidget {
                 _EngineeringServiceCard(
                   icon: Icons.forum_outlined,
                   label: l10n?.engConsultation ?? 'Consultation',
-                  subtitle: l10n?.engConsultationSubtitle ?? 'Advice & guidance',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -100,7 +96,6 @@ class EngineeringView extends StatelessWidget {
                 _EngineeringServiceCard(
                   icon: Icons.engineering_outlined,
                   label: l10n?.engExecution ?? 'Execution / PM',
-                  subtitle: l10n?.engExecutionSubtitle ?? 'Project management',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -113,7 +108,6 @@ class EngineeringView extends StatelessWidget {
                 _EngineeringServiceCard(
                   icon: Icons.inventory_2_outlined,
                   label: l10n?.engTurnkey ?? 'Turnkey Projects',
-                  subtitle: l10n?.engTurnkeySubtitle ?? 'End-to-end solution',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -126,7 +120,6 @@ class EngineeringView extends StatelessWidget {
                 _EngineeringServiceCard(
                   icon: Icons.palette_outlined,
                   label: l10n?.engFinishing ?? 'Finishing Design',
-                  subtitle: l10n?.engFinishingSubtitle ?? 'Design & finishes',
                   onTap: () => Navigator.of(context).pushNamed(
                     ProfessionalListView.routeName,
                     arguments: {
@@ -189,11 +182,10 @@ class EngineeringView extends StatelessWidget {
 }
 
 class _EngineeringServiceCard extends StatelessWidget {
-  const _EngineeringServiceCard({required this.icon, required this.label, required this.subtitle, required this.onTap});
+  const _EngineeringServiceCard({required this.icon, required this.label, required this.onTap});
 
   final IconData icon;
   final String label;
-  final String subtitle;
   final VoidCallback onTap;
 
   @override
@@ -226,8 +218,7 @@ class _EngineeringServiceCard extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
-            const SizedBox(height: 2),
-            Text(subtitle, style: TextStyle(color: Colors.black.withOpacity(0.2), fontSize: 14, fontWeight: FontWeight.w500)),
+            const SizedBox(height: 4),
           ],
         ),
       ),

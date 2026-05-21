@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../../core/mvvm/view_model_builder.dart';
+import 'profile_view_model.dart';
 import 'language_region_view.dart';
 import 'payment_methods_view.dart';
 import 'support_view.dart';
@@ -11,19 +14,34 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return Scaffold(
-      backgroundColor: const Color(0xFFFBFBFB),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(l10n?.accountSettings ?? 'Account & Settings',
-            style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 20)),
-        centerTitle: false,
-      ),
+    return ViewModelBuilder<ProfileViewModel>(
+      viewModelBuilder: () => ProfileViewModel(),
+      onViewModelReady: (vm) => vm.fetchProfile(),
+      builder: (context, vm, _) {
+        final l10n = AppLocalizations.of(context);
+        final profile = vm.profile;
+
+        if (vm.isLoading && profile == null) {
+          return const Scaffold(
+            backgroundColor: Color(0xFFFBFBFB),
+            body: Center(
+              child: CircularProgressIndicator(color: Color(0xFFF28B22)),
+            ),
+          );
+        }
+
+        return Scaffold(
+          backgroundColor: const Color(0xFFFBFBFB),
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Text(l10n?.accountSettings ?? 'Account & Settings',
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20)),
+            centerTitle: false,
+          ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -49,7 +67,7 @@ class ProfileView extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: Center(
-                          child: Text(l10n?.sampleInitials ?? 'JD',
+                          child: Text(profile?.ui.initials ?? 'JD',
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -61,12 +79,12 @@ class ProfileView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(l10n?.sampleName ?? 'John Doe',
+                            Text(profile?.ui.name ?? 'John Doe',
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 18)),
                             const SizedBox(height: 4),
                             Text(
-                              l10n?.profileMemberSince ??
+                              profile?.ui.memberSince ??
                                   'Client • Member since\nJan 2026',
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.3),
@@ -96,7 +114,7 @@ class ProfileView extends StatelessWidget {
                               color: Colors.black.withOpacity(0.4),
                               fontSize: 12,
                               fontWeight: FontWeight.w500)),
-                      Text(l10n?.completedOf6 ?? '3/6 Completed',
+                      Text(profile?.ui.verificationLabel ?? '3/6 Completed',
                           style: const TextStyle(
                               color: Color(0xFFF28B22),
                               fontSize: 12,
@@ -106,10 +124,10 @@ class ProfileView extends StatelessWidget {
                   const SizedBox(height: 12),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
-                    child: const LinearProgressIndicator(
-                      value: 0.5,
-                      backgroundColor: Color(0xFFF1F1F4),
-                      color: Color(0xFFF28B22),
+                    child: LinearProgressIndicator(
+                      value: profile?.ui.verificationProgress ?? 0.5,
+                      backgroundColor: const Color(0xFFF1F1F4),
+                      color: const Color(0xFFF28B22),
                       minHeight: 6,
                     ),
                   ),
@@ -216,8 +234,12 @@ class ProfileView extends StatelessWidget {
 
             // Log Out
             InkWell(
-              onTap: () => Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/auth/login', (route) => false),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                if (!context.mounted) return;
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/auth/login', (route) => false);
+              },
               borderRadius: BorderRadius.circular(20),
               child: Container(
                 padding:
@@ -251,6 +273,8 @@ class ProfileView extends StatelessWidget {
           ],
         ),
       ),
+    );
+      },
     );
   }
 }

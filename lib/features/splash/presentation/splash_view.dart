@@ -20,7 +20,11 @@ class SplashView extends StatelessWidget {
             duration: const Duration(seconds: 3),
             onDone: () {
               if (!context.mounted) return;
-              Navigator.of(context).pushReplacementNamed('/language/choose');
+              if (vm.isUserLoggedIn) {
+                Navigator.of(context).pushReplacementNamed('/home/main');
+              } else {
+                Navigator.of(context).pushReplacementNamed('/language/choose');
+              }
             },
           );
         });
