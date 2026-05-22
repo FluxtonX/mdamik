@@ -145,25 +145,12 @@ class AuthRegisterView extends StatelessWidget {
                               keyboardType: TextInputType.name,
                             ),
                             const SizedBox(height: 12),
-                            _MethodToggle(
-                              useEmail: vm.useEmail,
-                              onChanged: vm.setUseEmail,
+                            _AuthInput(
+                              controller: vm.emailController,
+                              hint: l10n?.emailAddress ?? 'Email address',
+                              icon: Icons.email_outlined,
+                              keyboardType: TextInputType.emailAddress,
                             ),
-                            const SizedBox(height: 20),
-                            if (vm.useEmail)
-                              _AuthInput(
-                                controller: vm.emailController,
-                                hint: l10n?.emailAddress ?? 'Email address',
-                                icon: Icons.email_outlined,
-                                keyboardType: TextInputType.emailAddress,
-                              )
-                            else
-                              _AuthInput(
-                                controller: vm.phoneNumberController,
-                                hint: l10n?.phoneNumber ?? 'Phone number',
-                                icon: Icons.phone_outlined,
-                                keyboardType: TextInputType.phone,
-                              ),
                             const SizedBox(height: 12),
                             _AuthInput(
                               controller: vm.passwordController,
@@ -193,15 +180,6 @@ class AuthRegisterView extends StatelessWidget {
                                   onPressed: vm.isLoading
                                       ? null
                                       : () async {
-                                          if (!vm.useEmail) {
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                              const SnackBar(
-                                                content: Text('Phone sign up is not enabled. Please use Email.'),
-                                                backgroundColor: Colors.orange,
-                                              ),
-                                            );
-                                            return;
-                                          }
                                           final error = await vm.signUp();
                                           if (!context.mounted) return;
                                           if (error != null) {
@@ -250,90 +228,6 @@ class AuthRegisterView extends StatelessWidget {
     );
   }
 }
-
-class _MethodToggle extends StatelessWidget {
-  const _MethodToggle({
-    required this.useEmail,
-    required this.onChanged,
-  });
-
-  final bool useEmail;
-  final Function(bool) onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 44,
-      decoration: BoxDecoration(
-        color: const Color(0xFFF3F3F6),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: _MethodButton(
-              label: 'Email',
-              active: useEmail,
-              onTap: () => onChanged(true),
-            ),
-          ),
-          Expanded(
-            child: _MethodButton(
-              label: 'Phone',
-              active: !useEmail,
-              onTap: () => onChanged(false),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _MethodButton extends StatelessWidget {
-  const _MethodButton({
-    required this.label,
-    required this.active,
-    required this.onTap,
-  });
-
-  final String label;
-  final bool active;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          color: active ? Colors.white : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: active
-              ? [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  )
-                ]
-              : null,
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          label,
-          style: TextStyle(
-            color: active ? const Color(0xFFE57E2E) : Colors.black45,
-            fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-            fontSize: 14,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 
 class _SegmentedTabs extends StatelessWidget {
   const _SegmentedTabs({

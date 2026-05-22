@@ -11,7 +11,6 @@ class AuthRegisterViewModel extends BaseViewModel {
   final ApiClient _apiClient = ApiClient();
 
   bool isLogin = false;
-  bool useEmail = true;
   bool isLoading = false;
 
   void selectLogin() {
@@ -23,12 +22,6 @@ class AuthRegisterViewModel extends BaseViewModel {
   void selectSignUp() {
     if (!isLogin) return;
     isLogin = false;
-    notifyListeners();
-  }
-
-  void setUseEmail(bool value) {
-    if (useEmail == value) return;
-    useEmail = value;
     notifyListeners();
   }
 
