@@ -42,6 +42,11 @@ import '../features/payment/presentation/payment_info_view.dart';
 import '../features/payment/presentation/payment_review_view.dart';
 import '../features/payment/presentation/payment_processing_view.dart';
 import '../features/payment/presentation/payment_successful_view.dart';
+import '../features/admin/presentation/admin_login_view.dart';
+import '../features/admin/presentation/admin_main_nav_view.dart';
+import '../features/admin/presentation/admin_construction_manage_view.dart';
+import '../features/admin/presentation/admin_add_project_type_view.dart';
+import '../features/admin/presentation/admin_real_estate_manage_view.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -127,6 +132,11 @@ class App extends StatelessWidget {
                 const PaymentProcessingView(),
             PaymentSuccessfulView.routeName: (_) =>
                 const PaymentSuccessfulView(),
+            AdminLoginView.routeName: (_) => const AdminLoginView(),
+            AdminMainNavView.routeName: (_) => const AdminMainNavView(),
+            AdminConstructionManageView.routeName: (_) => const AdminConstructionManageView(),
+            AdminAddProjectTypeView.routeName: (_) => const AdminAddProjectTypeView(),
+            AdminRealEstateManageView.routeName: (_) => const AdminRealEstateManageView(),
           },
         );
       },
